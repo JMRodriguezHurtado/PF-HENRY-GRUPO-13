@@ -45,6 +45,4 @@ productSchema.methods.softDelete = function() {
   return this.save();
 };
 
-const Product = mongoose.model('Product', productSchema);
-
-module.exports = Product;
+module.exports = model("Product", productSchema);
