@@ -39,11 +39,6 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.methods.softDelete = function() {
-  this.deleted = true;
-  return this.save();
-};
-
 userSchema.methods.encryptPassword = async function () {
   const salt = await bcrypt.genSalt(10);
   return bcrypt.hash(this.password, salt);
