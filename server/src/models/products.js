@@ -40,6 +40,11 @@ const productSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+productSchema.methods.softDelete = function() {
+  this.deleted = true;
+  return this.save();
+};
+
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
