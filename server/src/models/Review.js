@@ -15,7 +15,7 @@ const reviewsSchema = new Schema(
     }],
     productId: [{
       type: Schema.Types.ObjectId,
-      ref: 'Products',
+      ref: 'Product',
       require: false,
       unique: false
     }]
@@ -26,4 +26,4 @@ const reviewsSchema = new Schema(
   }
 );
 
-module.exports = model("Reviews", reviewsSchema);
+module.exports = model("Review", reviewsSchema);
