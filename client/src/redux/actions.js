@@ -51,9 +51,9 @@ export function getProductsByName(name) {
     };
   }
   
-export function getProductsById(id) {
+export function getProductsById(_id) {
     return async function (dispatch) {
-      const { data } = await fetch.get(`${URL}/product/${id}`);
+      const { data } = await axios.get(`${URL}/product/${_id}`);
       console.log(data);
       dispatch({
         type: GET_PRODUCTS_BY_ID,
