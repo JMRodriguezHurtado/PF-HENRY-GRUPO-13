@@ -14,7 +14,7 @@ import {
   const initialState = {
     products: [],
     productsByName: [],
-    productById: null,
+    productById: [],
     deletedProducts: [],
     admins: [],
     users: [],
