@@ -7,6 +7,7 @@ const getProductByName = require("../controllers/Product/getProductByName");
 const getProductById = require("../controllers/Product/getProductById");
 const putProduct = require("../controllers/Product/putProduct");
 const deleteProduct = require("../controllers/Product/deleteProduct");
+const getAllProductsDeleted = require("../controllers/Product/getAllProductsDeleted");
 
 
 //POST
@@ -55,6 +56,16 @@ router.get("/:id", async (req, res) => {
     const product = await getProductById(id);
 
     return res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
+
+router.get("/deleted", async (req, res) => {
+  try {
+    const results = await getAllProductsDeleted();
+    
+    return res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: error.message });
   };
