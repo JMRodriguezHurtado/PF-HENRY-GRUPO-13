@@ -4,7 +4,7 @@ const router = Router();
 // Middlewares
 const signTokens = require("../middlewares/Tokens/signTokens");
 const refreshTokens = require("../middlewares/Tokens/refreshTokens");
-const verifyToken = require("../middlewares/Tokens/verifyToken");
+const verifyToken = require("../middlewares/Tokens/verifyTokens");
 
 //Controllers
 const signUp = require('../controllers/User/signUp');
