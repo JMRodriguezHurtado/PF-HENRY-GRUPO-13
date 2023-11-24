@@ -5,9 +5,10 @@ const postAdmin = require('../controllers/Admin/postAdmin');
 
 router.post("/", async (req, res) => {
   try {
-    const { idUser, store, description, contact } = req.body;
+    const { store, description, contact } = req.body;
+    const userId = req.userId;
 
-    const newAdmin = await postAdmin({ idUser, store, description, contact });
+    const newAdmin = await postAdmin({ userId, store, description, contact });
 
     return res.status(200).json(newAdmin);
   } catch (error) {
