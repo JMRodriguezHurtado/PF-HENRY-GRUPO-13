@@ -32,7 +32,9 @@ const adminSchema = new Schema(
   }
 );
 
-userSchadminSchemaema.methods.softDelete = function() {
+
+adminSchema.methods.softDelete = function() {
+
   this.deleted = true;
   return this.save();
 };

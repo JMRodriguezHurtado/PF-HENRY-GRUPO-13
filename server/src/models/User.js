@@ -39,6 +39,7 @@ const userSchema = new Schema(
   }
 );
 
+
 userSchema.methods.softDelete = function() {
   this.deleted = true;
   return this.save();
