@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const Detail = ({ brand, price, img, name, description, _id, category, quantity }) => {
   return (

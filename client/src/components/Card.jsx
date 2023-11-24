@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { NavLink } from 'react-router-dom';
 
 const Card = ({ price, img, name, description, _id }) => {
