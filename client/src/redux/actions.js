@@ -88,7 +88,7 @@ export function updateProduct(payload) {
     return async function (dispatch) {
       console.log(payload.id);
   
-      const info = await fetch.put(`${URL}/product/put/${payload.id}`, payload);
+      const info = await fetch.put(`${URL}/product/${payload.id}`, payload);
   
       dispatch({
         type: UPDATE_PRODUCTS,
@@ -108,6 +108,33 @@ export function getDeletedProducts() {
     };
   }
 
+export function createAdmin(payload) {
+    return async function (dispatch) {
+      try {
+        const { data } = await fetch.post(`${URL}/admin`, payload);
+        dispatch({
+          type: REGISTER_ADMIN,
+          payload: data,
+        });
+      } catch (error) {
+        throw error.response.data;
+      }
+    };
+  }
+
+export function createUser(payload) {
+    return async function (dispatch) {
+      try {
+        const { data } = await fetch.post(`${URL}/user/signup`, payload);
+        dispatch({
+          type: REGISTER_USER,
+          payload: data,
+        });
+      } catch (error) {
+        throw error.response.data;
+      }
+    };
+  }
 
 export function createReview(newReview) {
     return async function (dispatch) {
@@ -119,6 +146,7 @@ export function createReview(newReview) {
     };
   }
 
-
+  
+  
 
 
