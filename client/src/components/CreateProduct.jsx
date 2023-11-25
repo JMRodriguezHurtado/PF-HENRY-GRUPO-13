@@ -51,7 +51,7 @@ const CreateProduct = () => {
       })
     } catch (error) {
       console.log(error);
-    };
+    }
   };
 
   const isFormValid =
