@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 require('dotenv').config();
+const path = require('path');
 const cors = require('cors');
 
 require('./db.js');
@@ -36,6 +37,8 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
+
+server.use('../images', express.static(path.join(__dirname, 'images')));
 
 server.use('/', routes);
 
