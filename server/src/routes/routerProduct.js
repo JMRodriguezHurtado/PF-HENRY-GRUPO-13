@@ -45,8 +45,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("", async (req, res) => {
+router.get("/name", async (req, res) => {
   const { name } = req.query;
+
+  if (!name) {
+    return res.status(400).json({ error: "Name parameter is missing in the request." });
+  }
 
   try {
     const products = await getProductByName(name);
