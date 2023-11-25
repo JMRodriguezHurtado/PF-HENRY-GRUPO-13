@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { getProductsByName } from "../redux/actions";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearch = () => {
-    // Puedes realizar acciones de búsqueda aquí, por ejemplo, llamar a una función pasada como prop.
-    if (onSearch) {
-      onSearch(searchTerm);
-    }
+  const handleClick = () => {
+    if (searchTerm) {
+      dispatch(getProductsByName(searchTerm, navigate));
+      setSearchTerm('');
+      navigate('/searchs')
+    };
   };
 
   return (
@@ -22,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleClick}>Buscar</button> 
     </div>
   );
 };

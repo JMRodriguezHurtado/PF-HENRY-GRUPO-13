@@ -9,7 +9,7 @@ export const CREATE_NEW_PRODUCT = 'CREATE_NEW_PRODUCT';
 export const DELETE_PRODUCTS = 'DELETE_PRODUCTS';
 export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS';
 export const GET_DELETED_PRODUCTS = 'GET_DELETED_PRODUCTS';
-
+export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
 // Admin
 
 export const REGISTER_ADMIN = 'REGISTER_NEW_ADMIN';
@@ -41,16 +41,27 @@ export function getAllProducts() {
   };
 }
 
+
 export function getProductsByName(name) {
     return async function (dispatch) {
-      const productsname = (await fetch.get(`${URL}/product/name/${name}`)).data;
-      dispatch({
-        type: GET_PRODUCTS_BY_NAME,
-        payload: productsname,
-      });
+      try {
+        const response = await axios.get(`${URL}/product/name?name=${name}`);
+        const data = await response.data;
+        dispatch({
+          type: GET_PRODUCTS_BY_NAME,
+          payload: data,
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
     };
   }
+
+export const clearSearchResults = () => ({
+  type: CLEAR_SEARCH_RESULTS,
+});
   
+
 export function getProductsById(_id) {
     return async function (dispatch) {
       const { data } = await axios.get(`${URL}/product/${_id}`);

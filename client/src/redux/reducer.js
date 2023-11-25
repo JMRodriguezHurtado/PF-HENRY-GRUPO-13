@@ -9,6 +9,7 @@ import {
     REGISTER_ADMIN,
     REGISTER_USER,
     CREATE_REVIEW,
+    CLEAR_SEARCH_RESULTS
   } from './actions';
   
   const initialState = {
@@ -28,12 +29,19 @@ import {
           ...state,
           products: action.payload,
         };
+
   
       case GET_PRODUCTS_BY_NAME:
         return {
           ...state,
           productsByName: action.payload,
         };
+      case CLEAR_SEARCH_RESULTS:
+        return {
+          ...state,
+          productsByName: []
+        };
+
   
       case GET_PRODUCTS_BY_ID:
         return {
