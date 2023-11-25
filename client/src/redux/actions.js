@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // Products
 
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
@@ -25,15 +27,19 @@ export const CREATE_REVIEW = 'CREATE_REVIEW';
 const URL = 'http://localhost:3001';
 
 export function getAllProducts() {
-    return async function (dispatch) {
-      const productsInfo = await fetch.get(`${URL}/product`);
-      console.log(productsInfo);
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${URL}/product`);
+      console.log(response.data);
       dispatch({
         type: GET_ALL_PRODUCTS,
-        payload: productsInfo.data.results,
+        payload: response.data,
       });
-    };
-  }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+}
 
 export function getProductsByName(name) {
     return async function (dispatch) {
@@ -45,9 +51,9 @@ export function getProductsByName(name) {
     };
   }
   
-export function getProductsById(id) {
+export function getProductsById(_id) {
     return async function (dispatch) {
-      const { data } = await fetch.get(`${URL}/product/${id}`);
+      const { data } = await axios.get(`${URL}/product/${_id}`);
       console.log(data);
       dispatch({
         type: GET_PRODUCTS_BY_ID,

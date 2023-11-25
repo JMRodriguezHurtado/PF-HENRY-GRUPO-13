@@ -34,3 +34,5 @@ const postProduct = async ({ name, brand, sale, category, img, description, pric
 };
 
 module.exports = postProduct;
+
+//AGREGAR LA LOGICA PARA VINCULAR PRODUCTO CON ADMIN
