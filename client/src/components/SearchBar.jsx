@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { getProductsByName } from "../redux/actions";
 
@@ -18,7 +18,7 @@ const SearchBar = () => {
       dispatch(getProductsByName(searchTerm, navigate));
       setSearchTerm('');
       navigate('/searchs')
-    };
+    }
   };
 
   return (

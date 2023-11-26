@@ -9,10 +9,6 @@ const getAllProducts = async (req, res, next) => {
   const { name, brand, sale, price, category, quantity } = req.query;
   const whereConditions = {};
 
-  if (name) {
-    whereConditions.name = new RegExp(name, 'i');
-  }
-
   if (category) {
     whereConditions.category = new RegExp(category, 'i');
   }

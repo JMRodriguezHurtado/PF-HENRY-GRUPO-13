@@ -35,14 +35,9 @@ router.post("/", upload, async (req, res) => {
 
 
 //GET
-router.get("/", async (req, res) => {
-  try {
-    const results = await getAllProducts();
-
-    return res.status(200).json(results);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+router.get("/", getAllProducts, (req, res) => {
+  
+  return res.status(200).json(res.paginatedResults);
 });
 
 router.get("/name", async (req, res) => {

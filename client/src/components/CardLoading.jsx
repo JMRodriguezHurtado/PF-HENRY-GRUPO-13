@@ -1,9 +1,7 @@
-import React from 'react';
-
 const CardLoading = () => {
   return (
     <div className="max-w-sm  rounded overflow-hidden shadow-lg animate-pulse mt-10">
-      <div class="h-48 bg-gray-300"></div>
+      <div className="h-48 bg-gray-300"></div>
       <div className="px-6 py-4">
         <div className="h-6 bg-gray-300 mb-2"></div>
         <div className="h-4 bg-gray-300 w-2/3"></div>
