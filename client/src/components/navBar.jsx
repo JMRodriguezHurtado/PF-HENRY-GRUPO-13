@@ -31,12 +31,12 @@ const NavBar = () => {
           onClick={() => navigate("/")}
         />
       </div>
-      <div className="flex">
+      <div className="flex mb-0">
           <SearchBar/>
       </div>
      
         <Button
-          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+          className="mb-3 flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
           type="primary"
           onClick={showModal}
         >

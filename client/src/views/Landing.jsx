@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../redux/actions';
@@ -103,8 +102,8 @@ const LandingPage = () => {
 
   return (
    <div className="flex flex-col items-center">
-     <h1 className="mt-20 text-4xl font-bold m-7">Bienvenido</h1>
-     <p className="text-lg text-gray-600 mt-0 m-5">Explora lo nuevo en tecnología</p>
+     <h1 className= "padding text-4xl font-bold m-2 mb-0">Bienvenido</h1>
+     <p className="text-lg text-gray-600 m-1 mt-0">Explora lo nuevo en tecnología</p>
 
 
      <div className='m-3'>
