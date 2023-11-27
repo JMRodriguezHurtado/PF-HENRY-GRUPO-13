@@ -92,121 +92,21 @@ const LandingPage = () => {
 
   
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="mt-20 text-4xl font-bold m-7">Bienvenido</h1>
-      <p className="text-lg text-gray-600 mt-0 m-5">Explora lo nuevo en tecnología</p>
-
-      <div className='m-3'>
-        <label>
-          <div className="relative inline-block">
-            <div
-              onClick={toggleCategoryOptions}
-              className="flex items-center cursor-pointer"
-            >
-              <span className="text-gray-700 p-2 bg-gray-100 rounded-full">
-                {filters.category ? filters.category : "Categorias"}
-              </span>  className="flex items-center"
-              <img
-                src={
-                  filters.category
-                    ? categoryImages[filters.category]
-                    : Categories
-                }
-                alt={filters.category || "Categories"}
-                className="w-6 h-6 ml-2 bg-gray-200 rounded-full "
-              />
-            </div>
-            {showCategoryOptions && (
-              <div className="absolute mt-2 bg-white border border-gray-300 rounded-md overflow-hidden shadow-md flex flex-col">
-                {categoriesWithAll.map((category) => (
-                  <div
-                    key={category}
-                    onClick={() => {
-                      handleFilterChange('category', category);
-                      toggleCategoryOptions();
-                    }}
-                    className="flex items-center px-8 py-2 cursor-pointer hover:bg-gray-100"
-                  >
-                    <span className="text-gray-700">{category || "Categorías"}</span>
-                    <img
-                      src={categoryImages[category] || Categories}
-                      alt={category}
-                      className="w-5 h-5 ml-2"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </label>
-
-        <label className='m-10'>
-          <select
-            value={filters.sale}
-            onChange={(e) => handleFilterChange('sale', e.target.value)}
-            className="p-2 bg-gray-100 rounded-full"
-          >
-            <option className='text-gray-200' value="">Oferta</option>
-            <option value="1">En oferta</option>
-            <option value="0">Sin oferta</option>
-          </select>
-        </label>
-
-
-        <label>
-          <select
-            value={filters.price}
-            onChange={(e) => handleFilterChange('price', e.target.value)}
-            className="p-2 bg-gray-100 rounded-full"
-          >
-            <option value="">Todos</option>
-            <option value="highest">Más alto</option>
-            <option value="lowest">Más bajo</option>
-          </select>
-        </label>
-      </div>
-
-
-      <div className="grid grid-cols-1 m-5 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {products?.map((product) => (
-          <Card
-            key={product._id}
-            name={product.name}
-            price={product.price}
-            img={product.img}
-            _id={product._id}
-          />
-        ))}
-      </div>
-
-
-      <div className="max-w-2xl m-10 mx-auto">
-        <nav aria-label="Page navigation example">
-          <ul className="flex justify-center -space-x-px">
-            <li>
-              <a
-                href="javascript:void(0)"
-                className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Anterior
-              </a>
-            </li>
-            {paginationItems}
-            <li>
-              <a
-                href="javascript:void(0)"
-                className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                Siguiente
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+    <div >
+    <h1 className="mt-20 text-4xl font-bold">Bienvenido</h1>
+      <p className="text-lg text-gray-600">Explora lo nuevo en tecnologia:</p>
+    <div className= "grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+   
+      {products?.map((product) => (
+        <Card
+        key={product._id}
+        name={product.name}
+        price={product.price}
+        img={product.img}
+        _id={product._id}
+      />
+      ))}
+    </div>
     </div>
   );
 };

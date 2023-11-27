@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import LoginRegister from "./Login-register/LoginRegister";
 import SearchBar from "./SearchBar";
-
+import homeicon from "../assets/icons/homeicon.png";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,12 +22,12 @@ const NavBar = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full bg-white shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
+    <header className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
       <div className="flex">
         <img
           className="w-[100px] h-[50px] cursor-pointer "
-          src="logo"
-          alt="logo"
+          src={homeicon}
+          alt="home"
           onClick={() => navigate("/")}
         />
       </div>
@@ -36,7 +36,7 @@ const NavBar = () => {
       </div>
      
         <Button
-          className="flex items-center justify-center text-blue font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
           type="primary"
           onClick={showModal}
         >
