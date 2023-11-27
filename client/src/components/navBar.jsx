@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
 import LoginRegister from "./Login-register/LoginRegister";
 import SearchBar from "./SearchBar";
-import homeicon from "../assets/icons/homeicon.png";
+import homeicon2 from "../assets/icons/homeicon2.png";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +26,7 @@ const NavBar = () => {
       <div className="flex">
         <img
           className="w-[100px] h-[50px] cursor-pointer "
-          src={homeicon}
+          src={homeicon2}
           alt="home"
           onClick={() => navigate("/")}
         />
