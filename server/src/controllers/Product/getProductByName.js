@@ -14,7 +14,7 @@ const getProductByName = async (name) => {
 
     return products;
   } catch (error) {
-    console.log('Error fetchin producst:', error.message);
+    console.log('Error fetchin products:', error.message);
     throw new Error('Unable to fetch products.');
   };
 };

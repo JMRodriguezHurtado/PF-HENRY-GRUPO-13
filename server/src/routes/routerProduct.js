@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 
+//Middlewares
+const upload = require('../middlewares/Multer/uploadImage');
+
+//Controllers
 const postProduct = require('../controllers/Product/postProduct');
 const getAllProducts = require("../controllers/Product/getAllProduct");
 const getProductByName = require("../controllers/Product/getProductByName");
@@ -11,9 +15,13 @@ const getAllProductsDeleted = require("../controllers/Product/getAllProductsDele
 
 
 //POST
-router.post("/", async (req, res) => {
+router.post("/", upload, async (req, res) => {
   try {
-    const { name, brand, sale, category, img, description, price, quantity } = req.body;
+    const { name, brand, sale, category, description, price, quantity } = req.body;
+    const img = req.file && req.file.path;
+
+    console.log(req.body);
+    console.log(req.img);
 
     const newProduct = await postProduct({ name, brand, sale, category, img, description, price, quantity });
 
@@ -27,18 +35,17 @@ router.post("/", async (req, res) => {
 
 
 //GET
-router.get("/", async (req, res) => {
-  try {
-    const results = await getAllProducts();
-
-    return res.status(200).json(results);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+router.get("/", getAllProducts, (req, res) => {
+  
+  return res.status(200).json(res.paginatedResults);
 });
 
-router.get("", async (req, res) => {
+router.get("/name", async (req, res) => {
   const { name } = req.query;
+
+  if (!name) {
+    return res.status(400).json({ error: "Name parameter is missing in the request." });
+  }
 
   try {
     const products = await getProductByName(name);

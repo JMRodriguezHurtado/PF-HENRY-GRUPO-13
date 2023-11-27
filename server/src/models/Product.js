@@ -11,6 +11,7 @@ const productSchema = new Schema({
   },
   sale: {
     type: Number,
+    default: 0,
   },
   category: {
     type: String,
