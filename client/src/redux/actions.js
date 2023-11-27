@@ -27,10 +27,12 @@ export const CREATE_REVIEW = 'CREATE_REVIEW';
 
 const URL = 'http://localhost:3001';
 
-export function getAllProducts() {
+export function getAllProducts(page, limit, filters) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${URL}/product`);
+      const response = await axios.get(`${URL}/product`, {
+        params: { page, limit, ...filters },
+      });
       console.log(response.data);
       dispatch({
         type: GET_ALL_PRODUCTS,
@@ -41,6 +43,7 @@ export function getAllProducts() {
     }
   };
 }
+
 
 
 export function getProductsByName(name) {

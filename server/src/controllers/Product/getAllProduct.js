@@ -2,27 +2,27 @@ const Product = require("../../models/Product");
 
 const getAllProducts = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  const limit = parseInt(req.query.limit) || 15;
   const startIndex = (page - 1) * limit;
   const results = {};
 
-  const { name, brand, sale, price, category, quantity } = req.query;
+  const { brand, sale, price, category, quantity } = req.query;
   const whereConditions = {};
 
   if (category) {
     whereConditions.category = new RegExp(category, 'i');
   }
 
-  if (sale === "sale") {
-    whereConditions.sale = {
+  if (sale === "1") {
+    console.log("Filtrando por sale con descuento");
+    whereConditions.sales = {
       $gt: 0,
     };
+  } else if (sale === "0") {
+    console.log("Filtrando por sale sin descuento");
+    whereConditions.sales = 0;
   }
-
-  if (sale === "no-sale") {
-    whereConditions.sale = 0;
-  }
-
+  
   try {
     const sort = {};
     if (price === "highest") {

@@ -9,7 +9,7 @@ const Card = ({ price, img, name, _id }) => {
         <img className='h-full w-full object-cover object-center group-hover:opacity-75' src={isLocalImage ? `http://localhost:3001/${img}` : img} alt={`${name} image`} />
       </div>
          <h3 className='my-4 pl-4 font-bold text-black-500'>{name}</h3>
-         <p className='mb-4 ml-4 text-xl font-semibold text-gray-800'>{price}</p>
+         <p className='mb-4 ml-4 text-xl font-semibold text-gray-800'>$ {price}</p>
    </NavLink>
  );
 };
