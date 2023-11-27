@@ -22,21 +22,21 @@ const NavBar = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
+    <nav className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
       <div className="flex">
         <img
-          className="w-[100px] h-[50px] cursor-pointer "
+          className="w-[50px] h-[50px] cursor-pointer "
           src={homeicon2}
           alt="home"
           onClick={() => navigate("/")}
         />
       </div>
-      <div className="flex mb-0">
+      <div className="flex">
           <SearchBar/>
       </div>
      
         <Button
-          className="mb-3 flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"          
           type="primary"
           onClick={showModal}
         >
@@ -52,7 +52,7 @@ const NavBar = () => {
       >
         <LoginRegister />
       </Modal>
-    </header>
+    </nav>
   );
 };
 
