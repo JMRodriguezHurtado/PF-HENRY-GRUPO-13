@@ -4,6 +4,7 @@ import { Button, Modal } from "antd";
 import LoginRegister from "./Login-register/LoginRegister";
 import SearchBar from "./SearchBar";
 import homeicon2 from "../assets/icons/homeicon2.png";
+import shoppingCart from "../assets/icons/shoppingCart.png"
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,16 +33,24 @@ const NavBar = () => {
         />
       </div>
       <div className="flex">
-          <SearchBar/>
+        <img
+          className="w-[50px] h-[50px] cursor-pointer "
+          src={shoppingCart}
+          alt="shoppingCart"
+          onClick={() => navigate("/shoppingCart")}
+        />
       </div>
-     
-        <Button
-          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"          
-          type="primary"
-          onClick={showModal}
-        >
-          Entrar/Registrarse
-        </Button>
+      <div className="flex">
+        <SearchBar />
+      </div>
+  
+      <Button
+        className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+        type="primary"
+        onClick={showModal}
+      >
+        Entrar/Registrarse
+      </Button>
       <Modal
         title=""
         open={isModalOpen}
@@ -54,6 +63,6 @@ const NavBar = () => {
       </Modal>
     </nav>
   );
-};
+}
 
 export default NavBar;
