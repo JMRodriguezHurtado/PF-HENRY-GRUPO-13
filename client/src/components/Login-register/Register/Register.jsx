@@ -62,7 +62,7 @@ const Register = () => {
         <br />
 
         <div className={div_style}>
-          <button className={isButtonDisabled ? button_disabledStyle : button_style} type="submit" disabled={isButtonDisabled}>Registrar</button>
+          <button className={isButtonDisabled ? button_disabledStyle : button_style} type="submit" disabled={isButtonDisabled}>Registrarse</button>
         </div>
         {messageRegister && <p className={h1_style}>{messageRegister}</p>}
       </form>
