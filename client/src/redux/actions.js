@@ -17,6 +17,7 @@ export const LOCAL_STORAGE = 'LOCAL_STORAGE';
 
 // Cart
 
+export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FINISH_PURCHASE = 'FINISH_PURCHASE';
 
@@ -214,4 +215,8 @@ export function removeFromCart(productId) {
     };
   }
 
+  export const addToCart = (productById) => ({
+    type: 'ADD_TO_CART',
+    payload: productById,
+  });
 

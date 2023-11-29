@@ -12,7 +12,8 @@ import {
     CLEAR_SEARCH_RESULTS,
     LOCAL_STORAGE,
     REMOVE_FROM_CART,
-    FINISH_PURCHASE
+    FINISH_PURCHASE,
+    ADD_TO_CART
   } from './actions';
   
   const initialState = {
@@ -24,7 +25,8 @@ import {
     users: [],
     reviews: [],
     localStorage: [],
-    cart: []
+    cart: [],
+    items: []
   };
   
   const reducer = (state = initialState, action) => {
@@ -105,19 +107,23 @@ import {
           };
       
       case REMOVE_FROM_CART:
-          // eslint-disable-next-line no-case-declarations
-          const productIdToRemove = action.payload;
-            return {
-              ...state,
-              cart: state.cart.filter(item => item.size !== productIdToRemove),
-            };
-
+        // eslint-disable-next-line no-case-declarations
+        const productIdToRemove = action.payload;
+          return {
+          ...state,
+           cart: state.cart.filter(item => item.id !== productIdToRemove),
+  };
       case FINISH_PURCHASE:
           return {
             ...state,
               cart: action.payload
               };
-          
+      
+      case ADD_TO_CART:
+          return {
+            ...state,
+              cart: [...state.cart, action.payload],
+                };
           default:
             return state;
           }

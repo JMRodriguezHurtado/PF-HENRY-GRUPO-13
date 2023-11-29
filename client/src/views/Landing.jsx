@@ -101,6 +101,9 @@ const LandingPage = () => {
 
 
   return (
+<div className="relative bg-blue-200">
+<div className="relative inset-0">
+<div className="text-center pt-5 pb-0 relative">
    <div className="flex flex-col items-center">
      <h1 className= "padding text-4xl font-bold m-2 mb-0">Bienvenido</h1>
      <p className="text-lg text-gray-600 m-1 mt-0">Explora lo nuevo en tecnología</p>
@@ -149,8 +152,6 @@ const LandingPage = () => {
            )}
          </div>
        </label>
-
-
        <label className='m-10'>
          <select
            value={filters.sale}
@@ -162,10 +163,6 @@ const LandingPage = () => {
            <option value="0">Sin oferta</option>
          </select>
        </label>
-
-
-
-
        <label>
          <select
            value={filters.price}
@@ -178,10 +175,6 @@ const LandingPage = () => {
          </select>
        </label>
      </div>
-
-
-
-
      <div className="grid grid-cols-1 m-5 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
        {products?.map((product) => (
          <Card
@@ -193,10 +186,6 @@ const LandingPage = () => {
          />
        ))}
      </div>
-
-
-
-
      <div className="max-w-2xl m-10 mx-auto">
        <nav aria-label="Page navigation example">
          <ul className="flex justify-center -space-x-px">
@@ -224,6 +213,9 @@ const LandingPage = () => {
          </ul>
        </nav>
      </div>
+   </div>
+   </div>
+   </div>
    </div>
  );
 };
