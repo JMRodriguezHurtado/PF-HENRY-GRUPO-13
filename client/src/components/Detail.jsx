@@ -44,7 +44,7 @@ const Detail = () => {
 
 
   return (
-    <div className='py-40 bg-gray-300 h-screen'>
+    <div className='py-40 h.full bg-gray-300 h-screen'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="md:flex-1 px-4">
