@@ -210,7 +210,7 @@ export function removeFromCart(productId) {
           payload: response.data,
         });
       } catch (error) {
-        console.error('Error in finishPurchase:', error);
+        console.error('Error al tratar de finalizar compra', error);
       }
     };
   }

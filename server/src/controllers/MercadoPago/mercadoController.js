@@ -31,7 +31,6 @@ const placeOrder = async (req, res) => {
         pending: "http://localhost:3001",
         success: "http://localhost:3001",
       },
-      auto_return: "approved",
     };
 
     const response = await payment.create(preference);
