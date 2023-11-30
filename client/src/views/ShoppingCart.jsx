@@ -15,13 +15,18 @@ const ShoppingCart = () => {
   };
 
   const handleFinishPurchase = () => {
+    
     if (cartItems.length === 0) {
-      
       Swal.fire('No hay nada en tu carrito');
       return;
     }
-
-    dispatch(finishPurchase());
+    const objetoPago = cartItems.map((item) => ({
+      ...item,
+      unit_price: item.price,
+      currency_id: 'MEX',
+    }));
+   
+    dispatch(finishPurchase(objetoPago));
     Swal.fire('Compra completada');
     navigate('/');
   };
