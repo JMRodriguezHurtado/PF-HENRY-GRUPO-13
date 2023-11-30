@@ -13,21 +13,35 @@ import {
     LOCAL_STORAGE,
     REMOVE_FROM_CART,
     FINISH_PURCHASE,
-    ADD_TO_CART
+    ADD_TO_CART,
+    POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
+    POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE,
   } from './actions';
   
-  const initialState = {
-    products: [],
-    productsByName: [],
-    productById: [],
-    deletedProducts: [],
-    admins: [],
-    users: [],
-    reviews: [],
-    localStorage: [],
-    cart: [],
-    items: []
-  };
+const initialState = {
+  products: [],
+  productsByName: [],
+  productById: [],
+  deletedProducts: [],
+  admins: [],
+  users: [],
+  reviews: [],
+  localStorage: [],
+  cart: [],
+  items: [],
+
+  loadingPostLogin: false, 
+  errorPostLogin: false,
+  successPostLogin: false,
+  access: false,
+  messageLogin: '',
+
+  loadingPostUser: false,
+  errorPostUser: false,
+  successPostUser: false,
+  messageRegister: '',
+
+};
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -124,9 +138,59 @@ import {
             ...state,
               cart: [...state.cart, action.payload],
                 };
-          default:
-            return state;
-          }
+      
+      case POST_LOGIN_REQUEST:
+        return {
+          ...state,
+          loadingPostLogin: true,
+          errorPostLogin: false,
+          successPostLogin: false,
+        };
+      case POST_LOGIN_SUCCESS:
+        return {
+          ...state,
+          loadingPostLogin: false,
+          errorPostLogin: false,
+          successPostLogin: true,
+          access: action.payload.access,
+          messageLogin: action.payload.data.message
+        };
+      case POST_LOGIN_FAILURE:
+        return {
+          ...state,
+          loadingPostLogin: false,
+          errorPostLogin: action.payload,
+          successPostLogin: false,
+        };
+
+
+      case POST_USER_REQUEST:
+        return {
+          ...state,
+          loadingPostUser: true,
+          errorPostUser: false,
+          successPostUser: false,
+        };
+      case POST_USER_SUCCESS:
+        return {
+          ...state,
+          loadingPostUser: false,
+          errorPostUser: false,
+          successPostUser: true,
+          access: action.payload.access,
+          messageRegister: action.payload.data.message
+        };
+      case POST_USER_FAILURE:
+        return {
+          ...state,
+          loadingPostUser: false,
+          errorPostUser: action.payload,
+          successPostUser: false,
+        };
+
+      default:
+        return state;
+  };
   };
   
   export default reducer;
