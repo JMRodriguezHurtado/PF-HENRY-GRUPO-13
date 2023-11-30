@@ -11,6 +11,7 @@ import Earbud from '../assets/iconsFilters/Earbuds.svg';
 import Keyboard from '../assets/iconsFilters/Keyboards.svg';
 import Mices from '../assets/iconsFilters/Mice.svg';
 import Controller from '../assets/iconsFilters/Controllers.svg';
+import refreshIcon from '../assets/icons/refreshIcon.png'
 
 const categoryImages = {
   Headsets: Headset,
@@ -63,7 +64,21 @@ const LandingPage = () => {
     }));
     setCurrentPage(1);
   };
-    
+  
+  const handleRefreshFilters = () => {
+    setFilters({
+      category: '',
+      sale: 3,
+      price: '',
+    });
+
+    dispatch(getAllProducts(1, 12, {
+      category: '',
+      sale: 3,
+      price: '',
+    }));
+  };
+
   const categories = ["Headsets", "Microphones", "Monitors", "Mousepads", "Earbuds", "Keyboards", "Mice", "Controllers"];
 
   const itemsPerPage = 12;
@@ -142,7 +157,6 @@ const LandingPage = () => {
                   )}
                 </div>
               </label>
-
               <label className='m-10'>
                 <select
                   value={filters.sale}
@@ -166,6 +180,11 @@ const LandingPage = () => {
                 </select>
               </label>
             </div>
+            <button 
+                onClick={handleRefreshFilters}
+                className="p-0 bg-gray-100 rounded-full"
+              ><img src={refreshIcon} alt="Refresh Icon" className="w-6 h-6" />
+              </button>
             
             <div className="grid grid-cols-1 m-5 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {products?.map((product) => (

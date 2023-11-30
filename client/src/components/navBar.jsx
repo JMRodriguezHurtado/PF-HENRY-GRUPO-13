@@ -5,6 +5,7 @@ import LoginRegister from "./Login-register/LoginRegister";
 import SearchBar from "./SearchBar";
 import homeicon2 from "../assets/icons/homeicon2.png";
 import shoppingCart from "../assets/icons/shoppingCart.png"
+import Login from "./Login-register/Login/Login";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +23,9 @@ const NavBar = () => {
     setIsModalOpen(false);
   };
 
+  const handleLogin = () => {
+    setIsModalOpen(false);
+  }
   return (
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
       <div className="flex">
@@ -59,6 +63,7 @@ const NavBar = () => {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
+        <Login onLogin={handleLogin} />
         <LoginRegister />
       </Modal>
     </nav>

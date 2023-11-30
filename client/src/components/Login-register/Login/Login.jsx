@@ -48,7 +48,7 @@ const Login = () => {
 
         <div className={divButtons_style}>
           <button
-            className={isButtonDisabled ? button_disabledStyle : button_style}
+            className={!isButtonDisabled ? button_disabledStyle : button_style}
             name='User'
             type="submit"
             onClick={handleLogin}

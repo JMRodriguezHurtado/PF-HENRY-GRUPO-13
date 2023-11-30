@@ -1,4 +1,4 @@
-const h1_style = "mt-5 pt-2 pb-5 text-center text-black font-pop-semi tracking-wider text-[20px] border-t-2";
+ const h1_style = "text-center text-black text-[20px]";
 const input_style = "border border-solid border-gray-400 w-[100%] rounded-sm h-7";
 const label_style = "pt-10 pb-5 text-center text-black font-pop-semi tracking-wider text-[14px]";
 const select_style = "border border-solid border-gray-400 w-[100%] rounded-sm h-7";
