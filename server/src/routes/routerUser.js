@@ -2,13 +2,14 @@ const { Router } = require("express");
 const router = Router();
 
 // Middlewares
-const signTokens = require("../middlewares/Tokens/signTokens");
 const refreshTokens = require("../middlewares/Tokens/refreshTokens");
 const verifyToken = require("../middlewares/Tokens/verifyTokens");
 
 //Controllers
 const signUp = require('../controllers/User/signUp');
 const authenticateWithGoogle = require("../controllers/User/auth");
+const verifyStatus = require("../controllers/User/verifyStatus");
+const login = require("../controllers/User/login");
 
 // REFRESH TOKENS
 router.post("/refresh", refreshTokens, (req, res) => {
@@ -32,15 +33,15 @@ router.post("/refresh", refreshTokens, (req, res) => {
 //POST
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, phoneNumber, address } = req.body;
+    const { name, email, password, phoneNumber, address,img } = req.body;
 
-    const newUser = await signUp({ name, email, password, phoneNumber, address });
+    const newUser = await signUp({ name, email, password, phoneNumber, address, img });
 
     return res.status(200).json(newUser);
   } catch (error) {
     console.log(error.message);
 
-    res.status(404).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   };
 });
 
@@ -49,10 +50,37 @@ router.post("/auth", async (req, res) => {
 
   try {
     const response = await authenticateWithGoogle(token);
-    res.status(200).json(response);
+
+    return res.status(200).json(response);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   };
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await login(email, password);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+
+    res.status(500).json({ error: error.message });
+  };
+});
+
+
+//GET
+router.get('/verify/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const response = await verifyStatus(userId);
+    return res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+})
 module.exports = router;
