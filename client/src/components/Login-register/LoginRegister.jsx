@@ -37,7 +37,7 @@ function LoginRegister() {
           {showRegister ? "Cancelar" : "Registrarse"}
         </button>
 
-        <button className={`bg-blue-400 hover:bg-blue-800 px-0 py-0 rounded-lg mx-2 min-w-[200px] h-[55px] text-[20px] text-white font-thin flex items-center justify-center ${isFormSelected && isImageSmaller ? 'transform scale-75 p-0 m-0' : ''}`} onClick={handleToggleLogin}>
+        <button className={`bg-blue-400 hover:bg-blue-500 px-0 py-0 rounded-lg mx-2 min-w-[200px] h-[55px] text-[20px] text-white font-thin flex items-center justify-center ${isFormSelected && isImageSmaller ? 'transform scale-75 p-0 m-0' : ''}`} onClick={handleToggleLogin}>
           {showLogin ? "Cancelar" : "Inicio de Sesión"}
         </button>
       </div>
