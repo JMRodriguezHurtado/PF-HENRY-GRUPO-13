@@ -51,7 +51,7 @@ const Login = () => {
               name='email'
               onChange={handleChange} 
               placeholder=' Ingrese su email'
-              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 placeholder-gray-900"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4 mb-2 placeholder-gray-900"
             />
             {errors.email && <p className="text-red-900 text-xs italic text-center">{errors.email}</p>}
           </div>
@@ -65,7 +65,7 @@ const Login = () => {
               name='password'
               onChange={handleChange}
               placeholder=' Ingrese su contraseña'
-              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 placeholder-gray-900"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-2 px-4 mb-2 placeholder-gray-900"
             />
             {errors.password && <p className="text-red-900 text-xs italic text-center">{errors.password}</p>}
           </div>
