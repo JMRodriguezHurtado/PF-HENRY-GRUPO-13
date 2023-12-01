@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { form_style, div_style, button_disabledStyle, button_style, label_style, input_style, divButtons_style } from "./tailwindStylesLogin";
+import { h1_style, button_disabledStyle, button_style, label_style, input_style, divButtons_style } from "./tailwindStylesLogin";
 import validation from '../../../utils/Validation/ValidationLogin';
 import { postLogin } from "../../../redux/actions";
 
@@ -41,36 +41,39 @@ const Login = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={form_style}>
-        <div className={div_style}>
-          <label className={label_style}>Correo electrónico: </label>
-          <input
-            type="text"
-            value={userData.email}
-            name='email'
-            onChange={handleChange} 
-            placeholder=' Ingrese su email'
-            className={input_style}
-          />
-          {errors.email && <p>{errors.email}</p>}
+      <h1 className={h1_style}>Inicio de sesión</h1>
+      <form onSubmit={handleSubmit} >
+        <div class="-mx-3 md:flex mb-3">
+          <div class="md:w-full px-3">
+            <input
+              type="text"
+              value={userData.email}
+              name='email'
+              onChange={handleChange} 
+              placeholder=' Ingrese su email'
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 placeholder-gray-900"
+            />
+            {errors.email && <p className="text-red-900 text-xs italic text-center">{errors.email}</p>}
+          </div>
         </div>
 
-        <div className={div_style}>
-          <label className={label_style}>Contraseña: </label>
-          <input
-            type='password'
-            value={userData.password}
-            name='password'
-            onChange={handleChange}
-            placeholder=' Ingrese su contraseña'
-            className={input_style}
-          />
-          {errors.password && <p>{errors.password}</p>}
+        <div class="-mx-3 md:flex mb-3">
+          <div class="md:w-full px-3">
+            <input
+              type='password'
+              value={userData.password}
+              name='password'
+              onChange={handleChange}
+              placeholder=' Ingrese su contraseña'
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 placeholder-gray-900"
+            />
+            {errors.password && <p className="text-red-900 text-xs italic text-center">{errors.password}</p>}
+          </div>
         </div>
 
         <div className={divButtons_style}>
           <button
-            className={!isFormValid ? button_disabledStyle : button_style}
+            className={isFormValid ? button_disabledStyle : button_style}
             name='User'
             type="submit"
             disabled={isFormValid}

@@ -9,6 +9,7 @@ import Login from "./Login-register/Login/Login";
 import userIcon from "../assets/icons/userIcon.png"
 import { clearData } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import LOGO from "../assets/LOGO.png"
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -44,8 +45,8 @@ const NavBar = () => {
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
       <div className="flex">
         <img
-          className="w-[50px] h-[50px] cursor-pointer "
-          src={homeicon2}
+          className=" bg-gray-50 rounded-lg w-[50px] h-[50px] cursor-pointer "
+          src={LOGO}
           alt="home"
           onClick={() => navigate("/")}
         />
@@ -95,7 +96,7 @@ const NavBar = () => {
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <Login onLogin={handleLogin} />
+        {/* <Login onLogin={handleLogin} /> */}
         <LoginRegister />
       </Modal>
     </nav>
