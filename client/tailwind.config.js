@@ -76,8 +76,8 @@ export default {
     ],
     options: {
       safelist: [
-        'bg-slate-500',
-        'text-zinc-500',
+        'bg-slate-900',
+        'text-zinc-50',
       ],
     },
   },
