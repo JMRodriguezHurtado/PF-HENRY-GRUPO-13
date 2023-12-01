@@ -1,8 +1,8 @@
-import  { useState } from "react";
-import { h1_style, input_style, label_style, div_style, button_style, button_disabledStyle } from "./tailwindStylesRegister";
-import { postUser } from "../../../redux/actions";
+import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { postUser } from "../../../redux/actions";
 import validation from "../../../utils/Validation/ValidationRegister";
+import { button_disabledStyle, button_style, div_style, h1_style, input_style, label_style } from "./tailwindStylesRegister";
 
 const Register = () => {
   const access = useSelector(state => state.access);

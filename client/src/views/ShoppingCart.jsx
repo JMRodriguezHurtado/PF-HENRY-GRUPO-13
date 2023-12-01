@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, finishPurchase } from '../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import LoginRegister from "../components/Login-register/LoginRegister";
+import { finishPurchase, removeFromCart } from '../redux/actions';
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();

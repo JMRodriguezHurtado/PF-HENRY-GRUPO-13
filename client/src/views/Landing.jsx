@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../redux/actions';
-import Card from '../components/Card';
+import refreshIcon from '../assets/icons/refreshIcon.png';
 import Categories from '../assets/iconsFilters/Category.svg';
+import Controller from '../assets/iconsFilters/Controllers.svg';
+import Earbud from '../assets/iconsFilters/Earbuds.svg';
 import Headset from '../assets/iconsFilters/Headsets.svg';
+import Keyboard from '../assets/iconsFilters/Keyboards.svg';
+import Mices from '../assets/iconsFilters/Mice.svg';
 import Microphone from '../assets/iconsFilters/Microphones.svg';
 import Monitor from '../assets/iconsFilters/Monitors.svg';
 import Mousepad from '../assets/iconsFilters/Mousepads.svg';
-import Earbud from '../assets/iconsFilters/Earbuds.svg';
-import Keyboard from '../assets/iconsFilters/Keyboards.svg';
-import Mices from '../assets/iconsFilters/Mice.svg';
-import Controller from '../assets/iconsFilters/Controllers.svg';
-import refreshIcon from '../assets/icons/refreshIcon.png'
+import Card from '../components/Card';
+import { getAllProducts } from '../redux/actions';
 
 const categoryImages = {
   Headsets: Headset,
@@ -53,7 +53,7 @@ const LandingPage = () => {
     setCurrentPage(newPage);
     if (newPage !== 1 && newPage !== totalPages) {
       window.scrollTo(0, 0);
-    };
+    }
   };
   
 

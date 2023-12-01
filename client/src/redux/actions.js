@@ -41,6 +41,10 @@ export const POST_USER_FAILURE = 'POST_USER_FAILURE'
 
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 
+//Dashboard
+
+export const GET_STOCK = "GET_STOCK"
+
 // Actions
 
 const URL = 'http://localhost:3001';
@@ -268,4 +272,13 @@ export function removeFromCart(productId) {
         dispatch(postUserFailure(error.response.data.error));
       }
     };
+    }
+    export const getStock = () => {
+      return async dispatch => {
+        try {
+          const {data} = await axios(`${URL}/stock`)
+        } catch (error) {
+          return 
+        }
+      }
   };
