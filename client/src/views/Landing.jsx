@@ -89,7 +89,7 @@ const LandingPage = () => {
       <li key={i}>
         <button
           className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 ${
-            i === currentPage ? 'bg-slate-600 text-zinc-50 pointer-events-none' : ''
+            i === currentPage ? 'bg-slate-300 text-zinc-500 pointer-events-none' : ''
           }`}
           onClick={() => handlePageChange(i)}
         >
