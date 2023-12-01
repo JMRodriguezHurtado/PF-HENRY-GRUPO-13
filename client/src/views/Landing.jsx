@@ -11,7 +11,7 @@ import Earbud from '../assets/iconsFilters/Earbuds.svg';
 import Keyboard from '../assets/iconsFilters/Keyboards.svg';
 import Mices from '../assets/iconsFilters/Mice.svg';
 import Controller from '../assets/iconsFilters/Controllers.svg';
-import refreshIcon from '../assets/icons/refreshIcon.png'
+import { IoReload } from "react-icons/io5";
 
 const categoryImages = {
   Headsets: Headset,
@@ -55,7 +55,6 @@ const LandingPage = () => {
       window.scrollTo(0, 0);
     };
   };
-  
 
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
@@ -90,7 +89,7 @@ const LandingPage = () => {
       <li key={i}>
         <button
           className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 ${
-            i === currentPage ? 'bg-slate-300 text-zinc-950 pointer-events-none' : ''
+            i === currentPage ? 'bg-slate-600 text-zinc-50 pointer-events-none' : ''
           }`}
           onClick={() => handlePageChange(i)}
         >
@@ -106,6 +105,8 @@ const LandingPage = () => {
 
   const categoriesWithAll = ["", ...categories];
 
+  const hasAppliedFilters = filters.category !== '' || filters.sale !== '3' || filters.price !== '';
+
   return (
     <div className="relative h-full bg-blue-200">
       <div className="relative inset-0">
@@ -114,14 +115,14 @@ const LandingPage = () => {
             <h1 className= "p-10 pb-5 text-4xl font-bold mb-0">Bienvenido</h1>
             <p className="text-lg text-gray-600 mb-3">Explora lo nuevo en tecnología</p>
 
-            <div className='m-3'>
-              <label>
+            <div className="grid grid-cols-4 gap-3 items-center m-3">
+              <label className="col-span-1">
                 <div className="relative inline-block">
                   <div
                     onClick={toggleCategoryOptions}
                     className="flex items-center cursor-pointer"
                   >
-                    <span className="text-gray-700 p-2 bg-gray-100 rounded-full">
+                    <span className="text-gray-700 p-2 bg-gray-100 rounded-tl-md rounded-bl-md">
                       {filters.category ? filters.category : "Categorias"}
                     </span>  
                     <img
@@ -131,7 +132,7 @@ const LandingPage = () => {
                           : Categories
                       }
                       alt={filters.category || "Categories"}
-                      className="w-6 h-6 ml-2 bg-gray-200 rounded-full p-1 "
+                      className="w-6 h-6 bg-gray-100 rounded-tr-md rounded-br-md p-2 "
                     />
                   </div>
                   {showCategoryOptions && (
@@ -157,34 +158,43 @@ const LandingPage = () => {
                   )}
                 </div>
               </label>
-              <label className='m-10'>
+
+              <label className="col-span-1 ml-5 mr-5">
                 <select
                   value={filters.sale}
                   onChange={(e) => handleFilterChange('sale', e.target.value)}
-                  className="p-2 bg-gray-100 rounded-full"
+                  className="p-2 bg-gray-100 rounded-lg"
                 >
-                  <option className='text-gray-200' value="3">Descuentos</option>
+                  <option className='text-gray-200' value={3}>Descuentos</option>
                   <option value="1">Con descuentos</option>
                   <option value="0">Sin descuentos</option>
                 </select>
               </label>
-              <label>
+
+              <label className="col-span-1">
                 <select
                   value={filters.price}
                   onChange={(e) => handleFilterChange('price', e.target.value)}
-                  className="p-2 bg-gray-100 rounded-full"
+                  className="p-2 bg-gray-100 rounded-lg"
                 >
                   <option value="">Todos</option>
                   <option value="highest">Más alto</option>
                   <option value="lowest">Más bajo</option>
                 </select>
               </label>
+
+            <div className={`col-span-${hasAppliedFilters ? '1' : '0'} pr-40`}>
+              {hasAppliedFilters && filters.category !== '' && (
+                <button 
+                  onClick={handleRefreshFilters}
+                  className="p-0 bg-gray-100 rounded-full align-middle"
+                > 
+                  <IoReload className="w-6 h-6 p-1"/>
+                </button>
+              )}
             </div>
-            <button 
-                onClick={handleRefreshFilters}
-                className="p-0 bg-gray-100 rounded-full"
-              ><img src={refreshIcon} alt="Refresh Icon" className="w-6 h-6" />
-              </button>
+          </div>
+
             
             <div className="grid grid-cols-1 m-5 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {products?.map((product) => (
