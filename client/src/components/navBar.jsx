@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import homeicon2 from "../assets/icons/homeicon2.png";
 import shoppingCart from "../assets/icons/shoppingCart.png"
 import Login from "./Login-register/Login/Login";
+import userIcon from "../assets/icons/userIcon.png"
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +27,14 @@ const NavBar = () => {
   const handleLogin = () => {
     setIsModalOpen(false);
   }
+
+  const handleLogout = () => {  
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  const isUserLoggedIn = !!localStorage.getItem("token");
+
   return (
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-50 px-[5vw] flex items-center justify-between p-2">
       <div className="flex">
@@ -38,23 +47,41 @@ const NavBar = () => {
       </div>
       <div className="flex">
         <img
-          className="w-[50px] h-[50px] cursor-pointer "
+          className="w-[50px] h-[50px] cursor-pointer"
           src={shoppingCart}
           alt="shoppingCart"
           onClick={() => navigate("/shoppingCart")}
         />
       </div>
+      {isUserLoggedIn && (
+        <div className="flex">
+          <img 
+            className="w-[50px] h-[50px] cursor-pointer"
+            src={userIcon}
+            alt="user"
+          />
+        </div>
+      )}
       <div className="flex">
         <SearchBar />
       </div>
-  
-      <Button
-        className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
-        type="primary"
-        onClick={showModal}
-      >
-        Entrar/Registrarse
-      </Button>
+  {isUserLoggedIn ? (
+        <Button
+          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+          type="primary"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      ) : (
+        <Button
+          className="flex items-center justify-center text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+          type="primary"
+          onClick={showModal}
+        >
+          Entrar/Registrarse
+        </Button>
+      )}
       <Modal
         title=""
         open={isModalOpen}
