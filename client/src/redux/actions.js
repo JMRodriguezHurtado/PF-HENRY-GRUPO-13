@@ -233,11 +233,11 @@ export function removeFromCart(productId) {
         if (data.accessToken) {
           localStorage.setItem("token", data.accessToken);
           localStorage.setItem("access", data.access)
-        };
+        }
         dispatch(postLoginSuccess(data));
       } catch (error) {
         dispatch(postLoginFailure(error.response.data.error));
-      };
+      }
     };
   };
 
@@ -261,11 +261,11 @@ export function removeFromCart(productId) {
         if (data.accessToken) {
           localStorage.setItem("token", data.accessToken);
           localStorage.setItem("access", data.access)
-        };
+        }
         console.log(data);
         dispatch(postUserSuccess(data));
       } catch (error) {
         dispatch(postUserFailure(error.response.data.error));
-      };
+      }
     };
   };

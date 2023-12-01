@@ -119,7 +119,7 @@ const initialState = {
           ...state,
           localstorage: [action.payload],
           };
-      
+    
       case REMOVE_FROM_CART:
         // eslint-disable-next-line no-case-declarations
         const productIdToRemove = action.payload;
@@ -190,7 +190,7 @@ const initialState = {
 
       default:
         return state;
-  };
+  }
   };
   
   export default reducer;
