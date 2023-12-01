@@ -67,4 +67,18 @@ export default {
     },
   },
   plugins: [],
+
+  purge: {
+    content: [
+      "./index.html",
+      "./src/**/*.{js,jsx}",
+      "./src/App"
+    ],
+    options: {
+      safelist: [
+        'bg-slate-500',
+        'text-zinc-500',
+      ],
+    },
+  },
 }
