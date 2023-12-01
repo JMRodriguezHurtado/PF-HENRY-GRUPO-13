@@ -51,7 +51,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="relative h-full bg-blue-200">
+    <div className="relative bg-blue-200">
       <div className="text-center py-10 bg-blue-200 h-screen">
         <h2 className="text-3xl font-bold text-black mb-4">Tu carrito</h2>
         {cartItems.length === 0 ? (
@@ -97,7 +97,7 @@ const ShoppingCart = () => {
             </tbody>
           </table>
         )}
-        <div className="text-center mt-4">
+        <div className="relative bg-blue-200 text-center">
           <button
             onClick={handleFinishPurchase}
             className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-600"
