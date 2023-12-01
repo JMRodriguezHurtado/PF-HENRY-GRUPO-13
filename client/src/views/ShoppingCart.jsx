@@ -53,9 +53,9 @@ const ShoppingCart = () => {
   return (
     <div className="relative h-full bg-blue-200">
       <div className="text-center py-10 bg-blue-200 h-screen">
-        <h2 className="text-3xl font-bold text-black mb-4">Your Shopping Cart</h2>
+        <h2 className="text-3xl font-bold text-black mb-4">Tu carrito</h2>
         {cartItems.length === 0 ? (
-          <p className="text-black">Your cart is empty.</p>
+          <p className="text-black">Tu carrito esta vacio</p>
         ) : (
           <table className="w-full border-collapse">
             <thead>
@@ -91,7 +91,7 @@ const ShoppingCart = () => {
               ))}
               <tr>
                 <td className="border p-2"></td>
-                <td className="border p-2 font-bold">Total to pay:</td>
+                <td className="border p-2 font-bold">Total a pagar:</td>
                 <td className="border p-2 font-bold">${totalAmount}</td>
               </tr>
             </tbody>
