@@ -27,7 +27,7 @@ const placeOrder = async (req, res) => {
         back_urls: {
           failure: "http://localhost:3001",
           pending: "http://localhost:3001/purchase/pending",
-          success: "http://localhost:3001",
+          success: "http://localhost:3001/purchase/succes",
         },
         auto_return: "approved",
       },
@@ -42,10 +42,12 @@ const placeOrder = async (req, res) => {
 
 const successfulPurchase = async (req, res) => {
   try {
-    res.status(200).send("Compra realizada con exito");
+    console.log(res);
+    res.redirect("http://localhost:5173/");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 module.exports = { placeOrder, successfulPurchase };
