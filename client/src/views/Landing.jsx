@@ -82,15 +82,19 @@ const LandingPage = () => {
 
   const itemsPerPage = 12;
   const totalPages = Math.ceil(info?.total / itemsPerPage);
-
+  
   const paginationItems = [];
   for (let i = 1; i <= totalPages; i++) {
     paginationItems.push(
       <li key={i}>
         <button
-          className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 ${
-            i === currentPage ? 'bg-slate-900 text-zinc-50 pointer-events-none' : ''
-          }`}
+          style={{
+            backgroundColor: i === currentPage ? '#1a202c' : 'white', // Cambia el color de fondo según la condición
+            borderColor: '#718096',
+            color: i === currentPage ? '#f7fafc' : '#4a5568', // Cambia el color del texto según la condición
+            pointerEvents: i === currentPage ? 'none' : 'auto', // Desactiva los eventos de puntero si es la página actual
+          }}
+          className={`border border-gray-300 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3`}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -98,6 +102,7 @@ const LandingPage = () => {
       </li>
     );
   }
+  
 
   const toggleCategoryOptions = () => {
     setShowCategoryOptions(!showCategoryOptions);
