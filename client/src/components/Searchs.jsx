@@ -226,9 +226,13 @@ const Searchs = () => {
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <li key={i}>
                       <button
-                        className={`bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 ${
-                          i + 1 === currentPage ? 'bg-slate-600 text-zinc-50 pointer-events-none' : ''
-                        }`}
+                        style={{
+                          backgroundColor: i + 1 === currentPage ? '#424447' : 'white', 
+                          borderColor: '#718096',
+                          color: i + 1 === currentPage ? '#f7fafc' : '#4a5568', 
+                          pointerEvents: i + 1 === currentPage ? 'none' : 'auto',
+                        }}
+                        className={`border border-gray-300 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3`}
                         onClick={() => handlePageChange(i + 1)}
                       >
                         {i + 1}
