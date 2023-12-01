@@ -27,8 +27,8 @@ function LoginRegister() {
   return (
     <div>
       <div className={`flex items-center justify-center ${isFormSelected && isImageSmaller ? 'h-[110px] pb-3 m-0' : ''}`}>
-        <div className={`flex transition-transform duration-300 p-0 ease-in-out ${isFormSelected && isImageSmaller ? 'scale-50' : ''}`}>
-          <img src={LOGO} alt="Logo" className="h-30 w-30 m-0" />
+        <div className={`flex transition-transform duration-300 p-0 ease-in-out ${isFormSelected && isImageSmaller ? 'scale-75' : ''}`}>
+          <img src={LOGO} alt="Logo" className="h-[150px] w-[150px] m-0" />
         </div>
       </div>
 
