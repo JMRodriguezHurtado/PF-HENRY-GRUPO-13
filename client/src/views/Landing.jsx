@@ -10,7 +10,7 @@ import Mices from '../assets/iconsFilters/Mice.svg';
 import Microphone from '../assets/iconsFilters/Microphones.svg';
 import Monitor from '../assets/iconsFilters/Monitors.svg';
 import Mousepad from '../assets/iconsFilters/Mousepads.svg';
-import Card from '../components/Card';
+import Card from '../components/Products/Product';
 import { getAllProducts } from '../redux/actions';
 
 const categoryImages = {

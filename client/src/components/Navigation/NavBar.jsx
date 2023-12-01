@@ -1,12 +1,12 @@
 import { Button, Modal } from "antd";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Login from "../Login-register/Login/Login";
+import LoginRegister from "../Login-register/LoginRegister";
+import SearchBar from "../SearchBar";
 import homeicon2 from "../assets/icons/homeicon2.png";
 import shoppingCart from "../assets/icons/shoppingCart.png";
 import userIcon from "../assets/icons/userIcon.png";
-import Login from "./Login-register/Login/Login";
-import LoginRegister from "./Login-register/LoginRegister";
-import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

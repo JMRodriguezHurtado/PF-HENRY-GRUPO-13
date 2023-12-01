@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-import validationCreateProduct from '../utils/Validation/validationCreateProducts';
+import validationCreateProduct from '../../utils/Validation/validationCreateProducts';
 
-const CreateProduct = () => {
+const NewProduct = () => {
 
   const [errors, setErrors] = useState({});
   const [product, setProduct] = useState({
@@ -272,4 +272,4 @@ const CreateProduct = () => {
 };
 
 
-export default CreateProduct;
+export default NewProduct;

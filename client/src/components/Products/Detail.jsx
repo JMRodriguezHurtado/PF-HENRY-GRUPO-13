@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { addToCart, getProductsById } from '../redux/actions';
+import { addToCart, getProductsById } from '../../redux/actions';
 
 const Detail = () => {
   const { id } = useParams();

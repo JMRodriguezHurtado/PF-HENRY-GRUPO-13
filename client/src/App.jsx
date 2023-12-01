@@ -1,9 +1,9 @@
 
 import { Route, Routes } from 'react-router-dom';
-import CreateProduct from './components/CreateProduct';
 import Dashboard from './components/Dashboard/Dashboard';
+import CreateProduct from './components/Dashboard/NewProduct';
 import ShowStock from './components/Dashboard/showStock';
-import Detail from './components/Detail';
+import Detail from './components/Products/Detail';
 import Searchs from './components/Searchs';
 import LandingPage from './views/Landing';
 import ShoppingCart from './views/ShoppingCart';
