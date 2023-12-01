@@ -18,27 +18,37 @@ const authenticateWithGoogle = async (token) => {
     let user = await User.findOne({ email });
 
     if (!user) {
-      user = new User({ email, name, img: picture || ''});
+      user = new User({ email, name, img: picture || '' });
       await user.save();
-    };
 
-    const { accessToken, refreshToken } = signTokens(user._id);
+      const { accessToken, refreshToken } = signTokens(user._id);
 
-    if (user.verify === false) {
-      await sendVerifyEmail(user.email, user._id);
-    };
+      if (user.verify === false) {
+        await sendVerifyEmail(user.email, user._id);
+      }
 
-    const data = {
-      name: user.name,
-      img: picture,
-      message: 'Usuario creado con exito!.'
-    };
+      const data = {
+        name: user.name,
+        img: picture,
+        message: 'Usuario creado con éxito!',
+      };
 
-    return { access: true, accessToken, refreshToken, data };
+      return { access: true, accessToken, refreshToken, data };
+    } else {
+      const { accessToken, refreshToken } = signTokens(user._id);
+
+      const data = {
+        name: user.name,
+        img: picture,
+        message: 'Inicio de sesión exitoso',
+      };
+
+      return { access: true, accessToken, refreshToken, data };
+    }
   } catch (error) {
-    console.error("Error authenticating with Google:", error);
-    throw { access: false, error: "Invalid Google token" };
-  };
+    console.error("Error al autenticar con Google:", error);
+    throw { access: false, error: "Token de Google inválido" };
+  }
 };
 
 module.exports = authenticateWithGoogle;

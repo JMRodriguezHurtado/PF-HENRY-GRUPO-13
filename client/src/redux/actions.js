@@ -33,10 +33,15 @@ export const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST';
 export const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
 export const POST_LOGIN_FAILURE = 'POST_LOGIN_FAILURE';
 
-export const POST_USER_REQUEST = 'POST_USER_REQUEST'
-export const POST_USER_SUCCESS = 'POST_USER_SUCCESS'
-export const POST_USER_FAILURE = 'POST_USER_FAILURE'
+export const POST_USER_REQUEST = 'POST_USER_REQUEST';
+export const POST_USER_SUCCESS = 'POST_USER_SUCCESS';
+export const POST_USER_FAILURE = 'POST_USER_FAILURE';
 
+export const SEND_TOKEN_GOOGLE_REQUEST = 'SEND_TOKEN_GOOGLE_REQUEST';
+export const SEND_TOKEN_GOOGLE_SUCCESS = 'SEND_TOKEN_GOOGLE_SUCCESS';
+export const SEND_TOKEN_GOOGLE_FAILURE = 'SEND_TOKEN_GOOGLE_FAILURE';
+
+export const CLEAR_DATA = 'CLEAR_DATA'
 // Reviews
 
 export const CREATE_REVIEW = 'CREATE_REVIEW';
@@ -242,30 +247,64 @@ export function removeFromCart(productId) {
   };
 
 
-  export const postUserRequest = () => ({
-    type: POST_USER_REQUEST
-  });
-  export const postUserSuccess = (user) => ({
-    type: POST_USER_SUCCESS,
-    payload: user
-  });
-  export const postUserFailure = (error) => ({
-    type: POST_USER_FAILURE,
-    payload: error
-  });
-  export const postUser = (user) => {
-    return async (dispatch) => {
-      dispatch(postUserRequest());
-      try {
-        const { data } = await axios.post(`${URL}/user/signup`, user);
-        if (data.accessToken) {
-          localStorage.setItem("token", data.accessToken);
-          localStorage.setItem("access", data.access)
-        }
-        console.log(data);
-        dispatch(postUserSuccess(data));
-      } catch (error) {
-        dispatch(postUserFailure(error.response.data.error));
+export const postUserRequest = () => ({
+  type: POST_USER_REQUEST
+});
+export const postUserSuccess = (user) => ({
+  type: POST_USER_SUCCESS,
+  payload: user
+});
+export const postUserFailure = (error) => ({
+  type: POST_USER_FAILURE,
+  payload: error
+});
+export const postUser = (user) => {
+  return async (dispatch) => {
+    dispatch(postUserRequest());
+    try {
+      const { data } = await axios.post(`${URL}/user/signup`, user);
+      if (data.accessToken) {
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("access", data.access)
       }
-    };
+      console.log(data);
+      dispatch(postUserSuccess(data));
+    } catch (error) {
+      dispatch(postUserFailure(error.response.data.error));
+    }
   };
+};
+
+
+export const postTokenGoogleRequest = () => ({
+  type: SEND_TOKEN_GOOGLE_REQUEST
+});
+export const postTokenGoogleSuccess = (data) => ({
+  type: SEND_TOKEN_GOOGLE_SUCCESS,
+  payload: data
+});
+export const postTokenGoogleFailure = (error) => ({
+  type: SEND_TOKEN_GOOGLE_FAILURE,
+  payload: error
+});
+export const postTokenGoogle = (token) => {
+  return async (dispatch) => {
+    dispatch(postTokenGoogleRequest());
+    try {
+      const { data } = await axios.post(`${URL}/user/auth`, { token });
+      if (data.accessToken) {
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
+        localStorage.setItem("access", data.access);
+      }
+      console.log(data);
+      dispatch(postTokenGoogleSuccess(data));
+    } catch (error) {
+      dispatch(postTokenGoogleFailure(error));
+    }
+  };
+};
+
+export const clearData = () => ({
+  type: CLEAR_DATA,
+});

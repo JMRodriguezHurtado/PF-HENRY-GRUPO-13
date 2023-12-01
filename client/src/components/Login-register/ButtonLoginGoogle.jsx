@@ -1,32 +1,35 @@
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
-import { useState } from "react";
-import axios from "axios";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useState, useEffect } from "react";
+import { postTokenGoogle } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const client = '9520948127-j0qckaqvur9flrfh6iq4fcec4p4te2t4.apps.googleusercontent.com';
-const url = 'http://localhost:3001';
 
 const ButtonLoginGoogle = () => {
-  const [authResult, setAuthResult] = useState(null);
+  const loading = useSelector((state) => state.loadingPostTokenGoogle);
+  const error = useSelector((state) => state.errorPostTokenGoogle);
+  const success = useSelector((state) => state.successPostTokenGoogle);
+  const dataUser = useSelector((state) => state.dataUser);
+  const messageGoogle = useSelector((state) => state.messageGoogle);
+
+  const [message, setMessage] = useState('');
+
+  const dispatch = useDispatch(); 
+
+  useEffect(() => {
+    setMessage(messageGoogle);
+  }, [messageGoogle]);
 
   const handleSuccess = async (credentialResponse) => {
     if (credentialResponse.credential) {
       const token = credentialResponse.credential;
 
       try {
-        const response = await sendTokenToServer(token);
-        setAuthResult(response);
+        dispatch(postTokenGoogle(token)); 
       } catch (error) {
         console.error("Error al enviar el token al servidor:", error);
       }
     }
-  };
-
-  const sendTokenToServer = async (token) => {
-    try {
-      const response = await axios.post(`${url}/user/auth`, { token });
-    } catch (error) {
-      console.error("Error al enviar el token al servidor:", error);
-    };
   };
 
   const handleError = () => {
@@ -43,8 +46,15 @@ const ButtonLoginGoogle = () => {
         locale="es"
         width='550px'
       />
+       {message && message.length > 1 && (
+          <p>{message}</p>
+      )}
+
+      { error && (
+        <p>{error}</p>
+      )}
     </GoogleOAuthProvider>
-  )
+  );
 }
 
 export default ButtonLoginGoogle;
