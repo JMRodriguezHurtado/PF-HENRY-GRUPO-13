@@ -16,7 +16,7 @@ const ShoppingCart = () => {
     dispatch(removeFromCart(productById));
   };
 
-  const totalAmount = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleFinishPurchase = () => {
     if (!isUserLoggedIn) {
@@ -60,9 +60,10 @@ const ShoppingCart = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="border p-2">Product</th>
-                <th className="border p-2">Price</th>
-                <th className="border p-2">Actions</th>
+                <th className="border p-2">Producto</th>
+                <th className='border p-2'>Cantidad</th>
+                <th className="border p-2">Precio</th>
+                <th className="border p-2">Cancelar</th>
               </tr>
             </thead>
             <tbody>
@@ -76,6 +77,7 @@ const ShoppingCart = () => {
                     />
                     {item.title}
                   </td>
+                  <td className="border p-2">{item.quantity}</td>
                   <td className="border p-2">${item.price}</td>
                   <td className="border p-2">
                     <button
