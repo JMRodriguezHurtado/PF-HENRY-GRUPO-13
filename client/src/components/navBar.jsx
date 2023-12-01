@@ -7,8 +7,12 @@ import homeicon2 from "../assets/icons/homeicon2.png";
 import shoppingCart from "../assets/icons/shoppingCart.png"
 import Login from "./Login-register/Login/Login";
 import userIcon from "../assets/icons/userIcon.png"
+import { clearData } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,6 +34,7 @@ const NavBar = () => {
 
   const handleLogout = () => {  
     localStorage.removeItem("token");
+    dispatch(clearData())
     navigate("/");
   };
 

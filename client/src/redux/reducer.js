@@ -16,6 +16,8 @@ import {
     ADD_TO_CART,
     POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
     POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE,
+    SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS, SEND_TOKEN_GOOGLE_FAILURE,
+    CLEAR_DATA
   } from './actions';
   
 const initialState = {
@@ -40,6 +42,12 @@ const initialState = {
   errorPostUser: false,
   successPostUser: false,
   messageRegister: '',
+
+  loadingPostTokenGoogle: false,
+  errorPostTokenGoogle: false,
+  successPostTokenGoogle: false,
+  dataUser: [],
+  messageGoogle: ''
 
 };
   
@@ -186,6 +194,40 @@ const initialState = {
           loadingPostUser: false,
           errorPostUser: action.payload,
           successPostUser: false,
+        };
+
+
+      case SEND_TOKEN_GOOGLE_REQUEST:
+        return {
+          ...state,
+          loadingPostTokenGoogle: true,
+          errorPostTokenGoogle: false,
+          successPostTokenGoogle: false,
+        };
+      case SEND_TOKEN_GOOGLE_SUCCESS:
+        return {
+          ...state,
+          loadingPostTokenGoogle: false,
+          errorPostTokenGoogle: false,
+          successPostTokenGoogle: true,
+          access: action.payload.access,
+          dataUser: action.payload.data,
+          messageGoogle: action.payload.data.message
+        };
+      case SEND_TOKEN_GOOGLE_FAILURE:
+        return {
+          ...state,
+          loadingPostTokenGoogle: false,
+          errorPostTokenGoogle: action.payload,
+          successPostTokenGoogle: false,
+        };
+
+      case CLEAR_DATA:
+        return {
+          ...state,
+          messageLogin: '',
+          messageRegister: '',
+          messageGoogle: '',
         };
 
       default:
