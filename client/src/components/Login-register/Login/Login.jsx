@@ -40,7 +40,6 @@ const Login = () => {
   const isFormValid = !userData.email.length || !userData.password.length;
 
   return (
-    <div>
       <form onSubmit={handleSubmit} className={form_style}>
         <div className={div_style}>
           <label className={label_style}>Correo electrónico: </label>
@@ -87,7 +86,6 @@ const Login = () => {
         )}
         
       </form>
-    </div>
   );
 };
 export default Login;
