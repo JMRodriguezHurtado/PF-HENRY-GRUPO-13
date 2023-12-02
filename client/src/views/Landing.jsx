@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getAllProducts } from '../redux/actions';
 import Pagination from './Pagination';
 import Products from './Products';
-import Presentation from './Selection';
+import Selection from './Selection';
 
 
 
@@ -14,7 +12,7 @@ const LandingPage = () => {
   const products = useSelector((state) => state.products.results);
   const info = useSelector((state) => state.products?.info);
 
-  const [showCategoryOptions, setShowCategoryOptions] = useState(false);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     category: '',
@@ -34,19 +32,7 @@ const LandingPage = () => {
     fetchData();
   }, [dispatch, currentPage, filters]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (showCategoryOptions && !event.target.closest('.select-container')) {
-        setShowCategoryOptions(false);
-      }
-    };
-
-    window.addEventListener('click', handleClickOutside);
-
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, [showCategoryOptions]);
+  
 
   const scrollToTop = () => {
     scrollTo({
@@ -88,10 +74,7 @@ const LandingPage = () => {
     }));
   };
 
-  const toggleCategoryOptions = (e) => {
-    e.stopPropagation();
-    setShowCategoryOptions(!showCategoryOptions);
-  };
+  
 
   const categories = ["Headsets", "Microphones", "Monitors", "Mousepads", "Earbuds", "Keyboards", "Mice", "Controllers"];
 
@@ -111,7 +94,7 @@ const LandingPage = () => {
           <div className="flex flex-col items-center " >
             <h1 className= "p-10 pb-5 text-4xl font-bold mb-0">Bienvenido</h1>
             <p className="text-lg text-gray-600 mb-3">Explora lo nuevo en tecnología</p>
-            <Presentation toggleCategoryOptions={toggleCategoryOptions} filters={filters} showCategoryOptions={showCategoryOptions} categoriesWithAll={categoriesWithAll} handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
+            <Selection filters={filters} categoriesWithAll={categoriesWithAll} handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
             <Products products={products}/>
             <Pagination currentPage={currentPage} handlePageChange={handlePageChange} totalPages={totalPages}/>
           </div>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { IoReload } from "react-icons/io5";
 import Categories from '../assets/iconsFilters/Category.svg';
 import Controller from '../assets/iconsFilters/Controllers.svg';
@@ -9,7 +10,25 @@ import Microphone from '../assets/iconsFilters/Microphones.svg';
 import Monitor from '../assets/iconsFilters/Monitors.svg';
 import Mousepad from '../assets/iconsFilters/Mousepads.svg';
 
-const Selection = ({toggleCategoryOptions, filters, showCategoryOptions, categoriesWithAll, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+const Selection = ({ filters, categoriesWithAll, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+  const [showCategoryOptions, setShowCategoryOptions] = useState(false);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showCategoryOptions && !event.target.closest('.select-container')) {
+        setShowCategoryOptions(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [showCategoryOptions]);
+  const toggleCategoryOptions = (e) => {
+    e.stopPropagation();
+    setShowCategoryOptions(!showCategoryOptions);
+  };
   const categoryImages = {
     Headsets: Headset,
     Microphones: Microphone,
