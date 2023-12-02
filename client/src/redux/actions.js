@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SET_CURRENT_PAGE } from './actions/types';
 
 // Products
 
@@ -307,3 +308,10 @@ export const postTokenGoogle = (token) => {
 export const clearData = () => ({
   type: CLEAR_DATA,
 });
+
+export const setCurrentPage = (page) => {
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: page
+  }
+}

@@ -10,7 +10,9 @@ import Microphone from '../assets/iconsFilters/Microphones.svg';
 import Monitor from '../assets/iconsFilters/Monitors.svg';
 import Mousepad from '../assets/iconsFilters/Mousepads.svg';
 
-const Selection = ({ filters, categoriesWithAll, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+const Selection = ({ filters, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+  const categories = ["Headsets", "Microphones", "Monitors", "Mousepads", "Earbuds", "Keyboards", "Mice", "Controllers"];
+  const categoriesWithAll = ["", ...categories];
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
   useEffect(() => {
     const handleClickOutside = (event) => {

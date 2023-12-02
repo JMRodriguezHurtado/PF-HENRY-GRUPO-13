@@ -1,24 +1,28 @@
 import {
-    GET_ALL_PRODUCTS,
-    GET_PRODUCTS_BY_NAME,
-    GET_PRODUCTS_BY_ID,
-    CREATE_NEW_PRODUCT,
-    DELETE_PRODUCTS,
-    UPDATE_PRODUCTS,
-    GET_DELETED_PRODUCTS,
-    REGISTER_ADMIN,
-    REGISTER_USER,
-    CREATE_REVIEW,
-    CLEAR_SEARCH_RESULTS,
-    LOCAL_STORAGE,
-    REMOVE_FROM_CART,
-    FINISH_PURCHASE,
-    ADD_TO_CART,
-    POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
-    POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE,
-    SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS, SEND_TOKEN_GOOGLE_FAILURE,
-    CLEAR_DATA
-  } from './actions';
+  ADD_TO_CART,
+  CLEAR_DATA,
+  CLEAR_SEARCH_RESULTS,
+  CREATE_NEW_PRODUCT,
+  CREATE_REVIEW,
+  DELETE_PRODUCTS,
+  FINISH_PURCHASE,
+  GET_ALL_PRODUCTS,
+  GET_DELETED_PRODUCTS,
+  GET_PRODUCTS_BY_ID,
+  GET_PRODUCTS_BY_NAME,
+  LOCAL_STORAGE,
+  POST_LOGIN_FAILURE,
+  POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
+  POST_USER_FAILURE,
+  POST_USER_REQUEST, POST_USER_SUCCESS,
+  REGISTER_ADMIN,
+  REGISTER_USER,
+  REMOVE_FROM_CART,
+  SEND_TOKEN_GOOGLE_FAILURE,
+  SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
+  UPDATE_PRODUCTS
+} from './actions';
+import { SET_CURRENT_PAGE } from './actions/types';
   
 const initialState = {
   products: [],
@@ -31,6 +35,7 @@ const initialState = {
   localStorage: [],
   cart: [],
   items: [],
+  currentPage:1,
 
   loadingPostLogin: false, 
   errorPostLogin: false,
@@ -53,6 +58,11 @@ const initialState = {
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
+      case SET_CURRENT_PAGE:
+        return {
+          ...state,
+          currentPage: action.payload
+        }
       case GET_ALL_PRODUCTS:
         return {
           ...state,

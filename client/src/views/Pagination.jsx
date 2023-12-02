@@ -1,7 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../redux/actions";
 
 
-const Pagination = ({currentPage, handlePageChange, totalPages}) => {
+const Pagination = ({info}) => {
+    const dispatch = useDispatch()
+    const currentPage = useSelector(state => state.currentPage)
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(info?.total / itemsPerPage);
     const paginationItems = [];
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+          dispatch(setCurrentPage(newPage))
+        }
+      };
+      
   for (let i = 1; i <= totalPages; i++) {
     paginationItems.push(
       <li key={i}>

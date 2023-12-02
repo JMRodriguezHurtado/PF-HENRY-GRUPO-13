@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../redux/actions';
+import { getAllProducts, setCurrentPage } from '../redux/actions';
 import Pagination from './Pagination';
 import Products from './Products';
 import Selection from './Selection';
+import Welcome from './Welcome';
 
 
 
 const LandingPage = () => {
+  const info = useSelector((state) => state.products?.info);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.results);
-  const info = useSelector((state) => state.products?.info);
+  const currentPage = useSelector(state => state.currentPage)
 
-  
-  const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     category: '',
     sale: 3,
@@ -46,18 +46,12 @@ const LandingPage = () => {
   useEffect(() => {
     scrollToTop();
   }, [currentPage]);
-  
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterName]: filterValue === "Todos" ? null : filterValue,
     }));
-    setCurrentPage(1);
+    dispatch(setCurrentPage(1));
   };
 
   const handleRefreshFilters = () => {
@@ -76,30 +70,22 @@ const LandingPage = () => {
 
   
 
-  const categories = ["Headsets", "Microphones", "Monitors", "Mousepads", "Earbuds", "Keyboards", "Mice", "Controllers"];
-
-  const itemsPerPage = 12;
-  const totalPages = Math.ceil(info?.total / itemsPerPage);
+  
+  
+  
 
   
 
-  const categoriesWithAll = ["", ...categories];
+  
 
   const hasAppliedFilters = filters.category !== '' || filters.sale !== '3' || filters.price !== '';
 
   return (
-    <div className="relative h-full min-h-[100vh] bg-blue-200">
-      <div className="relative inset-0">
-        <div className="text-center pt-5 pb-0 relative">
-          <div className="flex flex-col items-center " >
-            <h1 className= "p-10 pb-5 text-4xl font-bold mb-0">Bienvenido</h1>
-            <p className="text-lg text-gray-600 mb-3">Explora lo nuevo en tecnología</p>
-            <Selection filters={filters} categoriesWithAll={categoriesWithAll} handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
-            <Products products={products}/>
-            <Pagination currentPage={currentPage} handlePageChange={handlePageChange} totalPages={totalPages}/>
-          </div>
-        </div>
-      </div>
+    <div className="relative h-full min-h-[100vh] bg-blue-200 inset-0 text-center pt-5 pb-0 flex flex-col items-center">
+      <Welcome/>
+      <Selection filters={filters} handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
+      <Products products={products}/>
+      <Pagination info={info}/>
     </div>
   );
 };
