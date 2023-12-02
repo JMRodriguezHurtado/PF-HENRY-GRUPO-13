@@ -228,6 +228,17 @@ const initialState = {
           messageLogin: '',
           messageRegister: '',
           messageGoogle: '',
+          loadingPostLogin: false,
+          errorPostLogin: false,
+          successPostLogin: false,
+          access: false,
+          loadingPostUser: false,
+          errorPostUser: false,
+          successPostUser: false,
+          loadingPostTokenGoogle: false,
+          errorPostTokenGoogle: false,
+          successPostTokenGoogle: false,
+          dataUser: [],
         };
 
       default:

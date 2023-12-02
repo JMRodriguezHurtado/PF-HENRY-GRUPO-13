@@ -297,7 +297,6 @@ export const postTokenGoogle = (token) => {
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("access", data.access);
       }
-      console.log(data);
       dispatch(postTokenGoogleSuccess(data));
     } catch (error) {
       dispatch(postTokenGoogleFailure(error));
