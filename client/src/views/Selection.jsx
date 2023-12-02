@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import { IoReload } from "react-icons/io5";
 import Categories from '../assets/iconsFilters/Category.svg';
-import Controller from '../assets/iconsFilters/Controllers.svg';
-import Earbud from '../assets/iconsFilters/Earbuds.svg';
-import Headset from '../assets/iconsFilters/Headsets.svg';
-import Keyboard from '../assets/iconsFilters/Keyboards.svg';
-import Mices from '../assets/iconsFilters/Mice.svg';
-import Microphone from '../assets/iconsFilters/Microphones.svg';
-import Monitor from '../assets/iconsFilters/Monitors.svg';
-import Mousepad from '../assets/iconsFilters/Mousepads.svg';
+import categories from "./categories";
+import categoryImages from "./categoryImages";
+
 
 const Selection = ({ filters, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
-  const categories = ["Headsets", "Microphones", "Monitors", "Mousepads", "Earbuds", "Keyboards", "Mice", "Controllers"];
   const categoriesWithAll = ["", ...categories];
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
   useEffect(() => {
@@ -31,16 +25,7 @@ const Selection = ({ filters, handleFilterChange, hasAppliedFilters, handleRefre
     e.stopPropagation();
     setShowCategoryOptions(!showCategoryOptions);
   };
-  const categoryImages = {
-    Headsets: Headset,
-    Microphones: Microphone,
-    Monitors: Monitor,
-    Mousepads: Mousepad,
-    Earbuds: Earbud,
-    Keyboards: Keyboard,
-    Mice: Mices,
-    Controllers: Controller,
-  };
+  
     return(
         <div className="grid grid-cols-4 gap-3 items-center m-3 " >
               <label className="col-span-1">
