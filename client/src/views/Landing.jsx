@@ -63,13 +63,24 @@ const LandingPage = () => {
     };
   }, [showCategoryOptions]);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    if (newPage !== 1 && newPage !== totalPages) {
-      window.scrollTo(0, 0);
-    }
+  const scrollToTop = () => {
+    scrollTo({
+      top: 0,
+      duration: 900,
+      easing: 'easeInOutCubic',
+      behavior: 'smooth',
+    });
   };
 
+  useEffect(() => {
+    scrollToTop();
+  }, [currentPage]);
+  
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -127,7 +138,7 @@ const LandingPage = () => {
   const hasAppliedFilters = filters.category !== '' || filters.sale !== '3' || filters.price !== '';
 
   return (
-    <div className="relative h-full bg-blue-200">
+    <div className="relative h-full min-h-[100vh] bg-blue-200">
       <div className="relative inset-0">
         <div className="text-center pt-5 pb-0 relative">
           <div className="flex flex-col items-center " >

@@ -110,7 +110,7 @@ const Searchs = () => {
   const hasAppliedFilters = filters.category || filters.sale !== '3' || filters.price;
 
   return (
-    <div className="relative h-full bg-blue-200">
+    <div className="relative h-full min-h-[100vh] bg-blue-200">
       <div className="relative inset-0">
         <div className="text-center pt-40 pb-0 relative">
           <div className="flex flex-col items-center">
