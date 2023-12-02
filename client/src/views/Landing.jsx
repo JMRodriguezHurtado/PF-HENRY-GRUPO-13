@@ -6,8 +6,6 @@ import Products from './Products';
 import Selection from './Selection';
 import Welcome from './Welcome';
 
-
-
 const LandingPage = () => {
   const info = useSelector((state) => state.products?.info);
   const dispatch = useDispatch();
