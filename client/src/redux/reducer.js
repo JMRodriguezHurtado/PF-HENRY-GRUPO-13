@@ -46,9 +46,9 @@ const initialState = {
   loadingPostTokenGoogle: false,
   errorPostTokenGoogle: false,
   successPostTokenGoogle: false,
+  messageGoogle: '',
+  
   dataUser: [],
-  messageGoogle: ''
-
 };
   
   const reducer = (state = initialState, action) => {
@@ -161,7 +161,8 @@ const initialState = {
           errorPostLogin: false,
           successPostLogin: true,
           access: action.payload.access,
-          messageLogin: action.payload.data.message
+          messageLogin: action.payload.data.message,
+          dataUser: action.payload.data
         };
       case POST_LOGIN_FAILURE:
         return {
@@ -186,7 +187,8 @@ const initialState = {
           errorPostUser: false,
           successPostUser: true,
           access: action.payload.access,
-          messageRegister: action.payload.data.message
+          messageRegister: action.payload.data.message,
+          dataUser: action.payload.data
         };
       case POST_USER_FAILURE:
         return {

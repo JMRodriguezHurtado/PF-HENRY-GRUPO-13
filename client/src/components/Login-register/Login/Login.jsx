@@ -5,10 +5,8 @@ import validation from '../../../utils/Validation/ValidationLogin';
 import { postLogin } from "../../../redux/actions";
 
 const Login = () => {
-  const access = useSelector(state => state.access);
-  const success = useSelector(state => state.successPostLogin);
+  const loadingPostLogin = useSelector(state => state.loadingPostLogin);
   const error = useSelector(state => state.errorPostLogin);
-  const messageLogin = useSelector(state => state.messageLogin);
 
   const dispatch = useDispatch();
   
@@ -38,11 +36,14 @@ const Login = () => {
   };
 
   const isFormValid = !userData.email.length || !userData.password.length;
-
   return (
     <div>
-      <h1 className={h1_style}>Inicio de sesión</h1>
-      <form onSubmit={handleSubmit} >
+      { !loadingPostLogin &&
+        <h1 className={h1_style}>Inicio de sesión</h1>
+      }
+
+      { !loadingPostLogin &&
+        <form onSubmit={handleSubmit} >
         <div class="-mx-3 md:flex mb-3">
           <div class="md:w-full px-3">
             <input
@@ -82,14 +83,14 @@ const Login = () => {
           </button>
         </div>
 
-        { success && access && (
-          <p>{messageLogin}</p>
-        )}
-        { error && (
-          <p>{error}</p>
+        {error && (
+          <div className="flex items-center justify-center mt-3 text-lg text-red-600 italic"> 
+            <p>{error}</p>
+          </div>
         )}
         
       </form>
+      }
     </div>
   );
 };

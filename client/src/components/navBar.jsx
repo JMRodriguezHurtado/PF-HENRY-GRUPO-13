@@ -13,6 +13,8 @@ import LOGO from "../assets/LOGO.png";
 
 const NavBar = () => {
   const successPostTokenGoogle = useSelector((state) => state.successPostTokenGoogle);
+  const successPostUser = useSelector((state) => state.successPostUser);
+  const successPostLogin = useSelector((state) => state.successPostLogin);
 
   const dispatch = useDispatch();
 
@@ -45,17 +47,17 @@ const NavBar = () => {
   const isUserLoggedIn = !!localStorage.getItem("token");
 
   useEffect(() => {
-    if (successPostTokenGoogle) {
+    if (successPostTokenGoogle || successPostUser || successPostLogin) {
       setShowModalFor2Seconds(true);
 
       const timer = setTimeout(() => {
         setShowModalFor2Seconds(false);
         setIsModalOpen(false);
-      }, 1800);
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
-  }, [successPostTokenGoogle]);
+  }, [successPostTokenGoogle, successPostUser, successPostLogin]);
 
   return (
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-40 px-[5vw] flex items-center justify-between p-2" >
