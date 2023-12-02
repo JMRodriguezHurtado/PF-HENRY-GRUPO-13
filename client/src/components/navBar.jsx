@@ -51,14 +51,14 @@ const NavBar = () => {
       const timer = setTimeout(() => {
         setShowModalFor2Seconds(false);
         setIsModalOpen(false);
-      }, 1400);
+      }, 1800);
 
       return () => clearTimeout(timer);
     }
   }, [successPostTokenGoogle]);
 
   return (
-    <nav className="fixed top-0 w-full bg-blue1 shadow-md z-40 px-[5vw] flex items-center justify-between p-2">
+    <nav className="fixed top-0 w-full bg-blue1 shadow-md z-40 px-[5vw] flex items-center justify-between p-2" >
       <div className="flex items-center">
         <img
           className="bg-gray-50 rounded-lg w-[50px] h-[50px] cursor-pointer"
