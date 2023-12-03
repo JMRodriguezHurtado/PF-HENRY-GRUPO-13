@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import CategorySelect from "./CategorySelect";
-import PriceSelect from "./PriceSelect";
-import ResetFiltersButton from "./ResetFiltersButton";
-import SaleSelect from "./SaleSelect";
+import CategorySelect from "./Options/Categories/CategorySelect";
+import PriceSelect from "./Options/PriceSelect";
+import ResetFiltersButton from "./Options/ResetFiltersButton";
+import SaleSelect from "./Options/SaleSelect";
 import SelectionContainer from "./SelectionContainer";
 
 const Selection = () => {

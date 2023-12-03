@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, setCurrentPage } from "../../redux/actions";
-import categories from "./categories";
+import { getAllProducts, setCurrentPage } from "../../redux/actions.js";
+import categories from "./Options/Categories/categories.js";
 
 const SelectionContainer = () => {
  const categoriesWithAll = ["", ...categories];

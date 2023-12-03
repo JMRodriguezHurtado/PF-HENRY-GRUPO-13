@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Categories from '../../assets/iconsFilters/Category.svg';
+import Categories from '../../../../assets/iconsFilters/Category.svg';
 import categoryImages from "./categoryImages";
 
 const CategorySelect = ({ filters, categoriesWithAll, handleFilterChange }) => {
