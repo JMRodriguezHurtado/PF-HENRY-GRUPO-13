@@ -1,3 +1,4 @@
+import initialState from './initialState';
 import {
   ADD_TO_CART,
   CLEAR_DATA,
@@ -20,48 +21,11 @@ import {
   REMOVE_FROM_CART,
   SEND_TOKEN_GOOGLE_FAILURE,
   SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
+  SET_CURRENT_PAGE,
   UPDATE_PRODUCTS
-} from './actions';
-import { SET_CURRENT_PAGE } from './actions/types';
-  
-const initialState = {
-  products: [],
-  productsByName: [],
-  productById: [],
-  deletedProducts: [],
-  admins: [],
-  users: [],
-  reviews: [],
-  localStorage: [],
-  cart: [],
-  items: [],
-  currentPage:1,
-  filters:{
-    category: '',
-    sale: 3,
-    price: '',
-  },
+} from './types';
 
-  loadingPostLogin: false, 
-  errorPostLogin: false,
-  successPostLogin: false,
-  access: false,
-  messageLogin: '',
-
-  loadingPostUser: false,
-  errorPostUser: false,
-  successPostUser: false,
-  messageRegister: '',
-
-  loadingPostTokenGoogle: false,
-  errorPostTokenGoogle: false,
-  successPostTokenGoogle: false,
-  messageGoogle: '',
-  
-  dataUser: [],
-};
-  
-  const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
       case SET_CURRENT_PAGE:
         return {
