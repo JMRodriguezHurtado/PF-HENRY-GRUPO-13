@@ -1,24 +1,78 @@
 import { useEffect, useState } from "react";
 import { IoReload } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Categories from '../assets/iconsFilters/Category.svg';
+import { getAllProducts, setCurrentPage } from "../redux/actions";
 import categories from "./categories";
 import categoryImages from "./categoryImages";
 
 
-const Selection = ({ handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
-  const filters = useSelector(state => state.filters)
+const Selection = () => {
   const categoriesWithAll = ["", ...categories];
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
+  const dispatch = useDispatch()
+  const {currentPage} = useSelector(state => state)
+  const [filters, setFilters] = useState({
+    category: '',
+    sale: 3,
+    price: '',
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getAllProducts(currentPage, 12, filters));
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, currentPage, filters]);
+
+  const scrollToTop = () => {
+    scrollTo({
+      top: 0,
+      duration: 900,
+      easing: 'easeInOutCubic',
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  }, [currentPage]);
+
+  const handleFilterChange = (filterName, filterValue) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: filterValue === "Todos" ? null : filterValue,
+    }));
+    dispatch(setCurrentPage(1));
+  };
+
+  const handleRefreshFilters = () => {
+    const reset = {
+      category: '',
+      sale: 3,
+      price: '',
+    }
+
+    setFilters(reset);
+
+    dispatch(getAllProducts(1, 12, reset));
+  };
+  
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showCategoryOptions && !event.target.closest('.select-container')) {
         setShowCategoryOptions(false);
       }
     };
-
+    
     window.addEventListener('click', handleClickOutside);
-
+    
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
@@ -28,8 +82,23 @@ const Selection = ({ handleFilterChange, hasAppliedFilters, handleRefreshFilters
     setShowCategoryOptions(!showCategoryOptions);
   };
   
-    return(
-        <div className="grid grid-cols-4 gap-3 items-center m-3 " >
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getAllProducts(currentPage, 12, filters));
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    
+    fetchData();
+  }, [dispatch, currentPage, filters]);
+  
+  
+  const hasAppliedFilters = filters.category !== '' || filters.sale !== '3' || filters.price !== '';
+  
+  return(
+    <div className="grid grid-cols-4 gap-3 items-center m-3 " >
               <label className="col-span-1">
                 <div className="relative inline-block select-container" onClick={toggleCategoryOptions}>
                   <div className="flex items-center cursor-pointer">

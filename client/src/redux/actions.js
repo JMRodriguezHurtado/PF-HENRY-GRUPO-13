@@ -64,7 +64,6 @@ export function getAllProducts(page, limit, filters) {
       const response = await axios.get(`${URL}/product`, {
         params: { page, limit, ...filters },
       });
-      console.log(response.data);
       dispatch({
         type: GET_ALL_PRODUCTS,
         payload: response.data,
