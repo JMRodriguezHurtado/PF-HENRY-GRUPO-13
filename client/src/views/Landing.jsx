@@ -30,8 +30,6 @@ const LandingPage = () => {
     fetchData();
   }, [dispatch, currentPage, filters]);
 
-  
-
   const scrollToTop = () => {
     scrollTo({
       top: 0,
@@ -44,6 +42,7 @@ const LandingPage = () => {
   useEffect(() => {
     scrollToTop();
   }, [currentPage]);
+
   const handleFilterChange = (filterName, filterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -53,29 +52,17 @@ const LandingPage = () => {
   };
 
   const handleRefreshFilters = () => {
-    setFilters({
+    const reset = {
       category: '',
       sale: 3,
       price: '',
-    });
+    }
 
-    dispatch(getAllProducts(1, 12, {
-      category: '',
-      sale: 3,
-      price: '',
-    }));
+    setFilters(reset);
+
+    dispatch(getAllProducts(1, 12, reset));
   };
-
   
-
-  
-  
-  
-
-  
-
-  
-
   const hasAppliedFilters = filters.category !== '' || filters.sale !== '3' || filters.price !== '';
 
   return (
