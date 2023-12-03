@@ -27,6 +27,9 @@ export const REGISTER_ADMIN = 'REGISTER_NEW_ADMIN';
 
 // Users
 
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+
 export const REGISTER_USER = 'REGISTER_NEW_USER';
 
 export const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST';
@@ -218,6 +221,27 @@ export function removeFromCart(productId) {
     type: 'ADD_TO_CART',
     payload: productById,
   });
+
+  export function getAllUsers() {
+    return async function (dispatch) {
+      const allUsers = await axios.get(`${URL}/user`);
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: allUsers.data,
+      });
+    };
+  }
+
+  export function getUserByID(id) {
+    return async function (dispatch) {
+      const { data } = await axios.get(`${URL}/user/${id}`);
+      console.log(data);
+      dispatch({
+        type: GET_USER_BY_ID,
+        payload: data,
+      });
+    };
+  }
 
   export const postLoginRequest = () => ({
     type: POST_LOGIN_REQUEST

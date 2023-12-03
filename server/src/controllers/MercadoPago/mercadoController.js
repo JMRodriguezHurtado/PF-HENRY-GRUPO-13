@@ -1,6 +1,17 @@
 require("dotenv").config();
 const { MercadoPagoConfig, Preference } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env;
+const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+const User = require("../../models/User");
+const Product = require("../../models/Product");
+
+const transporter = nodemailer.createTransport({
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
 
 const client = new MercadoPagoConfig({
   accessToken: ACCESS_TOKEN,
@@ -21,8 +32,19 @@ const placeOrder = async (req, res) => {
       description: product.description,
     }));
 
+    const userId = cart.reduce((foundUserId, item) => {
+      return foundUserId || (item.userId ? item.userId : null);
+    }, null);
+
+    if (!userId) {
+      throw new Error('User ID not found in the cart.');
+    }
+
+    const productIds = cart.map((item) => item.productId);
+
     let preference = {
       body: {
+        external_reference: {userId: userId, productIds: productIds},
         items: items,
         back_urls: {
           failure: "http://localhost:3001",
@@ -42,12 +64,36 @@ const placeOrder = async (req, res) => {
 
 const successfulPurchase = async (req, res) => {
   try {
-    console.log(res);
-    res.redirect("http://localhost:5173/");
+    const { status, external_reference } = req.query;
+
+    const datos = JSON.parse(external_reference);
+
+    console.log(datos);
+
+    const userId = datos.userId;
+    const user = await User.findOne({ _id: userId });
+    const product = await Product.findOne({ _id: datos.productsId }); 
+    if (!user) {
+      throw new Error('User not found.');
+    }
+
+    const userEmail = user.email;
+
+    await Product.findByIdAndUpdate(datos.productsId, { $inc: { quantity: -1 } });
+    console.log(userEmail);
+    await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: userEmail,
+      subject: "Gracias por tu compra",
+      text: "Te invitamos a seguir comprando",
+    });
+
+    if (status === "approved") {}
+
+    res.redirect('http://localhost:5173/');
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 module.exports = { placeOrder, successfulPurchase };

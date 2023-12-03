@@ -14,6 +14,8 @@ import {
     REMOVE_FROM_CART,
     FINISH_PURCHASE,
     ADD_TO_CART,
+    GET_ALL_USERS,
+    GET_USER_BY_ID,
     POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS, POST_LOGIN_FAILURE,
     POST_USER_REQUEST, POST_USER_SUCCESS, POST_USER_FAILURE,
     SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS, SEND_TOKEN_GOOGLE_FAILURE,
@@ -27,6 +29,7 @@ const initialState = {
   deletedProducts: [],
   admins: [],
   users: [],
+  userDetail:[],
   reviews: [],
   localStorage: [],
   cart: [],
@@ -147,6 +150,18 @@ const initialState = {
               cart: [...state.cart, action.payload],
                 };
       
+      case GET_ALL_USERS:
+        return {
+          ...state,
+          allUsers: action.payload,
+          };
+
+      case GET_USER_BY_ID:
+        return {
+          ...state,
+          userDetail: action.payload,
+            };
+
       case POST_LOGIN_REQUEST:
         return {
           ...state,
