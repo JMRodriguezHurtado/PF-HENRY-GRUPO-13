@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
+import Selection from '../components/Selection/Selection';
 import Pagination from './Pagination';
 import Products from './Products';
-import Selection from './Selection';
 import Welcome from './Welcome';
 
 const LandingPage = () => {
