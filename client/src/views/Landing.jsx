@@ -81,7 +81,7 @@ const LandingPage = () => {
   return (
     <div className="relative h-full min-h-[100vh] bg-blue-200 inset-0 text-center pt-5 pb-0 flex flex-col items-center">
       <Welcome/>
-      <Selection filters={filters} handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
+      <Selection handleFilterChange={handleFilterChange} hasAppliedFilters={hasAppliedFilters} handleRefreshFilters={handleRefreshFilters}/>
       <Products products={products}/>
       <Pagination info={info}/>
     </div>

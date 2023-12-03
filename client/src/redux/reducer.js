@@ -36,6 +36,11 @@ const initialState = {
   cart: [],
   items: [],
   currentPage:1,
+  filters:{
+    category: '',
+    sale: 3,
+    price: '',
+  },
 
   loadingPostLogin: false, 
   errorPostLogin: false,

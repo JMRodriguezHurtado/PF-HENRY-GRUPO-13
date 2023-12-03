@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SET_CURRENT_PAGE } from './actions/types';
+import { SET_CURRENT_PAGE, SET_FILTERS } from './actions/types';
 
 // Products
 
@@ -50,6 +50,13 @@ export const CREATE_REVIEW = 'CREATE_REVIEW';
 // Actions
 
 const URL = 'http://localhost:3001';
+
+export function setFilters(filters){
+  return {
+    type: SET_FILTERS,
+    payload: filters
+  }
+}
 
 export function getAllProducts(page, limit, filters) {
   return async function (dispatch) {

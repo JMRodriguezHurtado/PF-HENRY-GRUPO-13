@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { IoReload } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import Categories from '../assets/iconsFilters/Category.svg';
 import categories from "./categories";
 import categoryImages from "./categoryImages";
 
 
-const Selection = ({ filters, handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+const Selection = ({ handleFilterChange, hasAppliedFilters, handleRefreshFilters}) => {
+  const filters = useSelector(state => state.filters)
   const categoriesWithAll = ["", ...categories];
   const [showCategoryOptions, setShowCategoryOptions] = useState(false);
   useEffect(() => {
