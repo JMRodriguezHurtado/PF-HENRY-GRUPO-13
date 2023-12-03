@@ -6,12 +6,16 @@ const nodemailer = require('nodemailer');
 const User = require("../../models/User");
 const Product = require("../../models/Product");
 
-const transporter = nodemailer.createTransport({
+const config = {
+  host: 'smtp.gmail.com',
+  port: 587,
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
-  },
-});
+    user: 'electronicecommercepf@gmail.com',
+    pass: 'paev oxfq udun bumb'
+  }
+};
+
+const transporter = nodemailer.createTransport(config);
 
 const client = new MercadoPagoConfig({
   accessToken: ACCESS_TOKEN,
@@ -81,14 +85,13 @@ const successfulPurchase = async (req, res) => {
 
     await Product.findByIdAndUpdate(datos.productsId, { $inc: { quantity: -1 } });
     console.log(userEmail);
+
     await transporter.sendMail({
       from: process.env.EMAIL,
       to: userEmail,
       subject: "Gracias por tu compra",
       text: "Te invitamos a seguir comprando",
     });
-
-    if (status === "approved") {}
 
     res.redirect('http://localhost:5173/');
   } catch (error) {
