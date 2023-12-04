@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-const Card = ({ price, img, name, _id }) => {
+const Product = ({ price, img, name, _id }) => {
 
  const isLocalImage = !img?.startsWith("http");
  return (
@@ -14,4 +14,4 @@ const Card = ({ price, img, name, _id }) => {
  );
 };
 
-export default Card;
+export default Product;

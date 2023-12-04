@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './views/Landing';
-import Detail from './components/Detail';
+import { Route, Routes } from 'react-router-dom';
 import CreateProduct from './components/CreateProduct';
+import Detail from './components/Products/Detail';
 import Searchs from './components/Searchs';
+import LandingPage from './views/Landing';
 import ShoppingCart from './views/ShoppingCart';
 
 const App = () => {
