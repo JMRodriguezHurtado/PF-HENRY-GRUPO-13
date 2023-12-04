@@ -126,6 +126,18 @@ const reducer = (state = initialState, action) => {
               cart: [...state.cart, action.payload],
                 };
       
+      case GET_ALL_USERS:
+        return {
+          ...state,
+          allUsers: action.payload,
+          };
+
+      case GET_USER_BY_ID:
+        return {
+          ...state,
+          userDetail: action.payload,
+            };
+
       case POST_LOGIN_REQUEST:
         return {
           ...state,
