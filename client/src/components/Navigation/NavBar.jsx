@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
-import LoginRegister from "./Login-register/LoginRegister";
-import SearchBar from "./SearchBar";
-import { useSelector } from "react-redux";
-import { RiLogoutBoxRLine } from "react-icons/ri";
-import { LuShoppingCart } from "react-icons/lu";
+import { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
-import { clearData } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { LuShoppingCart } from "react-icons/lu";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearData } from "../../redux/actions";
+import LoginRegister from "../Login-register/LoginRegister";
+import SearchBar from "../SearchBar";
 import LOGO from "../assets/LOGO.png";
 
 const NavBar = () => {
