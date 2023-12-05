@@ -41,7 +41,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(clearData());
-    navigate("/");
+    navigate("/home");
   };
 
   const isUserLoggedIn = !!localStorage.getItem("token");
@@ -66,7 +66,7 @@ const NavBar = () => {
           className="bg-gray-50 rounded-lg w-[50px] h-[50px] cursor-pointer"
           src={LOGO}
           alt="home"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         />
       </div>
 

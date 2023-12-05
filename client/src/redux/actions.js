@@ -20,7 +20,8 @@ import {
   REMOVE_FROM_CART,
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE, SET_FILTERS,
-  UPDATE_PRODUCTS
+  UPDATE_PRODUCTS,
+  POST_MESSAGE_REQUEST, POST_MESSAGE_FAILURE, POST_MESSAGE_SUCCESS
 } from './types';
 
 // Actions
@@ -347,6 +348,31 @@ export const postCategory = (category) => {
       dispatch(postCategorySuccess(data));
     } catch (error) {
       dispatch(postCategoryFailure(error.response.data.error));
+    };
+  };
+};
+
+
+export const postMessageRequest = () => ({
+  type: POST_MESSAGE_REQUEST
+});
+export const postMessageSuccess = (message) => ({
+  type: POST_MESSAGE_SUCCESS,
+  payload: message
+});
+export const postMessageError = (error) => ({
+  type: POST_MESSAGE_FAILURE,
+  payload: error
+});
+export const postMessage = (message) => {
+  return async (dispatch) => {
+    dispatch(postMessageRequest());
+    try {
+      const { data } = await axios.post(`${URL}/user/messages`, message);
+      console.log(data);
+      dispatch(postMessageSuccess(data));
+    } catch (error) {
+      dispatch(postMessageError(error.response.data.error)); 
     };
   };
 };

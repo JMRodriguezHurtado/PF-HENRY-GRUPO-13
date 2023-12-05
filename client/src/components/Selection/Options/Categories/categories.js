@@ -9,4 +9,4 @@ const categories = [
     "Controllers"
 ];
 
-export default categories;
+export default categories

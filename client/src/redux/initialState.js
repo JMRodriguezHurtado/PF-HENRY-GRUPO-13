@@ -36,7 +36,11 @@ const initialState = {
 
     loadingPostCategory: false,
     errorPostCategory: false,
-    successPostCategory: false
+    successPostCategory: false,
+
+    loadingPostMessage: false,
+    errorPostMessage: false,
+    successPostMessage: false,
 };
 
 export default initialState

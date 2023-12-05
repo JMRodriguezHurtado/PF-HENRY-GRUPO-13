@@ -2,15 +2,25 @@ import { Route, Routes } from 'react-router-dom';
 import CreateProduct from './components/CreateProduct';
 import Detail from './components/Products/Detail';
 import Searchs from './components/Searchs';
-import LandingPage from './views/Landing';
+import Home from './views/Home';
 import ShoppingCart from './views/ShoppingCart';
 import CreateCategory from './components/CreateCategory/CreateCategory';
+import Landing from './views/Landing';
+import NavBar from './components/navBar.jsx'
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
+  const location = useLocation()
+
+
   return (
     <main className="relative">
+      { location.pathname !== '/' &&
+        <NavBar />
+      }
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/create/product' element={<CreateProduct />} />
         <Route path='/create/category' element={<CreateCategory />} />

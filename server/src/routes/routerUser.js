@@ -10,8 +10,9 @@ const signUp = require('../controllers/User/signUp');
 const authenticateWithGoogle = require("../controllers/User/auth");
 const verifyStatus = require("../controllers/User/verifyStatus");
 const login = require("../controllers/User/login");
-const getUserById = require("../controllers/User/getUserById")
-const getAllUsers = require("../controllers/User/getAllUsers")
+const getUserById = require("../controllers/User/getUserById");
+const getAllUsers = require("../controllers/User/getAllUsers");
+const postMessage = require("../controllers/User/postMessage");
 
 // REFRESH TOKENS
 router.post("/refresh", refreshTokens, (req, res) => {
@@ -66,6 +67,20 @@ router.post("/login", async (req, res) => {
     const user = await login(email, password);
 
     return res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+
+    res.status(500).json({ error: error.message });
+  };
+});
+
+router.post("/messages", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+console.log(req.body);
+    const newMessage = await postMessage({ name, email, message });
+
+    return res.status(200).json(newMessage);
   } catch (error) {
     console.log(error.message);
 
