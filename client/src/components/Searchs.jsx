@@ -205,6 +205,7 @@ const Searchs = () => {
                   name={product.name}
                   price={product.price}
                   img={product.img}
+                  description={product.description}
                   _id={product._id}
                 />
               ))}

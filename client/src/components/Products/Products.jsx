@@ -11,6 +11,7 @@ const Products = ({products}) =>{
                   price={product.price}
                   img={product.img}
                   _id={product._id}
+                  description={product.description}
                 />
               ))}
         </div>
@@ -18,3 +19,4 @@ const Products = ({products}) =>{
 }
 
 export default Products
+import { useState } from 'react';
