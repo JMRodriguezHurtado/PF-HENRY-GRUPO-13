@@ -1,5 +1,5 @@
 import { useState } from "react";
-import validationCreateProduct from '../utils/Validation/validationCreateProducts';
+import validation from '../utils/Validation/validationCreateProducts';
 import axios from "axios";
 
 const CreateProduct = () => {
@@ -28,7 +28,7 @@ const CreateProduct = () => {
     
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: validationCreateProduct({ ...product, [name]: value })[name]
+      [name]: validation({ ...product, [name]: value })[name]
     }));
   };
 
@@ -42,7 +42,6 @@ const CreateProduct = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(product);
     try {
       await axios.post('http://localhost:3001/product', product, {
         headers: {
@@ -107,11 +106,10 @@ const CreateProduct = () => {
             )}
           </div>
         </div>
+
         <div className="md:w-1/2 pl-4">
           <div className="bg-white shadow-md rounded px-8  pb-8  flex flex-col  h-screen justify-center">
             <div className="-mx-3 md:flex mb-6">
-
-
               <div className="md:w-1/2 px-3 mb-6 md:mb-0">
                 <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
                   Name
@@ -157,7 +155,7 @@ const CreateProduct = () => {
                   value={product.description}
                   onChange={handleChange}
                   name="description"
-                  style={{ height: '100px', lineHeight: '1.5' }} // Ajusta la altura y el line-height según tus necesidades
+                  style={{ height: '100px', lineHeight: '1.5' }}
                 />
                 {errors.description && <p className="text-red-900 text-xs italic">{errors.description}</p>}
               </div>
@@ -263,7 +261,6 @@ const CreateProduct = () => {
                 Create
               </button>
             </div>
-
           </div>
         </div>
       </form>

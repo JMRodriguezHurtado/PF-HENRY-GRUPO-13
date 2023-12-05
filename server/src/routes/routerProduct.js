@@ -21,9 +21,6 @@ router.post("/", upload, async (req, res) => {
     const { name, brand, sale, category, description, price, quantity } = req.body;
     let img = req.file && req.file.buffer;
 
-    console.log(req.body);
-    console.log(req.file);
-
     const result = await uploadImage(img);
     img = result.secure_url;
 

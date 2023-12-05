@@ -35,7 +35,7 @@ const CategorySelect = ({ filters, categoriesWithAll, handleFilterChange }) => {
                 handleFilterChange('category', category);
                 toggleCategoryOptions();
               }}
-              className="flex items-center px-8 py-2 cursor-pointer hover:bg-gray-100"
+              className="flex items-center px-5 py-1 cursor-pointer hover:bg-gray-100"
             >
               <span className="text-gray-700">{category || "Categorías"}</span>
               <img

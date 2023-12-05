@@ -1,4 +1,3 @@
-
 const categories = [
     "Headsets", 
     "Microphones", 
@@ -10,4 +9,4 @@ const categories = [
     "Controllers"
 ];
 
-export default categories
+export default categories;

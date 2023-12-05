@@ -33,6 +33,10 @@ const initialState = {
     messageGoogle: '',
     
     dataUser: [],
+
+    loadingPostCategory: false,
+    errorPostCategory: false,
+    successPostCategory: false
 };
 
 export default initialState

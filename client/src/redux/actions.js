@@ -11,14 +11,14 @@ import {
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
   LOCAL_STORAGE,
-  POST_LOGIN_FAILURE,
-  POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
-  POST_USER_FAILURE,
-  POST_USER_REQUEST, POST_USER_SUCCESS,
+  POST_CATEGORY_FAILURE,
+  POST_CATEGORY_REQUEST,
+  POST_CATEGORY_SUCCESS,
+  POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
+  POST_USER_FAILURE, POST_USER_REQUEST, POST_USER_SUCCESS,
   REGISTER_ADMIN,
   REMOVE_FROM_CART,
-  SEND_TOKEN_GOOGLE_FAILURE,
-  SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
+  SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE, SET_FILTERS,
   UPDATE_PRODUCTS
 } from './types';
@@ -308,9 +308,11 @@ export const postTokenGoogle = (token) => {
   };
 };
 
+
 export const clearData = () => ({
   type: CLEAR_DATA,
 });
+
 
 export const setCurrentPage = (page) => {
   return {
@@ -318,3 +320,33 @@ export const setCurrentPage = (page) => {
     payload: page
   }
 }
+
+
+export const postCategoryRequest = () => ({
+  type: POST_CATEGORY_REQUEST
+});
+export const postCategorySuccess = (category) => ({
+  type: POST_CATEGORY_SUCCESS,
+  payload: category
+});
+export const postCategoryFailure = (error) => ({
+  type: POST_CATEGORY_FAILURE,
+  payload: error
+});
+export const postCategory = (category) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("token");
+    dispatch(postCategoryRequest());
+    try {
+      const { data } = await axios.post(`${URL}/category`, category, {
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      dispatch(postCategorySuccess(data));
+    } catch (error) {
+      dispatch(postCategoryFailure(error.response.data.error));
+    };
+  };
+};
