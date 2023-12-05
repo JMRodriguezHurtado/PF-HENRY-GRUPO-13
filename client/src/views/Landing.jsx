@@ -129,7 +129,7 @@ const Landing = () => {
 
               <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 dark:text-white">Wagner Dueñas</h1>
 
-              <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrolador web full stack</p>
+              <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrollador web full stack</p>
 
               <div class="-mx-2 mt-3 flex">
                 <a href="https://www.linkedin.com/in/wsmith123/" target="_blank" class="mx-2 text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Facebook">
@@ -147,7 +147,7 @@ const Landing = () => {
 
                 <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 dark:text-white">Elias Martinez</h1>
 
-                <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrolador web full stack</p>
+                <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrollador web full stack</p>
 
                 <div class="-mx-2 mt-3 flex">
                   <a href="https://www.linkedin.com/in/elias-martinez-040980246/" target="_blank" class="mx-2 text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Facebook">
@@ -165,7 +165,7 @@ const Landing = () => {
 
                 <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 dark:text-white">Juan Rodriguez</h1>
 
-                <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrolador web full stack</p>
+                <p class="mt-2 capitalize text-gray-500 dark:text-gray-300">Desarrollador web full stack</p>
 
                 <div class="-mx-2 mt-3 flex">
                   <a href="https://www.linkedin.com/in/juan-manuel-rodriguez-hurtado-87b531164/" target="_blank" class="mx-2 text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Facebook">
