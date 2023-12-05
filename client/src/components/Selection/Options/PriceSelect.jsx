@@ -1,4 +1,3 @@
-
 const PriceSelect = ({ filters, handleFilterChange }) => {
  return (
     <select

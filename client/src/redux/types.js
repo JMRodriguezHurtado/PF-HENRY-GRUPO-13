@@ -1,5 +1,4 @@
 // Products
-
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const GET_PRODUCTS_BY_NAME = 'GET_PRODUCTS_BY_NAME';
 export const GET_PRODUCTS_BY_ID = 'GET_BY_ID';
@@ -9,22 +8,22 @@ export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS';
 export const GET_DELETED_PRODUCTS = 'GET_DELETED_PRODUCTS';
 export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
 
-// LocalStorage
 
+// LocalStorage
 export const LOCAL_STORAGE = 'LOCAL_STORAGE';
 
-// Cart
 
+// Cart
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const FINISH_PURCHASE = 'FINISH_PURCHASE';
 
-// Admin
 
+// Admin
 export const REGISTER_ADMIN = 'REGISTER_NEW_ADMIN';
 
-// Users
 
+// Users
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
@@ -42,15 +41,22 @@ export const SEND_TOKEN_GOOGLE_REQUEST = 'SEND_TOKEN_GOOGLE_REQUEST';
 export const SEND_TOKEN_GOOGLE_SUCCESS = 'SEND_TOKEN_GOOGLE_SUCCESS';
 export const SEND_TOKEN_GOOGLE_FAILURE = 'SEND_TOKEN_GOOGLE_FAILURE';
 
-export const CLEAR_DATA = 'CLEAR_DATA'
-// Reviews
+export const CLEAR_DATA = 'CLEAR_DATA';
 
+
+// Reviews
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 
-//Pagination
 
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+//Pagination
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+
 
 //Presentacion 
+export const SET_FILTERS = "SET_FILTERS";
 
-export const SET_FILTERS = "SET_FILTERS"
+
+//Category
+export const POST_CATEGORY_REQUEST = "POST_CATEGORY_REQUEST";
+export const POST_CATEGORY_SUCCESS = "POST_CATEGORY_SUCCESS";
+export const POST_CATEGORY_FAILURE = "POST_CATEGORY_FAILURE";

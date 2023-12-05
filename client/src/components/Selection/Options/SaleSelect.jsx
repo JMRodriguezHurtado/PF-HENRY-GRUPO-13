@@ -1,6 +1,3 @@
-
-
-
 const SaleSelect = ({ filters, handleFilterChange }) => {
  return (
     <select
