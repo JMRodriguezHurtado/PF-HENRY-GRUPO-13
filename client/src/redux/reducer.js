@@ -22,7 +22,6 @@ import {
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE,
   UPDATE_PRODUCTS,
-  POST_CATEGORY_FAILURE, POST_CATEGORY_REQUEST, POST_CATEGORY_SUCCESS,
   POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS
 } from './types';
 
@@ -229,29 +228,6 @@ const reducer = (state = initialState, action) => {
         successPostTokenGoogle: false,
         dataUser: [],
       };
-      E
-    case POST_CATEGORY_REQUEST:
-      return {
-        ...state,
-        loadingPostCategory: true,
-        errorPostCategory: false,
-        successPostCategory: false
-      };
-    case POST_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        loadingPostCategory: false,
-        errorPostCategory: false,
-        successPostCategory: true
-      };
-    case POST_CATEGORY_FAILURE:
-      return {
-        ...state,
-        loadingPostCategory: false,
-        errorPostCategory: action.payload,
-        successPostCategory: false
-      };
-
 
     case POST_MESSAGE_REQUEST:
       return{

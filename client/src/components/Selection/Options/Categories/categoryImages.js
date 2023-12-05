@@ -8,14 +8,14 @@ import Mousepad from '../../../../assets/iconsFilters/Mousepads.svg';
 import Controller from './../../../../assets/iconsFilters/Controllers.svg';
 
 const categoryImages = {
-    Headsets: Headset,
-    Microphones: Microphone,
-    Monitors: Monitor,
+    Auriculares: Headset,
+    Micrófonos: Microphone,
+    Monitores: Monitor,
     Mousepads: Mousepad,
-    Earbuds: Earbud,
-    Keyboards: Keyboard,
-    Mice: Mices,
-    Controllers: Controller,
+    Audifonos: Earbud,
+    Teclados: Keyboard,
+    Mouse: Mices,
+    Controles: Controller,
 };
 
 export default categoryImages

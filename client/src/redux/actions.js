@@ -6,14 +6,14 @@ import {
   CREATE_REVIEW,
   DELETE_PRODUCTS,
   FINISH_PURCHASE,
+  GET_CATEGORIES,
+  GET_ALL_USERS,
+  GET_USER_BY_ID,
   GET_ALL_PRODUCTS,
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
   LOCAL_STORAGE,
-  POST_CATEGORY_FAILURE,
-  POST_CATEGORY_REQUEST,
-  POST_CATEGORY_SUCCESS,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
   POST_USER_FAILURE, POST_USER_REQUEST, POST_USER_SUCCESS,
   REGISTER_ADMIN,
@@ -25,6 +25,8 @@ import {
 } from './types';
 
 // Actions
+
+// const URL = https://master--chipper-toffee-f8c293.netlify.app/
 
 const URL = 'http://localhost:3001';
 
@@ -322,34 +324,15 @@ export const setCurrentPage = (page) => {
   }
 }
 
-
-export const postCategoryRequest = () => ({
-  type: POST_CATEGORY_REQUEST
-});
-export const postCategorySuccess = (category) => ({
-  type: POST_CATEGORY_SUCCESS,
-  payload: category
-});
-export const postCategoryFailure = (error) => ({
-  type: POST_CATEGORY_FAILURE,
-  payload: error
-});
-export const postCategory = (category) => {
-  return async (dispatch) => {
-    const token = localStorage.getItem("token");
-    dispatch(postCategoryRequest());
-    try {
-      const { data } = await axios.post(`${URL}/category`, category, {
-        headers: {
-          'x-access-token': token,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      dispatch(postCategorySuccess(data));
-    } catch (error) {
-      dispatch(postCategoryFailure(error.response.data.error));
-    };
+export const getCategories = () => {
+  return async function (dispatch) {
+    const categories = await axios.get(`${URL}/categories`);
+    dispatch({
+      type: GET_CATEGORIES,
+      payload: categories.data,
+    });
   };
+
 };
 
 
@@ -373,6 +356,7 @@ export const postMessage = (message) => {
       dispatch(postMessageSuccess(data));
     } catch (error) {
       dispatch(postMessageError(error.response.data.error)); 
-    };
+    }
   };
 };
+

@@ -6,10 +6,11 @@ const CategorySelect = ({ filters, categoriesWithAll, handleFilterChange }) => {
  const [showCategoryOptions, setShowCategoryOptions] = useState(false);
 
  const toggleCategoryOptions = (e) => {
+  if (e) {
     e.stopPropagation();
-    setShowCategoryOptions(!showCategoryOptions);
- };
-
+}
+setShowCategoryOptions(!showCategoryOptions);
+};
  return (
     <div className="select-container" onClick={toggleCategoryOptions}>
       <div className="flex items-center cursor-pointer">

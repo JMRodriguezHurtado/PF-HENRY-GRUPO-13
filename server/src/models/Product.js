@@ -13,10 +13,9 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  category:[ {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-  }],
+  category: {
+    type: String,
+  },
   img: {
     type: String,
   },
