@@ -43,7 +43,6 @@ function LoginRegister() {
   const isFormSelected = showRegister || showLogin;
 
   useEffect(() => {
-    // Redirección a /home si alguno de los success es true y estamos en '/'
     if ((successPostTokenGoogle || successPostUser || successPostLogin) && location.pathname === '/') {
       navigate('/home');
     }

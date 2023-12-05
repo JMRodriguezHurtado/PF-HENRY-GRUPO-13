@@ -22,7 +22,6 @@ const AuthModal = ({ isOpen, onClose }) => {
       timer = setTimeout(() => {
         setShowModalFor2Seconds(false);
         onClose();
-        // Redirección a /home después de que termine el setTimeout
         navigate('/home');
       }, 2000);
     }
