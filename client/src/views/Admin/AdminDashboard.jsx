@@ -1,11 +1,12 @@
-import React from 'react'
+
+import AdminProducts from "./AdminProducts";
 
 const AdminDashboard = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+
+    return (
+        <AdminProducts />
+    )
 }
 
-export default AdminDashboard
+export default AdminDashboard;
+

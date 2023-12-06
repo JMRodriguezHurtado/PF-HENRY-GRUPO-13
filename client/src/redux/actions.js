@@ -6,7 +6,6 @@ import {
   CREATE_REVIEW,
   DELETE_PRODUCTS,
   FINISH_PURCHASE,
-  GET_CATEGORIES,
   GET_ALL_USERS,
   GET_USER_BY_ID,
   GET_ALL_PRODUCTS,
@@ -323,18 +322,6 @@ export const setCurrentPage = (page) => {
     payload: page
   }
 }
-
-export const getCategories = () => {
-  return async function (dispatch) {
-    const categories = await axios.get(`${URL}/categories`);
-    dispatch({
-      type: GET_CATEGORIES,
-      payload: categories.data,
-    });
-  };
-
-};
-
 
 export const postMessageRequest = () => ({
   type: POST_MESSAGE_REQUEST

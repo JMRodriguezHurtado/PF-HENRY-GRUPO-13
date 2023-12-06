@@ -8,8 +8,9 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { clearData } from "../redux/actions";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,16 @@ const NavBar = () => {
           onClick={() => navigate("/shoppingCart")}
           title="Cart"
         />
+
+      
+          <button
+            className="hover:text-gray-100 text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
+            type="button"
+            onClick={() => navigate("/Admin")}
+          >
+            Admin Dashboard
+          </button>
+      
         
         {isUserLoggedIn ? (
           <button
