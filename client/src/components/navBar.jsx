@@ -1,63 +1,38 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
-import LoginRegister from "./Login-register/LoginRegister";
+import AuthModal from "./AuthModal";
 import SearchBar from "./SearchBar";
-import { useSelector } from "react-redux";
+import LOGO from "../assets/LOGO.png";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { clearData } from "../redux/actions";
-import { useDispatch } from "react-redux";
-import LOGO from "../assets/LOGO.png";
+import { useDispatch,useSelector } from "react-redux";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 const NavBar = () => {
-  const successPostTokenGoogle = useSelector((state) => state.successPostTokenGoogle);
-  const successPostUser = useSelector((state) => state.successPostUser);
-  const successPostLogin = useSelector((state) => state.successPostLogin);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showModalFor2Seconds, setShowModalFor2Seconds] = useState(false);
-  const navigate = useNavigate();
 
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  const handleLogin = () => {
-    setIsModalOpen(false);
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.setItem("authModalShown", "false")
     dispatch(clearData());
     navigate("/home");
   };
 
   const isUserLoggedIn = !!localStorage.getItem("token");
-
-  useEffect(() => {
-    if (successPostTokenGoogle || successPostUser || successPostLogin) {
-      setShowModalFor2Seconds(true);
-
-      const timer = setTimeout(() => {
-        setShowModalFor2Seconds(false);
-        setIsModalOpen(false);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [successPostTokenGoogle, successPostUser, successPostLogin]);
 
   return (
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-40 px-[5vw] flex items-center justify-between p-2" >
@@ -75,6 +50,14 @@ const NavBar = () => {
       </div>
 
       <div className="flex items-center space-x-4">
+        {isUserLoggedIn && (
+          <MdOutlineSpaceDashboard
+            className="w-[50px] h-[50px] cursor-pointer hover:text-gray-100"
+            onClick={() => navigate("/dashboard")}
+            title="Dashboard"
+          />
+        )}
+
         {isUserLoggedIn && (
           <FaRegUser
             className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
@@ -107,16 +90,7 @@ const NavBar = () => {
         )}
       </div>
 
-      <Modal
-        title=""
-        visible={isModalOpen || showModalFor2Seconds}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
-      >
-        <LoginRegister />
-      </Modal>
+      <AuthModal isOpen={isModalOpen} onClose={handleCancel} onLogout={handleLogout}/>
     </nav>
   );
 };

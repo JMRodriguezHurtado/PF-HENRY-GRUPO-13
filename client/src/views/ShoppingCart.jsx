@@ -62,7 +62,7 @@ const ShoppingCart = () => {
       <div className="text-center py-10 bg-blue-200 h-screen">
         <h2 className="text-3xl font-bold text-black mb-4">Tu carrito</h2>
         {cartItems.length === 0 ? (
-          <p className="text-black">Tu carrito esta vacio</p>
+          <p className="text-black mb-10">Tu carrito esta vacio</p>
         ) : (
           <table className="w-full border-collapse">
             <thead>
@@ -104,10 +104,12 @@ const ShoppingCart = () => {
             </tbody>
           </table>
         )}
-        <div className="relative bg-blue-200 text-center">
+        <div className="relative bg-blue-200 text-center mt-10">
           <button
+            disabled={cartItems.length === 0}
             onClick={handleFinishPurchase}
-            className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-600"
+            className={`px-4 py-2 rounded focus:outline-none hover:bg-blue-600 bg-blue-500 text-white
+            ${cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ' text-white'}`}
           >
             Comprar
           </button>
