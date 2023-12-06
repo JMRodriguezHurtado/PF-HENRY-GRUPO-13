@@ -45,4 +45,9 @@ productSchema.methods.softDelete = function() {
   return this.save();
 };
 
+productSchema.methods.restore = function() {
+  this.deleted = false;
+  return this.save();
+}
+
 module.exports = model("Product", productSchema);

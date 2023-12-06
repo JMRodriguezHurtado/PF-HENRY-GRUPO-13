@@ -12,7 +12,7 @@ const categoryImages = {
     Micrófonos: Microphone,
     Monitores: Monitor,
     Mousepads: Mousepad,
-    Audifonos: Earbud,
+    Audífonos: Earbud,
     Teclados: Keyboard,
     Mouse: Mices,
     Controles: Controller,

@@ -39,6 +39,10 @@ const userSchema = new Schema(
     },
     img: {
       type: String
+    },
+    Admin: {
+      type: Boolean,
+      default: false
     }
   },
   {
@@ -61,5 +65,18 @@ userSchema.methods.encryptPassword = async function () {
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compare(password, this.password)
 };
+
+userSchema.methods.restore = function() {
+  this.deleted = false;
+  return this.save();
+}
+userSchema.methods.adminUser = function() {
+  this.Admin = true;
+  return this.save()
+}
+userSchema.methods.adminStop = function() {
+  this.Admin = false;
+  return this.save()
+}
 
 module.exports = model("User", userSchema);
