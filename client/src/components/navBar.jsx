@@ -71,16 +71,6 @@ const NavBar = () => {
           onClick={() => navigate("/shoppingCart")}
           title="Cart"
         />
-
-      
-          <button
-            className="hover:text-gray-100 text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
-            type="button"
-            onClick={() => navigate("/Admin")}
-          >
-            Admin Dashboard
-          </button>
-      
         
         {isUserLoggedIn ? (
           <button
