@@ -1,14 +1,8 @@
 
 
-const Title = () => {
+const Title = ({title}) => {
     return(
-        <thead>
-            <tr>
-                <th>Nombre del Producto</th>
-                <th>Cantidad Disponible</th>
-                <th>Publicado</th>
-            </tr>
-        </thead>
+        <th>{title}</th>
     )
 }
 

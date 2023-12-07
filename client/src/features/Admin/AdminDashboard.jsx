@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { getWholeMerchandise } from "../../redux/actions"
 import Inventory from "./Components/Inventory/Inventory"
+import { products } from "./products"
 
 
 const AdminDashboard = () => {
-    const products = useSelector(state => state?.merchandise)
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getWholeMerchandise())

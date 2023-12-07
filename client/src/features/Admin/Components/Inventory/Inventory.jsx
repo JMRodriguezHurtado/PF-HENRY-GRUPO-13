@@ -1,13 +1,15 @@
+import { products } from "../../products"
+import Header from "./Header"
 import Items from "./Items"
-import Title from "./Title"
+import titles from "./titles"
 
 
-const Inventory = ({products}) => {
+const Inventory = () => {
     return (
         <table>
-        <Title/>
-        <Items products={products}/>
-    </table>
+            <Header titles={titles}/>
+            <Items products={products}/>
+        </table>
     )
 }
 

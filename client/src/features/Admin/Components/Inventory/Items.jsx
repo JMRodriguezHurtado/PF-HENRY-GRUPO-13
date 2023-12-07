@@ -1,10 +1,10 @@
+import Item from "./Item"
 
 
 const Items = ({products}) => {
-    console.log(products)
     return(
         <tbody>
-            
+            {products.map((product, index) => <Item key={index} product={product}/>)}
         </tbody>
     )
 }
