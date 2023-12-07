@@ -55,10 +55,9 @@ const NavBar = () => {
   };
 
   const isUserLoggedIn = !!localStorage.getItem("token");
-  const userData = useSelector((state) => state.userDetail);
+  const userData = useSelector((state) => state.userData);
   const isAdmin = userData && userData.Admin;
-  console.log(userData);
-  console.log(isAdmin);
+  
 
   return (
     <nav className="fixed top-0 w-full bg-blue1 shadow-md z-40 px-[5vw] flex items-center justify-between p-2">
