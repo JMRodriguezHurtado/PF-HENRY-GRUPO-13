@@ -1,4 +1,5 @@
 const initialState = {
+    merchandise:[],
     products: [],
     productsByName: [],
     productById: [],

@@ -10,15 +10,31 @@ import {
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
+  GET_WHOLE_MERCHANDISE,
   SET_CURRENT_PAGE,
   SET_FILTERS,
-  UPDATE_PRODUCTS,
+  UPDATE_PRODUCTS
 } from '../types';
 
 export const setFilters = (filters) => ({
   type: SET_FILTERS,
   payload: filters,
 });
+
+export const getWholeMerchandise = () => {
+  return async dispatch => {
+    try {
+      const {data} = await api.get("/product")
+      console.log(data)
+      dispatch({
+        type: GET_WHOLE_MERCHANDISE,
+        payload: data.results
+      })
+    } catch (error) {
+      return error.message
+    }
+  }
+}
 
 export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,

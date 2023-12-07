@@ -1,4 +1,3 @@
-// actions/authActions.js
 import api from '../api';
 import {
   CLEAR_DATA,

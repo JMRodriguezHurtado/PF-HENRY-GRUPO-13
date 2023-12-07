@@ -13,6 +13,7 @@ const getProductById = require("../controllers/Product/getProductById");
 const putProduct = require("../controllers/Product/putProduct");
 const deleteProduct = require("../controllers/Product/deleteProduct");
 const getAllProductsDeleted = require("../controllers/Product/getAllProductsDeleted");
+const getWholeMerchandise = require("../controllers/Admin/getWholeMerchandise")
 
 
 //POST

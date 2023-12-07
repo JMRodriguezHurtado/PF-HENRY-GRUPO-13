@@ -12,6 +12,7 @@ import {
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
   GET_USER_BY_ID,
+  GET_WHOLE_MERCHANDISE,
   LOCAL_STORAGE,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
   POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS,
@@ -27,6 +28,11 @@ import initialState from './initialState';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_WHOLE_MERCHANDISE:
+      return {
+        ...state,
+        products: [...action.payload]
+      }
     case SET_CURRENT_PAGE:
       return {
         ...state,

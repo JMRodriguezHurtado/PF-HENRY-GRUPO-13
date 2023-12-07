@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Pagination from '../components/Pagination/Pagination';
-import Inventory from '../features/Admin/Components/Inventory/Inventory';
+import AdminDashboard from '../features/Admin/AdminDashboard';
 import Welcome from './Welcome';
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className="relative h-full min-h-[100vh] bg-blue-200 inset-0 text-center pt-5 pb-0 flex flex-col items-center">
       <Welcome/>
-      <Inventory products={products}/>
+      <AdminDashboard products={products}/>
       <Pagination info={info}/>
     </div>
   );

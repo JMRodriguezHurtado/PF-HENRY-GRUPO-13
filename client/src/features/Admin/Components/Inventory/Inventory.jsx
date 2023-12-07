@@ -3,7 +3,6 @@ import Title from "./Title"
 
 
 const Inventory = ({products}) => {
-    console.log(products)
     return (
         <table>
         <Title/>
