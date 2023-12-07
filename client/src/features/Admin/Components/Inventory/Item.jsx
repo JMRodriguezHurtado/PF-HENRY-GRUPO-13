@@ -12,13 +12,11 @@ const Item = ({ product}) => {
     console.log("Deleted after", deleted)
   }
   return (
-    <tr>
-      <td>{name}</td>
-      <td>{price}</td>
-      <td>{quantity}</td>
-      <td>
-        <button onClick={handleClick}>Boludo</button>
-      </td>
+    <tr className="border-b">
+        <td className="border px-4 py-2">{name}</td>
+        <td className="border px-4 py-2">{price}</td>
+        <td className="border px-4 py-2">{quantity}</td>
+        <td><button onClick={handleClick}>DELETE</button></td>
     </tr>
   );
 };

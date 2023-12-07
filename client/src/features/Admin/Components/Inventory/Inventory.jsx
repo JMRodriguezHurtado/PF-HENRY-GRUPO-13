@@ -6,7 +6,7 @@ import titles from "./titles"
 
 const Inventory = () => {
     return (
-        <table>
+        <table className="w-full table-auto border-collapse">
             <Header titles={titles}/>
             <Items products={products}/>
         </table>

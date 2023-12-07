@@ -2,7 +2,7 @@
 
 const Title = ({title}) => {
     return(
-        <th>{title}</th>
+        <th className="border px-4 py-2">{title}</th>
     )
 }
 
