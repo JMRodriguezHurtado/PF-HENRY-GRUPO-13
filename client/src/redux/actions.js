@@ -20,7 +20,9 @@ import {
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE, SET_FILTERS,
   UPDATE_PRODUCTS,
-  POST_MESSAGE_REQUEST, POST_MESSAGE_FAILURE, POST_MESSAGE_SUCCESS
+  POST_MESSAGE_REQUEST, POST_MESSAGE_FAILURE, POST_MESSAGE_SUCCESS,
+  GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS, GET_USERDATA_FAILURE,
+  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
 } from './types';
 
 // Actions
@@ -343,6 +345,71 @@ export const postMessage = (message) => {
       dispatch(postMessageSuccess(data));
     } catch (error) {
       dispatch(postMessageError(error.response.data.error)); 
+    }
+  };
+};
+
+
+export const getUserDataRequest = () => ({
+  type: GET_USERDATA_REQUEST
+});
+export const getUserDataSuccess = (data) => ({
+  type: GET_USERDATA_SUCCESS,
+  payload: data
+});
+export const getUserDataError = (error) => ({
+  type: GET_USERDATA_FAILURE,
+  payload: error
+});
+export const getUserData = (userId) => {
+  return async (dispatch) => {
+    dispatch(getUserDataRequest());
+    try {
+      const { data } = await axios.get(`${URL}/user/${userId}`);
+      dispatch(getUserDataSuccess(data));
+    } catch (error) {
+      dispatch(getUserDataError(error.response.data.error));
+    }
+  };
+};
+
+
+export const putUserDataRequest = () => ({
+  type: PUT_USERDATA_REQUEST
+});
+export const putUserDataSuccess = (data) => ({
+  type: PUT_USERDATA_SUCCESS,
+  payload: data
+});
+export const putUserDataError = (error) => ({
+  type: PUT_USERDATA_FAILURE,
+  payload: error
+});
+export const putUserData = (userId, newData) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("token");
+    dispatch(putUserDataRequest());
+    try {
+      const formData = new FormData();
+      for (const key in newData) {
+        if (newData.hasOwnProperty(key)) {
+          if (key === 'img' && newData[key] !== undefined) {
+            formData.append(key, newData[key]);
+          } else if (key !== 'img') {
+            formData.append(key, newData[key]);
+          }
+        }
+      }
+
+      const { data } = await axios.put(`${URL}/user/${userId}`, formData, {
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      dispatch(putUserDataSuccess(data));
+    } catch (error) {
+      dispatch(putUserDataError(error.response?.data?.error || 'Unknown error'));
     }
   };
 };

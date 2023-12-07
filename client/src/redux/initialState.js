@@ -41,6 +41,16 @@ const initialState = {
     loadingPostMessage: false,
     errorPostMessage: false,
     successPostMessage: false,
+
+    loadingGetUserData: false,
+    errorGetUserData: false,
+    successGetUserData: false,
+    userData: [],
+
+    loadingPutUser: false,
+    errorPutUser: false,
+    successPutUser: false,
+    
 };
 
 export default initialState

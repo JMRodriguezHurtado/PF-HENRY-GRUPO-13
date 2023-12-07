@@ -4,6 +4,8 @@ const router = Router();
 // Middlewares
 const refreshTokens = require("../middlewares/Tokens/refreshTokens");
 const verifyToken = require("../middlewares/Tokens/verifyTokens");
+const upload = require('../middlewares/Multer/upload');
+const uploadImage = require('../middlewares/Cloudinary/uploadImage');
 
 //Controllers
 const signUp = require('../controllers/User/signUp');
@@ -13,6 +15,7 @@ const login = require("../controllers/User/login");
 const getUserById = require("../controllers/User/getUserById");
 const getAllUsers = require("../controllers/User/getAllUsers");
 const postMessage = require("../controllers/User/postMessage");
+const putUser = require("../controllers/User/putUser");
 
 // REFRESH TOKENS
 router.post("/refresh", refreshTokens, (req, res) => {
@@ -36,9 +39,9 @@ router.post("/refresh", refreshTokens, (req, res) => {
 //POST
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, phoneNumber, address,img } = req.body;
+    const { name, email, password, number, address,img } = req.body;
 
-    const newUser = await signUp({ name, email, password, phoneNumber, address, img });
+    const newUser = await signUp({ name, email, password, number, address, img });
 
     return res.status(200).json(newUser);
   } catch (error) {
@@ -90,7 +93,6 @@ console.log(req.body);
 
 
 //GET
-
 router.get("/", getAllUsers, (req, res) => {
   
   return res.status(200).json(res.paginatedResults);
@@ -112,10 +114,40 @@ router.get("/:id", async (req, res) => {
   
   try {
     const user = await getUserById(id);
+
     return res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   };
 });
+
+
+//PUT
+router.put("/:id", upload, verifyToken, async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+  let img;
+
+  // Verifica si la propiedad 'img' está presente y no es undefined
+  if (req.file && req.file.buffer) {
+    try {
+      const result = await uploadImage(req.file.buffer);
+      img = result.secure_url;
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error processing image' });
+    }
+  }
+
+  try {
+    const updatedUser = await putUser(id, updateData, img);
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message || 'Internal server error' });
+  }
+});
+
+
 
 module.exports = router;
