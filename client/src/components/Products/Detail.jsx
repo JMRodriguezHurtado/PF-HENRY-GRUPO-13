@@ -14,8 +14,6 @@ const Detail = () => {
     dispatch(getProductsById(id));
   }, [dispatch, id]);
 
-  console.log(productById);
-
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
     setSelectedQuantity(newQuantity);
@@ -32,37 +30,26 @@ const Detail = () => {
       description: productById.description,
       quantity: selectedQuantity,
     }));
-    
+
     Swal.fire({
       icon: 'success',
       title: 'Producto añadido al carro',
       showConfirmButton: false,
-      timer: 1500, 
+      timer: 1500,
     });
-    
   };
-
 
   return (
     <div className='py-40 hfull bg-gray-300 h-screen'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="md:flex-1 px-4">
-            <div
-              x-data="{ image: 1 }"
-              x-cloak
-              className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
-            >
-            <div
-              x-show="image === 1"
-              className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center"
-            >
+            <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
               <img
                 src={isLocalImage ? `http://localhost:3001/${productById.img}` : productById.img}
                 alt={`${productById.name} image`}
                 className="w-full h-full object-contain rounded-lg"
               />
-            </div>
             </div>
           </div>
           <div className="md:flex-1 px-4">
@@ -89,21 +76,21 @@ const Detail = () => {
                 <select
                   value={selectedQuantity}
                   onChange={handleQuantityChange}
-                  className="cursor-pointer appearance-none rounded-lg border border-gray-200 p-3 h-14 flex items-end text-center "
+                  className="cursor-pointer appearance-none rounded-lg border border-gray-200 p-3 h-14 flex items-end text-center"
                 >
                   {[...Array(productById.quantity).keys()].map((num) => (
                     <option key={num + 1} value={num + 1}>
                       {num + 1}
                     </option>
                   ))}
-                  
                 </select>
               </div>
 
-
-              <button type="button"
-               onClick={handleAddToCart}
-              className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
+              >
                 Añadir al carro
               </button>
             </div>
@@ -111,7 +98,7 @@ const Detail = () => {
         </div>
       </div>
     </div>
- );
+  );
 };
 
 export default Detail;
