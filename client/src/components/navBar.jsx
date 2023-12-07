@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import AuthModal from "./AuthModal";
@@ -17,28 +17,34 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const isUserLoggedIn = !!localStorage.getItem("token");
+  const fetchData = useCallback(async () => {
+    const isUserLoggedIn = !!localStorage.getItem("token");
 
-      if (isUserLoggedIn) {
-        const token = localStorage.getItem("token");
-        const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
-        if (decodedToken) {
-          try {
-            await dispatch(getUserByID(decodedToken.id));
-          } catch (error) {
-            console.error("Error dispatching getUserByID:", error);
-          }
+    if (isUserLoggedIn) {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwtDecode(token);
+
+      if (decodedToken) {
+        try {
+          await dispatch(getUserByID(decodedToken.id));
+        } catch (error) {
+          console.error("Error dispatching getUserByID:", error);
         }
       }
-    };
-
-    fetchData();
-
+    }
   }, [dispatch]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, dispatch]);
+
+  const userData = useSelector((state) => state.userData);
+  const isUserLoggedIn = !!localStorage.getItem("token");
+  const isAdmin = userData && userData.Admin;
+
+  useEffect(() => {
+    fetchData(); 
+  }, [userData, fetchData]);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -54,9 +60,9 @@ const NavBar = () => {
     navigate("/home");
   };
 
-  const isUserLoggedIn = !!localStorage.getItem("token");
-  const userData = useSelector((state) => state.userData);
-  const isAdmin = userData && userData.Admin;
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
   
 
   return (
