@@ -19,4 +19,3 @@ const Products = ({products}) =>{
 }
 
 export default Products
-import { useState } from 'react';

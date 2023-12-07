@@ -30,11 +30,14 @@ const App = () => {
         <Route path='/create/product' element={<CreateProduct />} />
         <Route path='/searchs' element={<Searchs />} />
         <Route path='/shoppingCart' element={<ShoppingCart/>} />
+        {isDashboardRoute && (
+          <>
         <Route path='/dashboard' element={<AdminDashboard/>} />
         <Route path='/dashboard/products' element={<AdminProducts/>} />
         <Route path='/dashboard/users' element={<AdminUser/>} />
         <Route path='/dashboard/profile' element={<Profile/>} />
-
+          </>
+        )}
       </Routes>
     </main>
   );
