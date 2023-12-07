@@ -22,7 +22,9 @@ import {
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE,
   UPDATE_PRODUCTS,
-  POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS
+  POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS,
+  GET_USERDATA_FAILURE, GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
+  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,  
 } from './types';
 
 const reducer = (state = initialState, action) => {
@@ -250,6 +252,54 @@ const reducer = (state = initialState, action) => {
         errorPostMessage: action.payload,
         successPostMessage: false,
       }
+
+
+    case GET_USERDATA_REQUEST:
+      return{
+        ...state,
+        loadingGetUserData: true,
+        errorGetUserData: false,
+        successGetUserData: false,
+      }
+    case GET_USERDATA_SUCCESS:
+      return{
+        ...state,
+        loadingGetUserData: false,
+        errorGetUserData: false,
+        successGetUserData: true,
+        userData: action.payload,
+      }
+    case GET_USERDATA_FAILURE:
+      return{
+        ...state,
+        loadingGetUserData: false,
+        errorGetUserData: action.payload,
+        successGetUserData: false,
+      }
+
+    case PUT_USERDATA_REQUEST:
+      return{
+        ...state,
+        loadingPutUser: true,
+        errorPutUser: false,
+        successPutUser: false,
+      }
+    case PUT_USERDATA_SUCCESS:
+      return{
+        ...state,
+        loadingPutUser: false,
+        errorPutUser: false,
+        successPutUser: true,
+        userData: action.payload,
+      }
+    case PUT_USERDATA_FAILURE:
+      return{
+        ...state,
+        loadingPutUser: false,
+        errorPutUser: action.payload,
+        successPutUser: false,
+      }
+
     default:
       return state;
   }

@@ -8,11 +8,9 @@ const userSchema = new Schema(
       unique: false,
       required: true
     },
-    phoneNumber: {
+    number: {
       type: Number,
-      default: function() {
-        return Math.floor(10000 + Math.random() * 90000);
-      },
+      unique: false
     },
     email: {
       type: String,

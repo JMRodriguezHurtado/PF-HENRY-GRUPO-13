@@ -20,7 +20,7 @@ const SideBar = () => {
 
 
   return (
-    <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 h-[calc(100vw)] w-72 transition-transform duration-300 xl:translate-x-0">
+    <aside className="bg-gradient-to-br from-gray-800 to-gray-900 fixed inset-y-0 left-0 z-50 h-[calc(100vw)] w-72 transition-transform duration-300 xl:translate-x-0">
 
       <div className="relative border-b border-white/20 m-5">
         <NavLink to={'/home'} className=" items-center gap-4 py-6 m-1 px-2 content-center flex justify-center">
