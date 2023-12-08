@@ -19,10 +19,10 @@ const AdminProducts = () => {
       <div className="p-8 ml-72 h-full">
         <div className="p-5 rounded-xl bg-blue-200 shadow mt-9 h-full">
           <div>
-            <Selection />
             <div className="mt-6">
-              <Inventory products={products} title="Productos disponibles" />
-              <Inventory products={deletedProducts} title="Productos eliminados" />
+                <Selection />
+                <Inventory products={products} title="Productos disponibles" />
+                <Inventory products={deletedProducts} title="Productos eliminados" />
             </div>
           </div>
         </div>
