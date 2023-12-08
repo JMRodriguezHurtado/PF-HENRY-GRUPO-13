@@ -16,6 +16,9 @@ const getUserById = require("../controllers/User/getUserById");
 const getAllUsers = require("../controllers/User/getAllUsers");
 const postMessage = require("../controllers/User/postMessage");
 const putUser = require("../controllers/User/putUser");
+const deleteUser = require("../controllers/User/deleteUser");
+const restoreUser = require("../controllers/User/restoreUser");
+const getAllUsersDeleted = require("../controllers/User/getAllUsersDeleted")
 
 // REFRESH TOKENS
 router.post("/refresh", refreshTokens, (req, res) => {
@@ -100,6 +103,11 @@ router.get("/", getAllUsers, (req, res) => {
   return res.status(200).json(res.paginatedResults);
 });
 
+router.get("/deleted", getAllUsersDeleted, (req, res) => {
+  
+  return res.status(200).json(res.paginatedResults);
+});
+
 router.get('/verify/:userId', async (req, res) => {
   const userId = req.params.userId;
 
@@ -152,6 +160,29 @@ router.put("/:id", upload, verifyToken, async (req, res) => {
   }
 });
 
+router.put("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await deleteUser(id);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
+
+router.put("/restore/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await restoreUser(id);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
 
 
 module.exports = router;

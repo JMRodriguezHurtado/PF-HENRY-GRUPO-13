@@ -5,9 +5,13 @@ import {
   CREATE_NEW_PRODUCT,
   CREATE_REVIEW,
   DELETE_PRODUCTS,
+  RESTORE_PRODUCT,
   FINISH_PURCHASE,
   GET_ALL_USERS,
   GET_USER_BY_ID,
+  DELETE_USER,
+  GET_ALL_USERS_DELETED,
+  RESTORE_USER,
   GET_ALL_PRODUCTS,
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
@@ -113,6 +117,16 @@ export function deleteProduct(id) {
     };
   }
 
+  export function restoreProduct(id) {
+    return async function (dispatch) {
+      const restoredProduct = await fetch.put(`${URL}/product/restore/${id}`);
+      dispatch({
+        type: RESTORE_PRODUCT,
+        payload: restoredProduct.data,
+      });
+    };
+  }
+
 export function updateProduct(payload) {
     return async function (dispatch) {
       console.log(payload.id);
@@ -212,6 +226,36 @@ export function removeFromCart(productId) {
       dispatch({
         type: GET_ALL_USERS,
         payload: allUsers.data,
+      });
+    };
+  }
+
+  export function deleteUser(id) {
+    return async function (dispatch) {
+      const deletedUser = await fetch.put(`${URL}/user/delete/${id}`);
+      dispatch({
+        type: DELETE_USER,
+        payload: deletedUser.data,
+      });
+    };
+  }
+
+  export function getAllUsersDeleted() {
+    return async function (dispatch) {
+      const allUsersDeleted = await axios.get(`${URL}/user/deleted`);
+      dispatch({
+        type: GET_ALL_USERS_DELETED,
+        payload: allUsersDeleted.data,
+      });
+    };
+  }
+
+  export function restoreUser(id) {
+    return async function (dispatch) {
+      const restoredUser = await fetch.put(`${URL}/user/restore/${id}`);
+      dispatch({
+        type: RESTORE_USER,
+        payload: restoredUser.data,
       });
     };
   }
