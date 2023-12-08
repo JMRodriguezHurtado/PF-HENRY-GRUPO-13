@@ -126,9 +126,11 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", upload, verifyToken, async (req, res) => {
   const { id } = req.params;
   const updateData = req.body;
+  const admin = req.body.admin
   let img;
 
-  // Verifica si la propiedad 'img' está presente y no es undefined
+  console.log(admin);
+
   if (req.file && req.file.buffer) {
     try {
       const result = await uploadImage(req.file.buffer);
@@ -140,7 +142,7 @@ router.put("/:id", upload, verifyToken, async (req, res) => {
   }
 
   try {
-    const updatedUser = await putUser(id, updateData, img);
+    const updatedUser = await putUser(id, updateData, img, admin);
     return res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);

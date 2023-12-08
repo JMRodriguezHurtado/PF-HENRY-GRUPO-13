@@ -42,12 +42,10 @@ const NavBar = () => {
   const isUserLoggedIn = !!localStorage.getItem("token");
   const isAdmin = userData && userData.Admin;
 
+
   useEffect(() => {
     fetchData(); 
-  }, [userData, fetchData]);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  }, []);  
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -93,6 +91,7 @@ const NavBar = () => {
           <FaRegUser
             className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
             title="User"
+            onClick={() => navigate("/profile")}
           />
         )}
 

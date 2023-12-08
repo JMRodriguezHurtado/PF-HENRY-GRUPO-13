@@ -12,7 +12,7 @@ import AdminDashboard from './views/Admin/AdminDashboard.jsx';
 import AdminProducts from './views/Admin/AdminProducts.jsx';
 import AdminUser from './views/Admin/AdminUser.jsx';
 import Profile from './views/Admin/Profile.jsx';
-
+import ProfileUser from './components/ProfileUser.jsx';
 
 const App = () => {
   const location = useLocation()
@@ -30,6 +30,8 @@ const App = () => {
         <Route path='/create/product' element={<CreateProduct />} />
         <Route path='/searchs' element={<Searchs />} />
         <Route path='/shoppingCart' element={<ShoppingCart/>} />
+        <Route path='/profile' element={<ProfileUser/>} />
+
         {isDashboardRoute && (
           <>
         <Route path='/dashboard' element={<AdminDashboard/>} />
