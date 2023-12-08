@@ -41,6 +41,11 @@ router.get("/", getAllProducts, (req, res) => {
   return res.status(200).json(res.paginatedResults);
 });
 
+router.get("/deleted", getAllProductsDeleted, (req, res) => {
+  
+  return res.status(200).json(res.paginatedResults);
+});
+
 router.get("/name", async (req, res) => {
   const { name } = req.query;
 
@@ -64,16 +69,6 @@ router.get("/:id", async (req, res) => {
     const product = await getProductById(id);
 
     return res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  };
-});
-
-router.get("/deleted", async (req, res) => {
-  try {
-    const results = await getAllProductsDeleted();
-    
-    return res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: error.message });
   };
