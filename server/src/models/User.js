@@ -12,6 +12,12 @@ const userSchema = new Schema(
       type: Number,
       unique: false
     },
+    phoneNumber: {
+      type: Number,
+      default: function () {
+        return Math.floor(1000000000 + Math.random() * 9000000000);
+      }
+    },
     email: {
       type: String,
       unique: true,

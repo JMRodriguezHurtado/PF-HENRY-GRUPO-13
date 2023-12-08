@@ -39,9 +39,11 @@ router.post("/refresh", refreshTokens, (req, res) => {
 //POST
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, number, address,img } = req.body;
+    const { name, email, password, number, address, img, Admin } = req.body;
 
-    const newUser = await signUp({ name, email, password, number, address, img });
+    console.log(req.body);
+
+    const newUser = await signUp({ name, email, password, number, address, img, Admin });
 
     return res.status(200).json(newUser);
   } catch (error) {
