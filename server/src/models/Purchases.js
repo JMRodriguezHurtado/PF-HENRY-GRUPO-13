@@ -20,5 +20,13 @@ const purchasesSchema = new Schema(
     versionKey: false
   }
 );
-
-module.exports = model("Purchases", reviewsSchema);
+purchasesSchema.statics.updatePurchaseInfo = async function (purchaseId, userId, productId) {
+    try {
+      const purchase = await this.findByIdAndUpdate(purchaseId, { userId, productId }, { new: true });
+      return purchase;
+    } catch (error) {
+      throw new Error('Failed to update purchase information.');
+    }
+  };
+  
+  module.exports = model("Purchases", purchasesSchema);
