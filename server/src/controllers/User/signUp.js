@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const signTokens = require('../../middlewares/Tokens/signTokens');
 const sendVerifyEmail = require('../../middlewares/Email/sendVerifyEmail');
 
-const signUp = async ({ name, email, password, number, address, img }) => {
+const signUp = async ({ name, email, password, number, address, img, Admin }) => {
   try {
     if (!name || !email || !password || !number || !address) {
       throw new Error("Missing data")
@@ -19,7 +19,8 @@ const signUp = async ({ name, email, password, number, address, img }) => {
       password,
       number,
       address,
-      img: img || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'
+      img: img || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png',
+      Admin
     });
 
     user.password = await user.encryptPassword(user.password);
