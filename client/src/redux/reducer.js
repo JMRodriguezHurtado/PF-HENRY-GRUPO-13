@@ -115,49 +115,46 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         localstorage: [action.payload],
-        };
+      };
   
     case REMOVE_FROM_CART:
-      // eslint-disable-next-line no-case-declarations
       const productIdToRemove = action.payload;
-        return {
+      return {
         ...state,
-         cart: state.cart.filter(item => item.id !== productIdToRemove),
-        };
+        cart: state.cart.filter(item => item.id !== productIdToRemove),
+      };
     case FINISH_PURCHASE:
-        return {
-          ...state,
-            cart: action.payload
-            };
-    
+      return {
+        ...state,
+        cart: action.payload
+      };
     case ADD_TO_CART:
-        return {
-          ...state,
-            cart: [...state.cart, action.payload],
-              };
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
 
     case GET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
-        };
+      };
     case GET_USER_BY_ID:
       return {
         ...state,
         userData: action.payload,
-          };
-
+      };
     case DELETE_USER:
-            return {
-              ...state,
-              user: state.deletedUser.filter(user => user.id !== action.payload.id),
-            };
+      return {
+        ...state,
+        user: state.deletedUser.filter(user => user.id !== action.payload.id),
+      };
 
     case RESTORE_USER:
-          return {
-                ...state,
-                user: state.restoredUser.filter(user => user.id !== action.payload),
-              };
+      return {
+        ...state,
+        user: state.restoredUser.filter(user => user.id !== action.payload),
+      };
 
     case POST_LOGIN_REQUEST:
       return {

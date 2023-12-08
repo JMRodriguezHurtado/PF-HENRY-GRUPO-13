@@ -15,6 +15,10 @@ import { jwtDecode } from "jwt-decode";
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const cart = useSelector((state) => state.cart);
+  const quantityProducts = cart.reduce((total, producto) => total + producto.quantity, 0);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
@@ -95,11 +99,19 @@ const NavBar = () => {
           />
         )}
 
-        <LuShoppingCart
-          className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
-          onClick={() => navigate("/shoppingCart")}
-          title="Cart"
-        />
+        
+        <div style={{ position: 'relative' }}>
+          <LuShoppingCart
+              className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
+              onClick={() => navigate("/shoppingCart")}
+              title="Cart"
+            />
+          {quantityProducts > 0 && (
+            <div className="bg-red-500 text-white text-center justify-center rounded-full w-4 h-4 absolute top-0 right-0 -mt-2 -mr-2">
+              {quantityProducts}
+            </div>
+          )}
+        </div>
 
         {isUserLoggedIn ? (
           <button
