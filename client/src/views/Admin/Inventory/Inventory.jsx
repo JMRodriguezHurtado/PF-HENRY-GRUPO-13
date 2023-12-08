@@ -6,10 +6,11 @@ const Inventory = ({ title, products }) => {
 
   return (
     <div className="mx-4 mt-8">
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300">
-          <caption className="text-lg font-semibold p-2">{title}</caption>
+        <table className="min-w-full bg-white shadow-md rounded-md">
+          <caption className="text-lg font-semibold p-4 text-blue-500">
+            {title}
+          </caption>
           <Header titles={columnTitles} />
           <Items products={products} />
         </table>

@@ -1,20 +1,25 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { deleteProduct } from "../../../redux/actions"
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import Switch from "react-switch";
+import { deleteProduct } from "../../../redux/actions";
 
+const PublicToggle = ({ id }) => {
+  const [toggleSwitch, setToggleSwitch] = useState(true);
+  const dispatch = useDispatch();
 
-const PublicToggle = ({id}) => {
-    const [toggleSwitch, setToggleSwitch] = useState(true)
-    const dispatch = useDispatch()
-    const handleClick = () => {
-        setToggleSwitch(!toggleSwitch)
-        dispatch(deleteProduct(id))
-    }
-    return(
-        <button onClick={handleClick}>
-            {toggleSwitch ? "Public" : "Private"}
-        </button>
-    )
-}
+  const handleChange = (checked) => {
+    setToggleSwitch(checked);
+    dispatch(deleteProduct(id));
+  };
 
-export default PublicToggle
+  return (
+    <label>
+      <Switch
+        onChange={handleChange}
+        checked={toggleSwitch}
+        onColor="#2196f3"/>
+    </label>
+  );
+};
+
+export default PublicToggle;
