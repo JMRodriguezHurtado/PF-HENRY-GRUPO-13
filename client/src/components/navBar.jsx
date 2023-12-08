@@ -113,7 +113,7 @@ const NavBar = () => {
           <Button
             className="text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
             type="primary"
-            onClick={showModal}
+            onClick={() => setIsModalOpen(true)}
           >
             Entrar/Registrarse
           </Button>
