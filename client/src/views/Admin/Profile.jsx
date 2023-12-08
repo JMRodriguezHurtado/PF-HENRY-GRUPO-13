@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserData, putUserData } from "../../redux/actions";
 import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData, putUserData } from "../../redux/actions";
 
 const Profile = () => {
   const token = localStorage.getItem('token');
