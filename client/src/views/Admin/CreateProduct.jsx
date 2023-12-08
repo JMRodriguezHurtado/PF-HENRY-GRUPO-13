@@ -1,5 +1,5 @@
 import { useState } from "react";
-import validation from '../utils/Validation/validationCreateProducts';
+import validation from '../../utils/Validation/validationCreateProducts';
 import axios from "axios";
 
 const CreateProduct = () => {

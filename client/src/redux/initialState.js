@@ -54,6 +54,11 @@ const initialState = {
     loadingPutUser: false,
     errorPutUser: false,
     successPutUser: false,
+
+    loadingGetUserPurchase: false,
+    errorGetUserPurchase: false,
+    successGetUserPurchase: false,
+    userPurchase: [],
     
 };
 

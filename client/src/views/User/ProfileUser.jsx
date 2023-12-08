@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData, putUserData } from "../redux/actions";
+import { getUserData, putUserData } from "../../redux/actions";
 import { jwtDecode } from 'jwt-decode';
 
 const ProfileUser = () => {
