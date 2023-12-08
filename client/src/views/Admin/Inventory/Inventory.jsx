@@ -1,26 +1,21 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getAllProducts, getDeletedProducts } from "../../../redux/actions"
-import Header from "./Header"
-import Items from "./Items"
+import Header from "./Header";
+import Items from "./Items";
 
-const Inventory = () => {
-    const titles = ["Nombre", "Precio", "Cantidad", "Publicado"]
-    const products = useSelector(state => state.products?.results)
-    const deletedProducts = useSelector(state => state)
-    console.log("DeltedProducts: ", deletedProducts)
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(getAllProducts())
-        dispatch(getDeletedProducts())
-    },[dispatch])
-    console.log("Products", products)
+const Inventory = ({ title, products }) => {
+    const titles = ["Nombre", "Precio", "Cantidad", "Publicado"];
+
     return (
-        <table className="w-full table-auto border-collapse">
-            <Header titles={titles}/>
-            <Items products={products} deletedProducts={deletedProducts}/>
-        </table>
-    )
-}
+        <div className="mx-4 mt-8">
+            <h2 className="text-2xl font-bold mb-4">{title}</h2>
+            <div className="overflow-x-auto">
+                <table className="min-w-full">
+                    <caption className="text-lg font-semibold p-2">{title}</caption>
+                    <Header titles={titles} />
+                    <Items products={products} />
+                </table>
+            </div>
+        </div>
+    );
+};
 
-export default Inventory
+export default Inventory;

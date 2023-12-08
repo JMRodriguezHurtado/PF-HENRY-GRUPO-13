@@ -1,11 +1,9 @@
 import Item from "./Item"
 
-const Items = ({products, deletedProducts}) => {
+const Items = ({products}) => {
     return(
         <tbody>
-            <h2>Availbles:</h2>
-            {products?.map((product, index) => {
-                return product.deleted === false && <Item key={index} product={product}/>})
+            {products?.map((product, index) => <Item key={index} product={product}/>)
             }
         </tbody>
     )
