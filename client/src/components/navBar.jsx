@@ -57,7 +57,6 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.setItem("authModalShown", "false");
     dispatch(clearData());
     navigate("/home");
   };

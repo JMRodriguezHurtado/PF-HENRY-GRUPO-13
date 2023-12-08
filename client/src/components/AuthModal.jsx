@@ -9,36 +9,38 @@ const AuthModal = ({ isOpen, onClose, onLogout }) => {
   const successPostUser = useSelector((state) => state.successPostUser);
   const successPostLogin = useSelector((state) => state.successPostLogin);
   const location = useLocation();
-  
+
   const [showModalFor2Seconds, setShowModalFor2Seconds] = useState(false);
-  const [modalAlreadyShown, setModalAlreadyShown] = useState(
-    localStorage.getItem("authModalShown") === "true"
-  );
+  const [modalAlreadyShown, setModalAlreadyShown] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     let timer;
 
-    if (
+    const shouldShowModal = () => (
       (successPostTokenGoogle || successPostUser || successPostLogin) &&
-      !modalAlreadyShown
-    ) {
+      !modalAlreadyShown &&
+      isOpen
+    );
+
+    if (shouldShowModal()) {
       setShowModalFor2Seconds(true);
 
       timer = setTimeout(() => {
         setShowModalFor2Seconds(false);
         onClose();
-        if (isOpen) {
+
+        if (location.pathname === "/home") {
           navigate("/home");
         }
+
         setModalAlreadyShown(true);
-        localStorage.setItem("authModalShown", "true");
       }, 2000);
     }
 
     return () => clearTimeout(timer);
-  }, [successPostTokenGoogle, successPostUser, successPostLogin, onClose, navigate, modalAlreadyShown, isOpen]);
+  }, [successPostTokenGoogle, successPostUser, successPostLogin, onClose, navigate, modalAlreadyShown, isOpen, location]);
 
   useEffect(() => {
     setShowModalFor2Seconds(isOpen && !modalAlreadyShown);
@@ -46,18 +48,20 @@ const AuthModal = ({ isOpen, onClose, onLogout }) => {
 
   useEffect(() => {
     if (modalAlreadyShown) {
-      setModalAlreadyShown(false);
       setShowModalFor2Seconds(false);
     }
   }, [modalAlreadyShown]);
 
   useEffect(() => {
-    setShowModalFor2Seconds(false);
+    if (location.pathname !== "/home") {
+      setModalAlreadyShown(false);
+      setShowModalFor2Seconds(false);
+    }
   }, [location]);
 
   return (
     <Modal
-      key={location.key}  
+      key={location.key}
       title=""
       open={showModalFor2Seconds}
       onOk={onClose}
