@@ -11,6 +11,7 @@ import { clearData, getUserByID } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { jwtDecode } from "jwt-decode";
+import { BiPurchaseTag } from "react-icons/bi";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -90,7 +91,15 @@ const NavBar = () => {
           />
         )}
 
-        {isUserLoggedIn && (
+        {isUserLoggedIn && !isAdmin && (
+          <BiPurchaseTag
+            className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
+            title="Mis compras"
+            onClick={() => navigate("/profile/purchase")}
+          />
+        )}
+
+        {isUserLoggedIn && !isAdmin && (
           <FaRegUser
             className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
             title="User"

@@ -179,6 +179,7 @@ const UserPurchase = () => {
                 name={product.name}
                 img={product.img}
                 purchaseDate={product.updatedAt.split("T")[0]}
+                _id={product._id}
               />
             ))}
           </tbody>

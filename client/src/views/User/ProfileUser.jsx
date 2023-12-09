@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData, putUserData } from "../../redux/actions";
+import { getUserData, putUserData, getUserPurchases } from "../../redux/actions";
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
 
 const ProfileUser = () => {
   const token = localStorage.getItem('token');
@@ -9,11 +10,16 @@ const ProfileUser = () => {
   const userId = decodedToken.id;
 
   const userData = useSelector((state) => state.userData);
+  const userPurchase = useSelector((state) => state.userPurchase);
+
+  const quantityPurchases = userPurchase.flatMap((purchase) => purchase.products).length;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUserData(userId));
+    dispatch(getUserPurchases(userId));
   }, [dispatch, userId]);
 
   useEffect(() => {
@@ -100,8 +106,10 @@ const ProfileUser = () => {
       <div className="p-5 rounded-xl bg-blue-200 shadow mt-8 h-full">
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="grid grid-cols-3 text-center order-last md:order-first mt-10 md:mt-0">
-            <div>
-              <p className="font-bold text-gray-700 text-xl">0</p>
+            <div className="cursor-pointer"
+              onClick={() => navigate('/profile/purchase')}
+            >
+              <p className="font-bold text-gray-700 text-xl">{quantityPurchases}</p>
               <p className="text-gray-500">Mis compras</p>
             </div>
             <div>

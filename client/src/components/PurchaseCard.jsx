@@ -1,13 +1,15 @@
-const PurchaseCard = ({ brand, category, price, name, img, purchaseDate }) => {
+import { NavLink } from 'react-router-dom';
+
+const PurchaseCard = ({ brand, category, price, name, img, purchaseDate, _id }) => {
   return (
     <tr className="bg-gray-800">
       <td className="p-3">
-        <div className="flex items-center">
+        <NavLink to={`/detail/${_id}`} className="flex items-center">
           <img className="rounded-full h-12 w-12 object-cover" src={img} alt={`Imagen de ${name}`} />
           <div className="ml-5">
             <div className="text-gray-50 w-40 truncate text-lg font-semibold">{name}</div>
           </div>
-        </div>
+        </NavLink>
       </td>
 
       <td className="p-3">
