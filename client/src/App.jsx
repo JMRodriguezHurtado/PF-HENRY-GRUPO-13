@@ -1,4 +1,3 @@
-
 import CreateProduct from './views/Admin/CreateProduct.jsx';
 import Detail from './components/Products/Detail';
 import Searchs from './components/Searchs';
@@ -15,7 +14,6 @@ import Profile from './views/Admin/Profile.jsx';
 
 import ProfileUser from './views/User/ProfileUser.jsx';
 import UserPurchase from './views/User/UserPurchase.jsx';
-import ProfileUser from './components/ProfileUser.jsx';
 import AdminDeletedUsers from './views/Admin/AdminDeletedUsers.jsx'
 
 const App = () => {
