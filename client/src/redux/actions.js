@@ -31,7 +31,12 @@ import {
   REMOVE_FROM_CART,
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE, SET_FILTERS,
-  UPDATE_PRODUCTS
+  UPDATE_PRODUCTS,
+  POST_MESSAGE_REQUEST, POST_MESSAGE_FAILURE, POST_MESSAGE_SUCCESS,
+  GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS, GET_USERDATA_FAILURE,
+  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
+  GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS, GET_USER_PURCHASES_FAILURE,
+
 } from './types';
 
 // Actions
@@ -506,3 +511,25 @@ export const putUserData = (userId, newData) => {
   };
 };
 
+export const getUserPurchasesRequest = () => ({
+  type: GET_USER_PURCHASES_REQUEST
+});
+export const getUserPurchasesSuccess = (data) => ({
+  type: GET_USER_PURCHASES_SUCCESS,
+  payload: data
+});
+export const getUserPurchasesError = (error) => ({
+  type: GET_USER_PURCHASES_FAILURE,
+  payload: error
+});
+export const getUserPurchases = (userId) => {
+  return async (dispatch) => {
+    dispatch(getUserPurchasesRequest());
+    try {
+      const { data } = await axios.get(`${URL}/purchase/user/${userId}`);
+      dispatch(getUserPurchasesSuccess(data));
+    } catch (error) {
+      dispatch(getUserPurchasesError(error.response.data.error));
+    }
+  };
+};

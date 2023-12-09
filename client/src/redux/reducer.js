@@ -29,6 +29,7 @@ import {
   POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS,
   GET_USERDATA_FAILURE, GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
   PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,  
+  GET_USER_PURCHASES_FAILURE, GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS,
 } from './types';
 
 const reducer = (state = initialState, action) => {
@@ -324,6 +325,29 @@ const reducer = (state = initialState, action) => {
         loadingPutUser: false,
         errorPutUser: action.payload,
         successPutUser: false,
+      }
+
+    case GET_USER_PURCHASES_REQUEST:
+      return{
+        ...state,
+        loadingGetUserPurchase: true,
+        errorGetUserPurchase: false,
+        successGetUserPurchase: false,
+      }
+    case GET_USER_PURCHASES_SUCCESS:
+      return{
+        ...state,
+        loadingGetUserPurchase: false,
+        errorGetUserPurchase: false,
+        successGetUserPurchase: true,
+        userPurchase: action.payload,
+      }
+    case GET_USER_PURCHASES_FAILURE:
+      return{
+        ...state,
+        loadingGetUserPurchase: false,
+        errorGetUserPurchase: action.payload,
+        successGetUserPurchase: false,
       }
 
     default:
