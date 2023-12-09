@@ -15,6 +15,10 @@ import { jwtDecode } from "jwt-decode";
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const cart = useSelector((state) => state.cart);
+  const quantityProducts = cart.reduce((total, producto) => total + producto.quantity, 0);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
@@ -42,12 +46,10 @@ const NavBar = () => {
   const isUserLoggedIn = !!localStorage.getItem("token");
   const isAdmin = userData && userData.Admin;
 
+
   useEffect(() => {
     fetchData(); 
-  }, [userData, fetchData]);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  }, []);  
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -55,7 +57,6 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.setItem("authModalShown", "false");
     dispatch(clearData());
     navigate("/home");
   };
@@ -93,14 +94,23 @@ const NavBar = () => {
           <FaRegUser
             className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
             title="User"
+            onClick={() => navigate("/profile")}
           />
         )}
 
-        <LuShoppingCart
-          className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
-          onClick={() => navigate("/shoppingCart")}
-          title="Cart"
-        />
+        
+        <div style={{ position: 'relative' }}>
+          <LuShoppingCart
+              className="w-[40px] h-[40px] cursor-pointer hover:text-gray-100"
+              onClick={() => navigate("/shoppingCart")}
+              title="Cart"
+            />
+          {quantityProducts > 0 && (
+            <div className="bg-red-500 text-white text-center justify-center rounded-full w-4 h-4 absolute top-0 right-0 -mt-2 -mr-2">
+              {quantityProducts}
+            </div>
+          )}
+        </div>
 
         {isUserLoggedIn ? (
           <button
@@ -114,7 +124,7 @@ const NavBar = () => {
           <Button
             className="text-gray4 font-pop-light text-xl bg-transparent border-none shadow-none navbutton"
             type="primary"
-            onClick={showModal}
+            onClick={() => setIsModalOpen(true)}
           >
             Entrar/Registrarse
           </Button>

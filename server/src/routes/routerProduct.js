@@ -13,6 +13,7 @@ const getProductById = require("../controllers/Product/getProductById");
 const putProduct = require("../controllers/Product/putProduct");
 const deleteProduct = require("../controllers/Product/deleteProduct");
 const getAllProductsDeleted = require("../controllers/Product/getAllProductsDeleted");
+const restoreProduct = require("../controllers/Product/restoreProduct")
 
 
 //POST
@@ -37,6 +38,11 @@ router.post("/", upload, async (req, res) => {
 
 //GET
 router.get("/", getAllProducts, (req, res) => {
+  
+  return res.status(200).json(res.paginatedResults);
+});
+
+router.get("/deleted", getAllProductsDeleted, (req, res) => {
   
   return res.status(200).json(res.paginatedResults);
 });
@@ -93,6 +99,18 @@ router.put("/delete/:id", async (req, res) => {
 
   try {
     const product = await deleteProduct(id);
+
+    return res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
+
+router.put("/restore/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await restoreProduct(id);
 
     return res.status(200).json(product);
   } catch (error) {

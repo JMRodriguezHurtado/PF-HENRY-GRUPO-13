@@ -48,7 +48,7 @@ const ShoppingCart = () => {
       ...item,
       productId: item.id,
       unit_price: item.price,
-      currency_id: 'MEX',
+      currency_id: 'ARG',
       userId: userId
     }));
 

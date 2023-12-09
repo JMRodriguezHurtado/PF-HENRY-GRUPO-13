@@ -11,8 +11,12 @@ import {
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
+  RESTORE_PRODUCT,
   GET_ALL_USERS,
   GET_USER_BY_ID,
+  DELETE_USER,
+  GET_ALL_USERS_DELETED,
+  RESTORE_USER,
   LOCAL_STORAGE,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
   POST_USER_FAILURE, POST_USER_REQUEST, POST_USER_SUCCESS,
@@ -45,6 +49,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         productsByName: action.payload,
       };
+      
     case CLEAR_SEARCH_RESULTS:
       return {
         ...state,
@@ -67,6 +72,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: state.products.filter(product => product.id !== action.payload.id),
+      };
+    
+    case RESTORE_PRODUCT:
+      return {
+        ...state,
+        products: state.restoredProduct.filter(product => product.id !== action.payload),
       };
 
     case UPDATE_PRODUCTS:
@@ -105,37 +116,52 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         localstorage: [action.payload],
-        };
+      };
   
     case REMOVE_FROM_CART:
-      // eslint-disable-next-line no-case-declarations
+      
       const productIdToRemove = action.payload;
-        return {
+      return {
         ...state,
-         cart: state.cart.filter(item => item.id !== productIdToRemove),
-        };
+        cart: state.cart.filter(item => item.id !== productIdToRemove),
+      };
     case FINISH_PURCHASE:
-        return {
-          ...state,
-            cart: action.payload
-            };
-    
+      return {
+        ...state,
+        cart: action.payload
+      };
     case ADD_TO_CART:
-        return {
-          ...state,
-            cart: [...state.cart, action.payload],
-              };
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
 
     case GET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
-        };
+      };
     case GET_USER_BY_ID:
       return {
         ...state,
         userData: action.payload,
-          };
+      };
+    case DELETE_USER:
+      return {
+        ...state,
+        user: state.deletedUser.filter(user => user.id !== action.payload.id),
+      };
+    case GET_ALL_USERS_DELETED:
+      return {
+        ...state,
+        allUsersDeleted: action.payload,
+      };
+
+    case RESTORE_USER:
+      return {
+        ...state,
+        user: state.restoredUser.filter(user => user.id !== action.payload),
+      };
 
     case POST_LOGIN_REQUEST:
       return {

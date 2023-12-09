@@ -5,7 +5,13 @@ import {
   CREATE_NEW_PRODUCT,
   CREATE_REVIEW,
   DELETE_PRODUCTS,
+  RESTORE_PRODUCT,
   FINISH_PURCHASE,
+  GET_ALL_USERS,
+  GET_USER_BY_ID,
+  DELETE_USER,
+  GET_ALL_USERS_DELETED,
+  RESTORE_USER,
   GET_ALL_PRODUCTS,
   GET_ALL_USERS,
   GET_DELETED_PRODUCTS,
@@ -55,19 +61,19 @@ export function getAllProducts(page, limit, filters) {
 }
 
 export function getProductsByName(name) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get(`${URL}/product/name?name=${name}`);
-        const data = await response.data;
-        dispatch({
-          type: GET_PRODUCTS_BY_NAME,
-          payload: data,
-        });
-      } catch (error) {
-        console.log(error.response.data.error);
-      }
-    };
-  }
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${URL}/product/name?name=${name}`);
+      const data = await response.data;
+      dispatch({
+        type: GET_PRODUCTS_BY_NAME,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  };
+}
 
 export const clearSearchResults = () => ({
   type: CLEAR_SEARCH_RESULTS,
@@ -75,13 +81,83 @@ export const clearSearchResults = () => ({
   
 
 export function getProductsById(_id) {
-    return async function (dispatch) {
-      const { data } = await axios.get(`${URL}/product/${_id}`);
+  return async function (dispatch) {
+    const { data } = await axios.get(`${URL}/product/${_id}`);
+    console.log(data);
+    dispatch({
+      type: GET_PRODUCTS_BY_ID,
+      payload: data,
+    });
+  };
+}  
+  
+export function createProduct(newproduct) {
+  console.log(newproduct);
+  return async function (dispatch) {
+    try {
+      const { data } = await fetch.post(`${URL}/product`, newproduct);
       console.log(data);
+      console.log(newproduct);
+
       dispatch({
-        type: GET_PRODUCTS_BY_ID,
+        type: CREATE_NEW_PRODUCT,
         payload: data,
       });
+    } catch (error) {
+      throw error.response.data;
+    }
+  };
+}
+  
+export function deleteProduct(id) {
+  return async function (dispatch) {
+    const deletedProduct = await fetch.put(`${URL}/product/delete/${id}`);
+    dispatch({
+      type: DELETE_PRODUCTS,
+      payload: deletedProduct.data,
+    });
+  };
+}
+
+export function restoreProduct(id) {
+  return async function (dispatch) {
+    const restoredProduct = await fetch.put(`${URL}/product/restore/${id}`);
+    dispatch({
+      type: RESTORE_PRODUCT,
+      payload: restoredProduct.data,
+    });
+  };
+}
+
+export function updateProduct(payload) {
+  return async function (dispatch) {
+    console.log(payload.id);
+
+    const info = await fetch.put(`${URL}/product/${payload.id}`, payload);
+
+    dispatch({
+      type: UPDATE_PRODUCTS,
+      payload: info.data,
+    });
+  };
+}
+
+export function getDeletedProducts() {
+  return async function (dispatch) {
+    const getDeletedProducts = await fetch.get(`${URL}/product/deleted`);
+    console.log(getDeletedProducts);
+    dispatch({
+      type: GET_DELETED_PRODUCTS,
+      payload: getDeletedProducts.data.results,
+    });
+  };
+}
+
+
+export function createAdmin(payload) {
+  return async function (dispatch) {
+    try {
+      const { data } = await fetch.post(`${URL}/admin`, payload);
     };
   }
   
@@ -125,35 +201,38 @@ export function getDeletedProducts() {
       const getDeletedProducts = await axios.get(`${URL}/product/deleted`);
       console.log(getDeletedProducts);
       dispatch({
-        type: GET_DELETED_PRODUCTS,
-        payload: getDeletedProducts.data.results,
+        type: REGISTER_ADMIN,
+        payload: data,
       });
-    };
-  }
+    } catch (error) {
+      throw error.response.data;
+    }
+  };
+}
 
-export function createAdmin(payload) {
-    return async function (dispatch) {
-      try {
-        const { data } = await fetch.post(`${URL}/admin`, payload);
-        dispatch({
-          type: REGISTER_ADMIN,
-          payload: data,
-        });
-      } catch (error) {
-        throw error.response.data;
-      }
-    };
-  }
 
 export function createReview(newReview) {
-    return async function (dispatch) {
-      const reviews = await fetch.post(`${URL}/review`, newReview);
-      dispatch({
-        type: CREATE_REVIEW,
-        payload: reviews.data,
-      });
-    };
-  }
+  return async function (dispatch) {
+    const reviews = await fetch.post(`${URL}/review`, newReview);
+    dispatch({
+      type: CREATE_REVIEW,
+      payload: reviews.data,
+    });
+  };
+}
+
+
+export const addToCart = (productById) => ({
+  type: 'ADD_TO_CART',
+  payload: productById,
+});
+
+export function removeFromCart(productId) {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: productId,
+  };
+}
 
 export function putLocalstorage() {
   if (localStorage.getItem('cart')) {
@@ -162,91 +241,111 @@ export function putLocalstorage() {
       type: LOCAL_STORAGE,
       payload: cart,
       };
-    } else {
+  } else {
       let cart = [];
       return {
         type: LOCAL_STORAGE,
         payload: cart,
-      };
+    };
+  }
+}
+
+export function finishPurchase(objectPago) {
+  return async function compra(dispatch) {
+    try {
+      const response = await axios.post(`${URL}/purchase/order`, objectPago);
+      window.location.href = response.data.init_point;
+
+      dispatch({
+        type: FINISH_PURCHASE,
+
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error('Error al tratar de finalizar compra', error);
     }
-  }
-
-export function removeFromCart(productId) {
-  return {
-    type: REMOVE_FROM_CART,
-    payload: productId,
-    };
-  }
-
-  export function finishPurchase(objectPago) {
-    return async function compra(dispatch) {
-      try {
-        const response = await axios.post(`${URL}/purchase/order`, objectPago);
-        window.location.href = response.data.init_point;
-  
-        dispatch({
-          type: FINISH_PURCHASE,
-  
-          payload: response.data,
-        });
-      } catch (error) {
-        console.error('Error al tratar de finalizar compra', error);
-      }
-    };
-  }
-
-  export const addToCart = (productById) => ({
-    type: 'ADD_TO_CART',
-    payload: productById,
-  });
-
-  export function getAllUsers() {
-    return async function (dispatch) {
-      const allUsers = await axios.get(`${URL}/user`);
-      dispatch({
-        type: GET_ALL_USERS,
-        payload: allUsers.data,
-      });
-    };
-  }
-
-  export function getUserByID(id) {
-    return async function (dispatch) {
-      const { data } = await axios.get(`${URL}/user/${id}`);
-      console.log(data);
-      dispatch({
-        type: GET_USER_BY_ID,
-        payload: data,
-      });
-    };
-  }
-
-  export const postLoginRequest = () => ({
-    type: POST_LOGIN_REQUEST
-  });
-  export const postLoginSuccess = (user) => ({
-    type: POST_LOGIN_SUCCESS,
-    payload: user
-  });
-  export const postLoginFailure = (error) => ({
-    type: POST_LOGIN_FAILURE,
-    payload: error
-  });
-  export const postLogin = (user) => {
-    return async (dispatch) => {
-      dispatch(postLoginRequest());
-      try {
-        const { data } = await axios.post(`${URL}/user/login`, user);
-        if (data.accessToken) {
-          localStorage.setItem("token", data.accessToken);
-          localStorage.setItem("access", data.access)
-        }
-        dispatch(postLoginSuccess(data));
-      } catch (error) {
-        dispatch(postLoginFailure(error.response.data.error));
-      }
-    };
   };
+}
+
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    const allUsers = await axios.get(`${URL}/user`, { headers: { 'Cache-Control': 'no-cache' }});
+    dispatch({
+      type: GET_ALL_USERS,
+      payload: allUsers.data,
+    });
+  };
+}
+
+export function deleteUser(id) {
+  return async function (dispatch) {
+    const deletedUser = await axios.put(`${URL}/user/delete/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
+    dispatch({
+      type: DELETE_USER,
+      payload: deletedUser.data,
+    });
+  };
+}
+
+export function getAllUsersDeleted() {
+  return async function (dispatch) {
+    const allUsersDeleted = await axios.get(`${URL}/user/deleted`, { headers: { 'Cache-Control': 'no-cache' }});
+    dispatch({
+      type: GET_ALL_USERS_DELETED,
+      payload: allUsersDeleted.data,
+    });
+  };
+}
+
+export function restoreUser(id) {
+  return async function (dispatch) {
+    const restoredUser = await axios.put(`${URL}/user/restore/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
+    dispatch({
+      type: RESTORE_USER,
+      payload: restoredUser.data,
+    });
+  };
+}
+
+export function getUserByID(id) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`${URL}/user/${id}`);
+    console.log(data);
+    dispatch({
+      type: GET_USER_BY_ID,
+      payload: data,
+    });
+  };
+}
+
+
+export const postLoginRequest = () => ({
+  type: POST_LOGIN_REQUEST
+});
+export const postLoginSuccess = (user) => ({
+  type: POST_LOGIN_SUCCESS,
+  payload: user
+});
+export const postLoginFailure = (error) => ({
+  type: POST_LOGIN_FAILURE,
+  payload: error
+});
+export const postLogin = (user) => {
+  return async (dispatch) => {
+    dispatch(postLoginRequest());
+    try {
+      const { data } = await axios.post(`${URL}/user/login`, user);
+      if (data.accessToken) {
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("access", data.access)
+      }
+      dispatch(postLoginSuccess(data));
+    } catch (error) {
+      dispatch(postLoginFailure(error.response.data.error));
+    }
+  };
+};
 
 
 export const postUserRequest = () => ({
