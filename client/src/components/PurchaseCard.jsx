@@ -1,11 +1,11 @@
 const PurchaseCard = ({ brand, category, price, name, img, purchaseDate }) => {
   return (
-    <tr className="bg-gray-800 text-center">
+    <tr className="bg-gray-800">
       <td className="p-3">
         <div className="flex items-center">
           <img className="rounded-full h-12 w-12 object-cover" src={img} alt={`Imagen de ${name}`} />
           <div className="ml-5">
-            <div className="text-gray-50 text-lg font-semibold">{name}</div>
+            <div className="text-gray-50 w-40 truncate text-lg font-semibold">{name}</div>
           </div>
         </div>
       </td>
@@ -27,3 +27,5 @@ const PurchaseCard = ({ brand, category, price, name, img, purchaseDate }) => {
 };
 
 export default PurchaseCard;
+
+//CAMBIAR EL MODELO DE PURCHASES PARA QUE TENGA UNA REFERENCIA A LA FECHA DE COMPRA
