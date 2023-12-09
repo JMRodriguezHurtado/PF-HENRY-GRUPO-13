@@ -13,6 +13,7 @@ import AdminProducts from './views/Admin/AdminProducts.jsx';
 import AdminUser from './views/Admin/AdminUser.jsx';
 import Profile from './views/Admin/Profile.jsx';
 import ProfileUser from './components/ProfileUser.jsx';
+import AdminDeletedUsers from './views/Admin/AdminDeletedUsers.jsx'
 
 const App = () => {
   const location = useLocation()
@@ -38,6 +39,7 @@ const App = () => {
         <Route path='/dashboard/products' element={<AdminProducts/>} />
         <Route path='/dashboard/users' element={<AdminUser/>} />
         <Route path='/dashboard/profile' element={<Profile/>} />
+        <Route path='/dashboard/users/deleted' element={<AdminDeletedUsers/>}/>
           </>
         )}
       </Routes>

@@ -6,6 +6,7 @@ const initialState = {
     restoredProduct: [],
     deletedUser: [],
     allUsersDeleted: [],
+    allUsers: [],
     restoredUser: [],
     admins: [],
     users: [],
