@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteUser } from '../../redux/actions';
 import Swal from 'sweetalert2';
-import Link from 'antd/es/typography/Link';
+import { NavLink } from 'react-router-dom';
 
 const AdminUser = () => {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ const AdminUser = () => {
 console.log(users);
 console.log(users.results)
   useEffect(() => {
+    console.log('voy por los usuarios')
     dispatch(getAllUsers());
   }, [dispatch]);
 
@@ -29,9 +30,9 @@ console.log(users.results)
       <div className="text-center py-10 bg-blue-200 h-screen">
         <h2 className="text-3xl font-bold text-black mb-4">Tus Usuarios</h2>
         <div className="mb-4">
-          <Link to="/dashboard/users/deleted">
+          <NavLink to="/dashboard/users/deleted">
             <button className="bg-gray-500 text-white p-2 rounded">Usuarios Borrados</button>
-          </Link>
+          </NavLink>
         </div>
         <table className="w-full border-collapse">
           <thead>
@@ -43,7 +44,7 @@ console.log(users.results)
             </tr>
           </thead>
           <tbody>
-            {users.results.map((user) => (
+            {users?.results.map((user) => (
               <tr key={user._id}>
                 <td className="border p-2 flex items-center">{user.name}</td>
                 <td className="border p-2">{user.email}</td>
