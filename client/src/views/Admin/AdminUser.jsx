@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteUser } from '../../redux/actions';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
+import Pagination from '../../components/Pagination/Pagination';
 
 const AdminUser = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
-console.log(users);
-console.log(users.results)
+  const info = useSelector((state) => state.products?.info);
+
   useEffect(() => {
     console.log('voy por los usuarios')
     dispatch(getAllUsers());
@@ -27,7 +28,7 @@ console.log(users.results)
 
   return (
     <div className="relative bg-blue-200">
-      <div className="text-center py-10 bg-blue-200 h-screen">
+      <div className="text-center py-10 bg-blue-200">
         <h2 className="text-3xl font-bold text-black mb-4">Tus Usuarios</h2>
         <div className="mb-4">
           <NavLink to="/dashboard/users/deleted">
@@ -59,6 +60,7 @@ console.log(users.results)
           </tbody>
         </table>
       </div>
+      <Pagination info={info}/>
     </div>
   );
 };

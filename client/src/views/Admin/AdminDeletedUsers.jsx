@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsersDeleted, restoreUser } from '../../redux/actions';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
+import Pagination from '../../components/Pagination/Pagination';
 
 const AdminDeletedUsers = () => {
   const dispatch = useDispatch();
   const deletedUsers = useSelector((state) => state.allUsersDeleted);
+  const info = useSelector((state) => state.products?.info);
   console.log(deletedUsers)
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const AdminDeletedUsers = () => {
 
   return (
     <div className="relative bg-blue-200">
-      <div className="text-center py-10 bg-blue-200 h-screen">
+      <div className="text-center py-10 bg-blue-200">
         <h2 className="text-3xl font-bold text-black mb-4">Usuarios removidos</h2>
         <div className="mb-4">
           <NavLink to="/dashboard/users">
@@ -58,6 +60,7 @@ const AdminDeletedUsers = () => {
           </tbody>
         </table>
       </div>
+      <Pagination info={info}/>
     </div>
   );
 };
