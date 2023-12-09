@@ -7,7 +7,9 @@ import Inventory from "./Inventory/Inventory";
 const AdminProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products?.results);
-  const deletedProducts = useSelector((state) => state.products?.results);
+  const deletedProducts = useSelector((state) => state.deletedProducts?.results);
+  console.log("Products:", products)
+  console.log("DeltedProducts", deletedProducts)
 
   useEffect(() => {
     dispatch(getAllProducts());

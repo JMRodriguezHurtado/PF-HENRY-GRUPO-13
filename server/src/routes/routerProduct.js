@@ -69,14 +69,9 @@ router.get("/:id", async (req, res) => {
   };
 });
 
-router.get("/deleted", async (req, res) => {
-  try {
-    const results = await getAllProductsDeleted();
-    
-    return res.status(200).json(results);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  };
+router.get("/deleted", getAllProductsDeleted, (req, res) => {
+
+  return res.status(200).json(res.paginatedResults);
 });
 
 //PUT
