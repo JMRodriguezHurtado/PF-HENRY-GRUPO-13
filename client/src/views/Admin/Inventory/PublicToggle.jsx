@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Switch from "react-switch";
-import { deleteProduct } from "../../../redux/actions";
+import { deleteProduct, restoreProduct, updateProduct } from "../../../redux/actions";
 
 const PublicToggle = ({ id, deleted }) => {
   const [toggleSwitch, setToggleSwitch] = useState(!deleted);
@@ -9,8 +9,16 @@ const PublicToggle = ({ id, deleted }) => {
 
   const handleChange = (checked) => {
     setToggleSwitch(checked);
-    dispatch(deleteProduct(id));
-  };
+    if(deleted){
+      if(deleted){
+        const product = dispatch(restoreProduct(id))
+        dispatch(updateProduct(product))
+      }else{
+        const delProduct = dispatch(deleteProduct(id))
+        dispatch(updateProduct(delProduct))
+      }
+    }
+  } 
 
   return (
     <Switch

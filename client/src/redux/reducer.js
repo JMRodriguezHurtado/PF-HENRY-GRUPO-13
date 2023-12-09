@@ -6,29 +6,29 @@ import {
   CREATE_NEW_PRODUCT,
   CREATE_REVIEW,
   DELETE_PRODUCTS,
+  DELETE_USER,
   FINISH_PURCHASE,
   GET_ALL_PRODUCTS,
+  GET_ALL_USERS,
+  GET_ALL_USERS_DELETED,
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
-  RESTORE_PRODUCT,
-  GET_ALL_USERS,
+  GET_USERDATA_FAILURE, GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
   GET_USER_BY_ID,
-  DELETE_USER,
-  GET_ALL_USERS_DELETED,
-  RESTORE_USER,
   LOCAL_STORAGE,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
+  POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS,
   POST_USER_FAILURE, POST_USER_REQUEST, POST_USER_SUCCESS,
+  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
   REGISTER_ADMIN,
   REGISTER_USER,
   REMOVE_FROM_CART,
+  RESTORE_PRODUCT,
+  RESTORE_USER,
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE,
   UPDATE_PRODUCTS,
-  POST_MESSAGE_FAILURE, POST_MESSAGE_REQUEST, POST_MESSAGE_SUCCESS,
-  GET_USERDATA_FAILURE, GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
-  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,  
 } from './types';
 
 const reducer = (state = initialState, action) => {
@@ -69,9 +69,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case DELETE_PRODUCTS:
+      console.log("Desde el reducer, deleteProduct****", action.payload)
       return {
         ...state,
-        products: state.products.filter(product => product.id !== action.payload.id),
+        products: action.payload,
       };
     
     case RESTORE_PRODUCT:
@@ -89,6 +90,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_DELETED_PRODUCTS:
+      console.log("Payload:" , action.payload)
       return {
         ...state,
         deletedProducts: action.payload,

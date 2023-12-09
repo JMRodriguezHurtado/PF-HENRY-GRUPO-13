@@ -5,15 +5,11 @@ import {
   CREATE_NEW_PRODUCT,
   CREATE_REVIEW,
   DELETE_PRODUCTS,
-  RESTORE_PRODUCT,
-  FINISH_PURCHASE,
-  GET_ALL_USERS,
-  GET_USER_BY_ID,
   DELETE_USER,
-  GET_ALL_USERS_DELETED,
-  RESTORE_USER,
+  FINISH_PURCHASE,
   GET_ALL_PRODUCTS,
   GET_ALL_USERS,
+  GET_ALL_USERS_DELETED,
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
@@ -29,6 +25,8 @@ import {
   PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
   REGISTER_ADMIN,
   REMOVE_FROM_CART,
+  RESTORE_PRODUCT,
+  RESTORE_USER,
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
   SET_CURRENT_PAGE, SET_FILTERS,
   UPDATE_PRODUCTS
@@ -111,44 +109,42 @@ export function createProduct(newproduct) {
   
 export function deleteProduct(id) {
   return async function (dispatch) {
-    const deletedProduct = await fetch.put(`${URL}/product/delete/${id}`);
+    const {data} = await axios.put(`${URL}/product/delete/${id}`);
     dispatch({
       type: DELETE_PRODUCTS,
-      payload: deletedProduct.data,
+      payload: data.product,
     });
   };
 }
 
 export function restoreProduct(id) {
   return async function (dispatch) {
-    const restoredProduct = await fetch.put(`${URL}/product/restore/${id}`);
+    const {data} = await axios.put(`${URL}/product/restore/${id}`);
     dispatch({
       type: RESTORE_PRODUCT,
-      payload: restoredProduct.data,
+      payload: data,
     });
   };
 }
 
 export function updateProduct(payload) {
   return async function (dispatch) {
-    console.log(payload.id);
-
-    const info = await fetch.put(`${URL}/product/${payload.id}`, payload);
-
+    const {data} = await axios.put(`${URL}/product/${payload.id}`, payload);
+    console.log("updateProduct:***", data)
     dispatch({
       type: UPDATE_PRODUCTS,
-      payload: info.data,
+      payload: data,
     });
   };
 }
 
 export function getDeletedProducts() {
   return async function (dispatch) {
-    const getDeletedProducts = await fetch.get(`${URL}/product/deleted`);
-    console.log(getDeletedProducts);
+    const {data} = await axios.get(`${URL}/product/deleted`);
+    console.log("Desde la action", data);
     dispatch({
       type: GET_DELETED_PRODUCTS,
-      payload: getDeletedProducts.data.results,
+      payload: data
     });
   };
 }
@@ -158,48 +154,6 @@ export function createAdmin(payload) {
   return async function (dispatch) {
     try {
       const { data } = await fetch.post(`${URL}/admin`, payload);
-    };
-  }
-  
-export function createProduct(newproduct) {
-    return async function (dispatch) {
-      try {
-        const { data } = await axios.post(`${URL}/product`, newproduct);
-  
-        dispatch({
-          type: CREATE_NEW_PRODUCT,
-          payload: data,
-        });
-      } catch (error) {
-        throw error.response.data;
-      }
-    };
-  }
-  
-export function deleteProduct(id) {
-    return async function (dispatch) {
-      const deletedProduct = await axios.put(`${URL}/product/delete/${id}`);
-      dispatch({
-        type: DELETE_PRODUCTS,
-        payload: deletedProduct.data,
-      });
-    };
-  }
-
-export function updateProduct(payload) {
-    return async function (dispatch) {
-      const info = await axios.put(`${URL}/product/${payload.id}`, payload);
-      dispatch({
-        type: UPDATE_PRODUCTS,
-        payload: info.data,
-      });
-    };
-  }
-
-export function getDeletedProducts() {
-    return async function (dispatch) {
-      const getDeletedProducts = await axios.get(`${URL}/product/deleted`);
-      console.log(getDeletedProducts);
       dispatch({
         type: REGISTER_ADMIN,
         payload: data,

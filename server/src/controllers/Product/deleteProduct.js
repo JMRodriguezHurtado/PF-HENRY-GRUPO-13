@@ -13,7 +13,7 @@ const deleteProduct = async (id) => {
 
     const message = "Product marked as deleted.";
 
-    return { message };
+    return { message, product };
   } catch (error) {
     console.error('Error deleting product:', error.message);
     throw new Error("Unable to delete product.");
