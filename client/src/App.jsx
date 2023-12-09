@@ -1,19 +1,17 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import CreateProduct from './components/CreateProduct';
 import Detail from './components/Products/Detail';
 import Searchs from './components/Searchs';
-import Home from './views/Home';
-import ShoppingCart from './views/ShoppingCart';
-import Landing from './views/Landing';
-import NavBar from './components/navBar.jsx'
-import { useLocation } from 'react-router-dom';
-import SideBar from './views/Admin/SideBar.jsx';
+import NavBar from './components/navBar.jsx';
 import AdminDashboard from './views/Admin/AdminDashboard.jsx';
 import AdminProducts from './views/Admin/AdminProducts.jsx';
 import AdminUser from './views/Admin/AdminUser.jsx';
 import Profile from './views/Admin/Profile.jsx';
 import ProfileUser from './components/ProfileUser.jsx';
 import AdminDeletedUsers from './views/Admin/AdminDeletedUsers.jsx'
+import Home from './views/Home';
+import Landing from './views/Landing';
+import ShoppingCart from './views/ShoppingCart';
 
 const App = () => {
   const location = useLocation()
@@ -23,7 +21,7 @@ const App = () => {
   return (
     <main className="relative">
       { !isDashboardRoute && location.pathname !== '/' && <NavBar /> }
-      { isDashboardRoute && <SideBar /> }
+      { isDashboardRoute && <AdminDashboard/> }
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
