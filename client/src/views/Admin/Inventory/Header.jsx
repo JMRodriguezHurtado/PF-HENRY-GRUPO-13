@@ -1,15 +1,15 @@
-import UserTitle from "./UserTitle"
+import Title from "./Title"
 
-const UserHeader = ({ titles }) => {
+const Header = ({ titles }) => {
     return (
         <thead className="bg-gray-100">
             <tr>
                 {titles.map((title, index) => (
-                    <UserTitle key={index} title={title}/>
+                    <Title key={index} title={title}/>
                 ))}
             </tr>
         </thead>
     )
 }
 
-export default UserHeader
+export default Header

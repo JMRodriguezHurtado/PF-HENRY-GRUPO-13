@@ -13,12 +13,20 @@ import {
   GET_ALL_USERS_DELETED,
   RESTORE_USER,
   GET_ALL_PRODUCTS,
+  GET_ALL_USERS,
   GET_DELETED_PRODUCTS,
   GET_PRODUCTS_BY_ID,
   GET_PRODUCTS_BY_NAME,
+  GET_USERDATA_FAILURE,
+  GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
+  GET_USER_BY_ID,
   LOCAL_STORAGE,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
+  POST_MESSAGE_FAILURE,
+  POST_MESSAGE_REQUEST,
+  POST_MESSAGE_SUCCESS,
   POST_USER_FAILURE, POST_USER_REQUEST, POST_USER_SUCCESS,
+  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
   REGISTER_ADMIN,
   REMOVE_FROM_CART,
   SEND_TOKEN_GOOGLE_FAILURE, SEND_TOKEN_GOOGLE_REQUEST, SEND_TOKEN_GOOGLE_SUCCESS,
@@ -28,11 +36,11 @@ import {
   GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS, GET_USERDATA_FAILURE,
   PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
   GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS, GET_USER_PURCHASES_FAILURE,
+
 } from './types';
 
-// const URL = https://master--chipper-toffee-f8c293.netlify.app/
-
-const URL = 'http://localhost:3001';
+// Actions
+const URL = 'http://localhost:3001' || 'https://master--chipper-toffee-f8c293.netlify.app/'
 
 export function setFilters(filters){
   return {
@@ -155,6 +163,48 @@ export function createAdmin(payload) {
   return async function (dispatch) {
     try {
       const { data } = await fetch.post(`${URL}/admin`, payload);
+    };
+  }
+  
+export function createProduct(newproduct) {
+    return async function (dispatch) {
+      try {
+        const { data } = await axios.post(`${URL}/product`, newproduct);
+  
+        dispatch({
+          type: CREATE_NEW_PRODUCT,
+          payload: data,
+        });
+      } catch (error) {
+        throw error.response.data;
+      }
+    };
+  }
+  
+export function deleteProduct(id) {
+    return async function (dispatch) {
+      const deletedProduct = await axios.put(`${URL}/product/delete/${id}`);
+      dispatch({
+        type: DELETE_PRODUCTS,
+        payload: deletedProduct.data,
+      });
+    };
+  }
+
+export function updateProduct(payload) {
+    return async function (dispatch) {
+      const info = await axios.put(`${URL}/product/${payload.id}`, payload);
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        payload: info.data,
+      });
+    };
+  }
+
+export function getDeletedProducts() {
+    return async function (dispatch) {
+      const getDeletedProducts = await axios.get(`${URL}/product/deleted`);
+      console.log(getDeletedProducts);
       dispatch({
         type: REGISTER_ADMIN,
         payload: data,
@@ -225,7 +275,7 @@ export function finishPurchase(objectPago) {
 
 export function getAllUsers() {
   return async function (dispatch) {
-    const allUsers = await axios.get(`${URL}/user`);
+    const allUsers = await axios.get(`${URL}/user`, { headers: { 'Cache-Control': 'no-cache' }});
     dispatch({
       type: GET_ALL_USERS,
       payload: allUsers.data,
@@ -235,7 +285,7 @@ export function getAllUsers() {
 
 export function deleteUser(id) {
   return async function (dispatch) {
-    const deletedUser = await fetch.put(`${URL}/user/delete/${id}`);
+    const deletedUser = await axios.put(`${URL}/user/delete/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
     dispatch({
       type: DELETE_USER,
       payload: deletedUser.data,
@@ -245,7 +295,7 @@ export function deleteUser(id) {
 
 export function getAllUsersDeleted() {
   return async function (dispatch) {
-    const allUsersDeleted = await axios.get(`${URL}/user/deleted`);
+    const allUsersDeleted = await axios.get(`${URL}/user/deleted`, { headers: { 'Cache-Control': 'no-cache' }});
     dispatch({
       type: GET_ALL_USERS_DELETED,
       payload: allUsersDeleted.data,
@@ -255,7 +305,7 @@ export function getAllUsersDeleted() {
 
 export function restoreUser(id) {
   return async function (dispatch) {
-    const restoredUser = await fetch.put(`${URL}/user/restore/${id}`);
+    const restoredUser = await axios.put(`${URL}/user/restore/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
     dispatch({
       type: RESTORE_USER,
       payload: restoredUser.data,
@@ -420,7 +470,6 @@ export const getUserData = (userId) => {
     }
   };
 };
-
 
 export const putUserDataRequest = () => ({
   type: PUT_USERDATA_REQUEST

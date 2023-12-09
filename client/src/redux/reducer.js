@@ -15,6 +15,7 @@ import {
   GET_ALL_USERS,
   GET_USER_BY_ID,
   DELETE_USER,
+  GET_ALL_USERS_DELETED,
   RESTORE_USER,
   LOCAL_STORAGE,
   POST_LOGIN_FAILURE, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS,
@@ -119,6 +120,7 @@ const reducer = (state = initialState, action) => {
       };
   
     case REMOVE_FROM_CART:
+      
       const productIdToRemove = action.payload;
       return {
         ...state,
@@ -149,6 +151,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: state.deletedUser.filter(user => user.id !== action.payload.id),
+      };
+    case GET_ALL_USERS_DELETED:
+      return {
+        ...state,
+        allUsersDeleted: action.payload,
       };
 
     case RESTORE_USER:
