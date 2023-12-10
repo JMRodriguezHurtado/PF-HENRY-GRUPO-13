@@ -29,7 +29,6 @@ const App = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path='/detail/:id' element={<Detail />} />
-        <Route path='/create/product' element={<CreateProduct />} />
         <Route path='/searchs' element={<Searchs />} />
         <Route path='/shoppingCart' element={<ShoppingCart/>} />
         <Route path='/profile' element={<ProfileUser/>} />
@@ -41,7 +40,7 @@ const App = () => {
         <Route path='/dashboard/products' element={<AdminProducts/>} />
         <Route path='/dashboard/users' element={<AdminUser/>} />
         <Route path='/dashboard/profile' element={<Profile/>} />
-        <Route path='/dashboard/create' element={<Profile/>} />
+        <Route path='/dashboard/create' element={<CreateProduct/>} />
         <Route path='/dashboard/users/deleted' element={<AdminDeletedUsers/>}/>
           </>
         )}

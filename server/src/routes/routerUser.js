@@ -19,6 +19,7 @@ const putUser = require("../controllers/User/putUser");
 const deleteUser = require("../controllers/User/deleteUser");
 const restoreUser = require("../controllers/User/restoreUser");
 const getAllUsersDeleted = require("../controllers/User/getAllUsersDeleted")
+const getAdminCreateProducts = require("../controllers/User/getAdminCreateProducts");
 
 // REFRESH TOKENS
 router.post("/refresh", refreshTokens, (req, res) => {
@@ -126,6 +127,17 @@ router.get("/:id", async (req, res) => {
     const user = await getUserById(id);
 
     return res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
+
+router.get("/mycreated/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await getAdminCreateProducts(id);
+    return res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   };

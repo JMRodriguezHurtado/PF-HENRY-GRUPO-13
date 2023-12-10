@@ -47,7 +47,11 @@ const userSchema = new Schema(
     Admin: {
       type: Boolean,
       default: false
-    }
+    },
+    myCreated: [{
+      type: Schema.ObjectId,
+      ref: 'Product'
+    }],
   },
   {
     timestamps: false,
