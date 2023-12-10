@@ -18,8 +18,8 @@ const AdminProducts = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900">
-      <div className="p-8 ml-72 h-full">
-        <div className="p-5 rounded-xl bg-blue-200 shadow mt-9 h-full">
+      <div className="p-5 ml-72 h-full">
+        <div className="p-5 rounded-xl bg-blue-200 shadow mt-3 h-full">
           <div>
             <div className="mt-6">
                 <Selection />
