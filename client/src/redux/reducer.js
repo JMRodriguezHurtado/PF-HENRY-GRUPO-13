@@ -30,6 +30,7 @@ import {
   GET_USERDATA_FAILURE, GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS,
   PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,  
   GET_USER_PURCHASES_FAILURE, GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS,
+  GET_ADMIN_PRODUCTS_FAILURE, GET_ADMIN_PRODUCTS_REQUEST, GET_ADMIN_PRODUCTS_SUCCESS,
 } from './types';
 
 const reducer = (state = initialState, action) => {
@@ -349,6 +350,30 @@ const reducer = (state = initialState, action) => {
         errorGetUserPurchase: action.payload,
         successGetUserPurchase: false,
       }
+
+    case GET_ADMIN_PRODUCTS_REQUEST:
+      return{
+        ...state,
+        loadingGetAdminProducts: true,
+        errorGetAdminProducts: false,
+        successGetAdminProducts: false,
+      }
+    case GET_ADMIN_PRODUCTS_SUCCESS:
+      return{
+        ...state,
+        loadingGetAdminProducts: false,
+        errorGetAdminProducts: false,
+        successGetAdminProducts: true,
+        adminProducts: action.payload,
+      }
+    case GET_ADMIN_PRODUCTS_FAILURE:
+      return{
+        ...state,
+        loadingGetAdminProducts: false,
+        errorGetAdminProducts: action.payload,
+        successGetAdminProducts: false,
+      }
+      
 
     default:
       return state;

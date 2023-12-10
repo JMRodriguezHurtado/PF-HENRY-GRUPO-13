@@ -32,14 +32,6 @@ const validation = (product) => {
       errors.description = "Must be less than 250 characters";
     };
   
-  
-    if (!product.sale) {
-      errors.sale = "Sale is required.";
-    } else if (product.sale < 0) {
-      errors.sale = "Minimum 0";
-    };
-  
-  
     if (!product.price) {
       errors.price = "Price is required.";
     } else if (product.price < 1) {

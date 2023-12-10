@@ -60,7 +60,11 @@ const initialState = {
     errorGetUserPurchase: false,
     successGetUserPurchase: false,
     userPurchase: [],
-    
+  
+    loadingGetAdminProducts: false,
+    errorGetAdminProducts: false,
+    successGetAdminProducts: false,
+    adminProducts: [],
 };
 
 export default initialState

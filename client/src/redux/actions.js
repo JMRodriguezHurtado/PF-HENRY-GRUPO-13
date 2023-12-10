@@ -28,6 +28,7 @@ import {
  GET_USERDATA_REQUEST, GET_USERDATA_SUCCESS, GET_USERDATA_FAILURE,
  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
  GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS, GET_USER_PURCHASES_FAILURE,
+ GET_ADMIN_PRODUCTS_FAILURE, GET_ADMIN_PRODUCTS_REQUEST, GET_ADMIN_PRODUCTS_SUCCESS,
 } from './types';
 
 // const URL = https://master--chipper-toffee-f8c293.netlify.app/
@@ -478,6 +479,29 @@ export const getUserPurchases = (userId) => {
      dispatch(getUserPurchasesSuccess(data));
    } catch (error) {
      dispatch(getUserPurchasesError(error.response.data.error));
+   }
+ };
+};
+
+export const getAdminProductsRequest = () => ({
+ type: GET_ADMIN_PRODUCTS_REQUEST
+});
+export const getAdminProductsSuccess = (data) => ({
+ type: GET_ADMIN_PRODUCTS_SUCCESS,
+ payload: data
+});
+export const getAdminProductsError = (error) => ({
+ type: GET_ADMIN_PRODUCTS_FAILURE,
+ payload: error
+});
+export const getAdminProducts = (userId) => {
+ return async (dispatch) => {
+   dispatch(getAdminProductsRequest());
+   try {
+     const { data } = await axios.get(`${URL}/user/mycreated/${userId}`);
+     dispatch(getAdminProductsSuccess(data));
+   } catch (error) {
+     dispatch(getAdminProductsError(error.response.data.error));
    }
  };
 };

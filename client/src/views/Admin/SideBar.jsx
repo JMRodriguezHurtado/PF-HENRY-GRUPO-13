@@ -18,12 +18,11 @@ const SideBar = () => {
 
   const isUserLoggedIn = !!localStorage.getItem("token");
 
-
   return (
     <aside className="bg-gradient-to-br from-gray-800 to-gray-900 fixed inset-y-0 left-0 z-50 h-[calc(100vw)] w-72 transition-transform duration-300 xl:translate-x-0">
 
-      <div className="relative border-b border-white/20 m-5">
-        <NavLink to={'/home'} className=" items-center gap-4 py-6 m-1 px-2 content-center flex justify-center">
+      <div className="relative border-b border-white/20">
+        <NavLink to={'/home'} className=" items-center gap-4 py-4 m-1 px-2 content-center flex justify-center">
           <img
             className="bg-gray-50 rounded-lg w-[15vh] mb-3 h-[15vh] cursor-pointer mx-auto my-auto"
             src={LOGO}
@@ -96,6 +95,22 @@ const SideBar = () => {
                   <path fillRule="evenodd" d="M1.5 5.625c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v12.75c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 18.375V5.625zM21 9.375A.375.375 0 0020.625 9h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zm0 3.75a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zm0 3.75a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5a.375.375 0 00.375-.375v-1.5zM10.875 18.75a.375.375 0 00.375-.375v-1.5a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375h7.5zM3.375 15h7.5a.375.375 0 00.375-.375v-1.5a.375.375 0 00-.375-.375h-7.5a.375.375 0 00-.375.375v1.5c0 .207.168.375.375.375zm0-3.75h7.5a.375.375 0 00.375-.375v-1.5A.375.375 0 0010.875 9h-7.5A.375.375 0 003 9.375v1.5c0 .207.168.375.375.375z" clipRule="evenodd"></path>
                 </svg>
                 <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Usuarios</p>
+              </button>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to={'/dashboard/create'} className="" >
+              <button 
+                className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg ${
+                location.pathname.startsWith('/dashboard/create') ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]' : 'text-white hover:bg-white/10 active:bg-white/30'
+                } w-full flex items-center gap-4 px-4 capitalize`} 
+                type="button"
+              >
+                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.546.5a9.5 9.5 0 1 0 9.5 9.5 9.51 9.51 0 0 0-9.5-9.5ZM13.788 11h-3.242v3.242a1 1 0 1 1-2 0V11H5.304a1 1 0 0 1 0-2h3.242V5.758a1 1 0 0 1 2 0V9h3.242a1 1 0 1 1 0 2Z"/>
+                </svg>
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Crear producto</p>
               </button>
             </NavLink>
           </li>

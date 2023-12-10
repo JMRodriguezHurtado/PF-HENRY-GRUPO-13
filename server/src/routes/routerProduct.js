@@ -4,6 +4,7 @@ const router = Router();
 //Middlewares
 const upload = require('../middlewares/Multer/upload');
 const uploadImage = require('../middlewares/Cloudinary/uploadImage');
+const verifyToken = require("../middlewares/Tokens/verifyTokens")
 
 //Controllers
 const postProduct = require('../controllers/Product/postProduct');
@@ -17,15 +18,16 @@ const restoreProduct = require("../controllers/Product/restoreProduct")
 
 
 //POST
-router.post("/", upload, async (req, res) => {
+router.post("/", upload, verifyToken, async (req, res) => {
   try {
     const { name, brand, sale, category, description, price, quantity } = req.body;
     let img = req.file && req.file.buffer;
+    const userId = req.userId;
 
     const result = await uploadImage(img);
     img = result.secure_url;
 
-    const newProduct = await postProduct({ name, brand, sale, category, img, description, price, quantity });
+    const newProduct = await postProduct({ name, brand, sale, category, img, description, price, quantity, userId });
 
     return res.status(200).json(newProduct);
   } catch (error) {
