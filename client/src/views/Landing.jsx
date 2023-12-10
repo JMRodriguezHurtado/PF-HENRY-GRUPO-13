@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { postMessage } from "../redux/actions";
 import AuthModal from "../components/AuthModal";
@@ -9,6 +9,7 @@ import wagner from "../assets/images/wagner.jpg";
 
 const Landing = () => {
   const dispatch = useDispatch(); 
+  const navigate = useNavigate();
 
   const [message, setMessage] = useState({
     name: '',
@@ -48,22 +49,28 @@ const Landing = () => {
     })
   };
 
-  console.log(message);
+  const isUserLoggedIn = !!localStorage.getItem("token");
+
+  const toHome = () => {
+    navigate('/home');
+  }
 
   return (
     <div>
       <main>
 
         <section className="bg-white dark:bg-gray-900">
-          <div className="flex items-center justify-between">
-          <Button
-            onClick={showModal}
-            style={{ borderBottom: "1px solid white", borderRadius: "0" }}
-            className="font-pop-light text-white bg-transparent border-none pb-5 text-2xl navbutton ml-auto m-5"
-          >
-            Acceder
-          </Button>
-          </div>
+          { !isUserLoggedIn &&
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={showModal}
+                style={{ borderBottom: "1px solid white", borderRadius: "0" }}
+                className="font-pop-light text-white bg-transparent border-none pb-5 text-2xl navbutton ml-auto m-5"
+              >
+                Acceder
+              </Button>
+            </div>
+          }
 
           <div className="container mx-auto px-6 py-16 text-center">
             <div className="mx-auto max-w-lg">
@@ -380,17 +387,16 @@ const Landing = () => {
       <footer className="bg-white dark:bg-gray-900">
       <div className="container mx-auto px-6 py-12">
           <div className="md:-mx-3 md:flex md:items-center md:justify-between">
-          <h1 className="text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-4xl">Accede para poder comprar!.</h1>
+            <h1 className="text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-4xl">Accede para poder comprar!.</h1>
 
-          <div className="mt-6 shrink-0 md:mx-3 md:mt-0 md:w-auto" >
-              <button onClick={showModal} className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-              <span  className="mx-2">Acceder</span>
-
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mx-2 h-6 w-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-              </svg>
+            <div className="mt-6 shrink-0 md:mx-3 md:mt-0 md:w-auto" >
+              <button onClick={isUserLoggedIn ? toHome : showModal} className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                <span  className="mx-2">Acceder</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mx-2 h-6 w-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
               </button>
-          </div>
+            </div>
           </div>
 
           <hr className="my-6 border-gray-200 dark:border-gray-700 md:my-10" />
