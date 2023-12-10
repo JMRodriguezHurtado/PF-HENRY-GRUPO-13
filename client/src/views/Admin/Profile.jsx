@@ -98,7 +98,7 @@ const Profile = () => {
   };  
 
   return (
-    <div className="p-8 bg-gray-900 ml-72 h-full min-h-[100vh]">
+    <div className="p-5 pt-10 bg-gray-900 ml-72 h-full min-h-[100vh]">
       <div className="p-5 rounded-xl bg-blue-200 shadow mt-9 h-full">
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="grid grid-cols-3 text-center order-last md:order-first mt-10 md:mt-0">
