@@ -65,6 +65,11 @@ const initialState = {
     errorGetAdminProducts: false,
     successGetAdminProducts: false,
     adminProducts: [],
+
+    loadingGetUserProducts: false,
+    errorGetUserProducts: false,
+    successGetUserProducts: false,
+    userProducts: [],
 };
 
 export default initialState

@@ -29,6 +29,7 @@ import {
  PUT_USERDATA_FAILURE, PUT_USERDATA_REQUEST, PUT_USERDATA_SUCCESS,
  GET_USER_PURCHASES_REQUEST, GET_USER_PURCHASES_SUCCESS, GET_USER_PURCHASES_FAILURE,
  GET_ADMIN_PRODUCTS_FAILURE, GET_ADMIN_PRODUCTS_REQUEST, GET_ADMIN_PRODUCTS_SUCCESS,
+ GET_USER_PRODUCTS_REQUEST, GET_USER_PRODUCTS_SUCCESS, GET_USER_PRODUCTS_FAILURE,
 } from './types';
 
 // const URL = https://master--chipper-toffee-f8c293.netlify.app/
@@ -502,6 +503,34 @@ export const getAdminProducts = (userId) => {
      dispatch(getAdminProductsSuccess(data));
    } catch (error) {
      dispatch(getAdminProductsError(error.response.data.error));
+   }
+ };
+};
+
+export const getUserProductsRequest = () => ({
+ type: GET_USER_PRODUCTS_REQUEST
+});
+export const getUserProductsSuccess = (data) => ({
+ type: GET_USER_PRODUCTS_SUCCESS,
+ payload: data
+});
+export const getUserProductsError = (error) => ({
+ type: GET_USER_PRODUCTS_FAILURE,
+ payload: error
+});
+export const getUserProducts = () => {
+ return async (dispatch) => {
+  const token = localStorage.getItem("token");
+   dispatch(getUserProductsRequest());
+   try {
+     const { data } = await axios.get(`${URL}/product/users&products`, {
+        headers: {
+          'x-access-token': token,
+        },
+     });
+     dispatch(getUserProductsSuccess(data));
+   } catch (error) {
+     dispatch(getUserProductsError(error.response.data.error));
    }
  };
 };

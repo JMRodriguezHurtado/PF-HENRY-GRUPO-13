@@ -24,7 +24,7 @@ const App = () => {
   return (
     <main className="relative">
       { !isDashboardRoute && location.pathname !== '/' && <NavBar /> }
-      { isDashboardRoute && <AdminDashboard/> }
+      { isDashboardRoute && <SideBar/> }
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
@@ -36,12 +36,12 @@ const App = () => {
 
         {isDashboardRoute && (
           <>
-        <Route path='/dashboard' element={<AdminDashboard/>} />
-        <Route path='/dashboard/products' element={<AdminProducts/>} />
-        <Route path='/dashboard/users' element={<AdminUser/>} />
-        <Route path='/dashboard/profile' element={<Profile/>} />
-        <Route path='/dashboard/create' element={<CreateProduct/>} />
-        <Route path='/dashboard/users/deleted' element={<AdminDeletedUsers/>}/>
+            <Route path='/dashboard/products' element={<AdminProducts/>} />
+            <Route path='/dashboard' element={<AdminDashboard/>} />
+            <Route path='/dashboard/users' element={<AdminUser/>} />
+            <Route path='/dashboard/profile' element={<Profile/>} />
+            <Route path='/dashboard/create' element={<CreateProduct/>} />
+            <Route path='/dashboard/users/deleted' element={<AdminDeletedUsers/>}/>
           </>
         )}
       </Routes>

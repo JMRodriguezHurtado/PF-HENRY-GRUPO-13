@@ -15,7 +15,7 @@ const putProduct = require("../controllers/Product/putProduct");
 const deleteProduct = require("../controllers/Product/deleteProduct");
 const getAllProductsDeleted = require("../controllers/Product/getAllProductsDeleted");
 const restoreProduct = require("../controllers/Product/restoreProduct")
-
+const getUsersAndProducts = require("../controllers/Product/getUsers&Products");
 
 //POST
 router.post("/", upload, verifyToken, async (req, res) => {
@@ -65,6 +65,16 @@ router.get("/name", async (req, res) => {
   };
 });
 
+router.get("/users&products", async (req, res) => {
+  try {
+    const usersAndProducts = await getUsersAndProducts();
+
+    return res.status(200).json(usersAndProducts);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  };
+});
+
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   
@@ -81,6 +91,7 @@ router.get("/deleted", getAllProductsDeleted, (req, res) => {
 
   return res.status(200).json(res.paginatedResults);
 });
+
 
 //PUT
 router.put("/:id", async (req, res) => {
