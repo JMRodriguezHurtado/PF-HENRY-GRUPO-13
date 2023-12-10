@@ -27,21 +27,21 @@ const AdminUser = () => {
   };
 
   return (
-    <div className="relative bg-blue-200">
-      <div className="text-center py-10 bg-blue-200">
-        <h2 className="text-3xl font-bold text-black mb-4">Tus Usuarios</h2>
-        <div className="mb-4">
+    <div className="flex flex-col min-h-screen bg-blue-200">
+      <div className="p-5 ml-72 h-full">
+        <h2 className="text-center text-lg font-semibold p-4 text-blue-500">Tus Usuarios</h2>
+        <div className="text-center mb-4">
           <NavLink to="/dashboard/users/deleted">
             <button className="bg-gray-500 text-white p-2 rounded">Usuarios Borrados</button>
           </NavLink>
         </div>
-        <table className="w-full border-collapse">
+        <table className="min-w-full bg-white shadow-md rounded-md">
           <thead>
             <tr>
-              <th className="border p-2">Usuario</th>
-              <th className="border p-2">Email</th>
-              <th className="border p-2">Estado</th>
-              <th className="border p-2">Remover Usuario</th>
+              <th className="px-4 py-2">Usuario</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Estado</th>
+              <th className="px-4 py-2">Remover Usuario</th>
             </tr>
           </thead>
           <tbody>
@@ -49,8 +49,8 @@ const AdminUser = () => {
               <tr key={user._id}>
                 <td className="border p-2 flex items-center">{user.name}</td>
                 <td className="border p-2">{user.email}</td>
-                <td className="border p-2">{user.deleted ? "Inactivo" : "Activo"}</td>
-                <td className="border p-2">
+                <td className="text-center border p-2">{user.deleted ? "Inactivo" : "Activo"}</td>
+                <td className="text-center border p-2">
                   <button onClick={() => handleDeleteUser(user._id)} className="text-black">
                     Ban
                   </button>

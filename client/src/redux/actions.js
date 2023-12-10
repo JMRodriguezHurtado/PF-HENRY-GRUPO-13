@@ -48,7 +48,7 @@ export function getAllProducts(page, limit, filters) {
    try {
      const response = await axios.get(`${URL}/product`, {
        params: { page, limit, ...filters },
-     });
+     }, { headers: { 'Cache-Control': 'no-cache' }});
      dispatch({
        type: GET_ALL_PRODUCTS,
        payload: response.data,
@@ -107,7 +107,7 @@ export function getProductsById(_id) {
 }
  export function deleteProduct(id) {
  return async function (dispatch) {
-   const deletedProduct = await fetch.put(`${URL}/product/delete/${id}`);
+   const deletedProduct = await axios.put(`${URL}/product/delete/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
    dispatch({
      type: DELETE_PRODUCTS,
      payload: deletedProduct.data,
@@ -117,7 +117,7 @@ export function getProductsById(_id) {
 
 export function restoreProduct(id) {
  return async function (dispatch) {
-   const restoredProduct = await fetch.put(`${URL}/product/restore/${id}`);
+   const restoredProduct = await axios.put(`${URL}/product/restore/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
    dispatch({
      type: RESTORE_PRODUCT,
      payload: restoredProduct.data,
@@ -140,11 +140,11 @@ export function updateProduct(payload) {
 
 export function getDeletedProducts() {
  return async function (dispatch) {
-   const getDeletedProducts = await fetch.get(`${URL}/product/deleted`);
+   const getDeletedProducts = await axios.get(`${URL}/product/deleted`, { headers: { 'Cache-Control': 'no-cache' }});
    console.log(getDeletedProducts);
    dispatch({
      type: GET_DELETED_PRODUCTS,
-     payload: getDeletedProducts.data.results,
+     payload: getDeletedProducts.data,
    });
  };
 }
@@ -224,7 +224,7 @@ export function finishPurchase(objectPago) {
 
 export function getAllUsers() {
  return async function (dispatch) {
-   const allUsers = await axios.get(`${URL}/user`);
+   const allUsers = await axios.get(`${URL}/user`, { headers: { 'Cache-Control': 'no-cache' }});
    dispatch({
      type: GET_ALL_USERS,
      payload: allUsers.data,
@@ -234,7 +234,7 @@ export function getAllUsers() {
 
 export function deleteUser(id) {
  return async function (dispatch) {
-   const deletedUser = await fetch.put(`${URL}/user/delete/${id}`);
+   const deletedUser = await axios.put(`${URL}/user/delete/${id}`, { headers: { 'Cache-Control': 'no-cache'}});
    dispatch({
      type: DELETE_USER,
      payload: deletedUser.data,
@@ -244,7 +244,7 @@ export function deleteUser(id) {
 
 export function getAllUsersDeleted() {
  return async function (dispatch) {
-   const allUsersDeleted = await axios.get(`${URL}/user/deleted`);
+   const allUsersDeleted = await axios.get(`${URL}/user/deleted`, { headers: { 'Cache-Control': 'no-cache' }});
    dispatch({
      type: GET_ALL_USERS_DELETED,
      payload: allUsersDeleted.data,
@@ -254,7 +254,7 @@ export function getAllUsersDeleted() {
 
 export function restoreUser(id) {
  return async function (dispatch) {
-   const restoredUser = await fetch.put(`${URL}/user/restore/${id}`);
+   const restoredUser = await axios.put(`${URL}/user/restore/${id}`, { headers: { 'Cache-Control': 'no-cache' }});
    dispatch({
      type: RESTORE_USER,
      payload: restoredUser.data,

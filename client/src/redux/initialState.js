@@ -1,8 +1,8 @@
 const initialState = {
-    products: [],
+    products: {results: []},
     productsByName: [],
     productById: [],
-    deletedProducts: [],
+    deletedProducts: {results:[]},
     restoredProduct: [],
     deletedUser: [],
     allUsersDeleted: {results:[]},
