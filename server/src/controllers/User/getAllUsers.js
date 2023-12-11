@@ -3,7 +3,7 @@ const User = require("../../models/User");
 const getAllUsers = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 15;
+    const limit = parseInt(req.query.limit) || 12;
     const startIndex = (page - 1) * limit;
     const whereConditions = { deleted: false };
     const count = await User.countDocuments(whereConditions);
