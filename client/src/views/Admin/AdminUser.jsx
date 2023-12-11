@@ -8,13 +8,13 @@ import Pagination from '../../components/Pagination/Pagination';
 const AdminUser = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
-  const info = useSelector((state) => state.products?.info);
+  const info = useSelector((state) => state.allUsers?.info);
 
   useEffect(() => {
     console.log('voy por los usuarios')
     dispatch(getAllUsers());
   }, [dispatch]);
-
+console.log(info)
   const handleDeleteUser = (userId) => {
     dispatch(deleteUser(userId));
 

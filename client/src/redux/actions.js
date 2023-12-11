@@ -364,14 +364,12 @@ export const clearData = () => ({
  type: CLEAR_DATA,
 });
 
-
 export const setCurrentPage = (page) => {
  return {
    type: SET_CURRENT_PAGE,
    payload: page
  }
 }
-
 export const postMessageRequest = () => ({
  type: POST_MESSAGE_REQUEST
 });

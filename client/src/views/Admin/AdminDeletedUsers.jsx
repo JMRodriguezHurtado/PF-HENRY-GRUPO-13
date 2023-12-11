@@ -8,7 +8,7 @@ import Pagination from '../../components/Pagination/Pagination';
 const AdminDeletedUsers = () => {
   const dispatch = useDispatch();
   const deletedUsers = useSelector((state) => state.allUsersDeleted);
-  const info = useSelector((state) => state.products?.info);
+  const info = useSelector((state) => state.allUsersDeleted?.info);
   console.log(deletedUsers)
 
   useEffect(() => {
