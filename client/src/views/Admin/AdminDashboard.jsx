@@ -63,7 +63,7 @@ const AdminDashboard = () => {
     new Chart(commercesChartCanvas, {
       type: "doughnut",
       data: {
-        labels: ["Productos ocultos", "Productos activos"],
+        labels: ["Productos desactivados", "Productos activos"],
         datasets: [
           {
             data: [
