@@ -11,7 +11,7 @@ const PurchaseCard = ({ brand, category, price, name, img, purchaseDate, _id, ca
   }
 
   return (
-    <tr className="bg-gray-800">
+    <tr className="bg-gray-800 rounded-md">
       { cart !== true &&
         <td className="p-3">
           <NavLink to={`/detail/${_id}`} className="flex items-center">

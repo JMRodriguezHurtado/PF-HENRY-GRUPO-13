@@ -121,22 +121,25 @@ const reducer = (state = initialState, action) => {
         localstorage: [action.payload],
       };
   
-    case REMOVE_FROM_CART:
-      
-      const productIdToRemove = action.payload;
-      return {
-        ...state,
-        cart: state.cart.filter(item => item.id !== productIdToRemove),
-      };
+      case 'REMOVE_FROM_CART':
+        const productIdToRemove = action.payload;
+        const updatedCartAfterRemoval = state.cart.filter(item => item.id !== productIdToRemove);
+        localStorage.setItem('cart', JSON.stringify(updatedCartAfterRemoval));
+        return {
+          ...state,
+          cart: updatedCartAfterRemoval,
+        };
     case FINISH_PURCHASE:
       return {
         ...state,
         cart: action.payload
       };
     case ADD_TO_CART:
+      const updatedCart = [...state.cart, action.payload];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: updatedCart,
       };
 
     case GET_ALL_USERS:

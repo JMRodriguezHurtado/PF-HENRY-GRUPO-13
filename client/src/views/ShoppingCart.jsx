@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, finishPurchase } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import { finishPurchase } from '../redux/actions';
 import Swal from 'sweetalert2';
 import AuthModal from "../components/AuthModal";
 import PurchaseCard from '../components/PurchaseCard';
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart);
-  console.log('cartItems:', cartItems);
-
+  const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  const [cartItems, setCartItems] = useState(storedCartItems);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -22,11 +25,6 @@ const ShoppingCart = () => {
   };
 
   const isUserLoggedIn = !!localStorage.getItem("token");
-
-  const handleDelete = () => {
-    dispatch(removeFromCart(_id));
-  }
-
 
   const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -66,17 +64,18 @@ const ShoppingCart = () => {
     dispatch(finishPurchase(objetoPago));
     Swal.fire('Compra en proceso');
     handleCancel();
+    setCartItems([]);
   };
 
   return (
-    <div className="relative h-creen bg-gray-900">
+    <div className="relative h-creen bg-blue-200">
       <div className="text-center h-screen py-10 ">
-        <h2 className="text-3xl justify-center align-center font-bold mt-3 text-white">Tu carrito</h2>
+        <h2 className="text-3xl justify-center align-center font-bold mt-3 text-black">Tu carrito</h2>
         {cartItems.length === 0 ? (
-          <p className="text-white text-4xl pt-10 mt-10">Tu carrito esta vacio :(</p>
+          <p className="text-black text-4xl pt-10 mt-10">Tu carrito esta vacio :(</p>
         ) : (
-          <table className="table p-5 text-gray-400 text-center border-separate space-y-6 text-sm">
-            <thead className="bg-gray-800 text-gray-500">
+          <table className="table p-5 text-gray-400 text-center border-separate space-y-6 rounded-md text-sm">
+            <thead className="bg-gray-800 text-gray-500 rounded-md">
               <tr>
                 <th className="p-3 text-gray-300 w-screen text-center">Nombre</th>
                 <th className="p-3 text-gray-300 w-screen text-center">Cantidad</th>
