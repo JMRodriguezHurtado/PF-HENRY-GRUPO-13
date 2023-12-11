@@ -10,6 +10,7 @@ const AdminDeletedUsers = () => {
   const deletedUsers = useSelector((state) => state.allUsersDeleted);
   const info = useSelector((state) => state.allUsersDeleted?.info);
   console.log(deletedUsers)
+  console.log(info)
 
   useEffect(() => {
     dispatch(getAllUsersDeleted());

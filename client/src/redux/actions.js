@@ -224,11 +224,11 @@ export function finishPurchase(objectPago) {
 
 export function getAllUsers() {
  return async function (dispatch) {
-   const allUsers = await axios.get(`${URL}/user`, { headers: { 'Cache-Control': 'no-cache' }});
+   const allUsers = await axios.get(`${URL}/user`);
    dispatch({
      type: GET_ALL_USERS,
      payload: allUsers.data,
-   });
+   }); console.log(allUsers);
  };
 }
 

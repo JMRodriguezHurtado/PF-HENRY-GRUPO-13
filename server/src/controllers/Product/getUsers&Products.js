@@ -27,7 +27,7 @@ const getUsersAndProducts = async () => {
     const userAdmin = await User.find({ Admin: true });
     const userAdminCount = userAdmin.length;
 
-    const userNotAdmin = await User.find({ Admin: false });
+    const userNotAdmin = await User.find({ Admin: { $in: [false, null] } });
     const userNotAdminCount = userNotAdmin.length;
 
     return ({ users, products, productDeletedCount, productNotDeletedCount, userAdminCount, userNotAdminCount });
