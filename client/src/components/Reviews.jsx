@@ -14,7 +14,7 @@ const Reviews = ({ productId }) => {
 
   return (
     <div>
-      <h2>Product Reviews</h2>
+      <h2>Comentarios</h2>
       {reviews.map((review) => (
         <div key={review.id}>
           <p>{review.comment}</p>
